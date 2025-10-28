@@ -1,0 +1,6 @@
+@MoodTracker.Server_HostAddress = http://localhost:5267
+
+GET {{MoodTracker.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
