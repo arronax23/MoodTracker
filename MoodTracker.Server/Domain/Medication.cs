@@ -7,6 +7,10 @@ public record Medication : IValueObject
     public string Name { get; private set; } = null!;
     public Dosage Dose { get; private set; } = null!;
 
+    private Medication()
+    {
+    }
+
     private Medication(string name, Dosage dosage)
     {
         Name = name;

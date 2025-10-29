@@ -6,6 +6,10 @@ public record Mood : IValueObject
 {
     public MoodRate Rate { get; private set; }
 
+    private Mood()
+    {
+    }
+
     private Mood(int rate)
     {
         Rate = (MoodRate)rate;

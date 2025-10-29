@@ -5,8 +5,13 @@ namespace MoodTracker.Server.Domain;
 public class Day : EntityBase
 {
     private List<Medication> _medications = new List<Medication>();
-    public IReadOnlyList<Medication> Medications => _medications.AsReadOnly();
     public Mood Mood { get; private set; } = null!;
+
+
+    private Day()
+    {
+    }
+
 
     private Day(Mood mood, IEnumerable<Medication> medications)
     {
@@ -18,4 +23,6 @@ public class Day : EntityBase
     {
         return new Day(mood, medications);
     }
+
+    public IReadOnlyList<Medication> GetMedications() => _medications.AsReadOnly();
 }
