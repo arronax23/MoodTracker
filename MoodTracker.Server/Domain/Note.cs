@@ -2,29 +2,30 @@
 
 namespace MoodTracker.Server.Domain;
 
-public class Day : EntityBase
+public class Note : EntityBase
 {
     private List<Medication> _medications = new List<Medication>();
+    public DateOnly Date { get; private set; }
     public Mood Mood { get; private set; } = null!;
 
 
-    private Day()
+    private Note()
     {
     }
 
 
-    private Day(Mood mood, IEnumerable<Medication> medications)
+    private Note(Mood mood, IEnumerable<Medication> medications)
     {
         Mood = mood;
         _medications = medications.ToList();
     }
 
-    public static Day Create(Mood mood, IEnumerable<Medication> medications)
+    public static Note Create(Mood mood, IEnumerable<Medication> medications)
     {
-        return new Day(mood, medications);
+        return new Note(mood, medications);
     }
 
-    public void Update(Day day)
+    public void Update(Note day)
     {
         if (day.Id != Id)
             throw new InvalidOperationException("Wrong Id");

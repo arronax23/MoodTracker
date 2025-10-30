@@ -10,6 +10,9 @@ public class MedicationConfiguration : IEntityTypeConfiguration<Medication>
     {
         builder.ToTable("Medications");
 
+        builder.Property<int>("Id");
+        builder.HasKey("Id");
+
         builder.OwnsOne(x => x.Dose, dose =>
         {
             dose.Property(y => y.Value)

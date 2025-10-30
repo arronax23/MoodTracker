@@ -4,11 +4,11 @@ using MoodTracker.Server.Domain;
 
 namespace MoodTracker.Server.Infrastructure.Configurations;
 
-public class DayConfiguration : IEntityTypeConfiguration<Day>
+public class NoteConfiguration : IEntityTypeConfiguration<Note>
 {
-    public void Configure(EntityTypeBuilder<Day> builder)
+    public void Configure(EntityTypeBuilder<Note> builder)
     {
-        builder.ToTable("Days");
+        builder.ToTable("Notes");
 
         builder.HasKey(d => d.Id);
 
