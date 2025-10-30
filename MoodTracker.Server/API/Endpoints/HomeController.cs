@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace MoodTracker.Server.Controllers
+namespace MoodTracker.Server.API.Endpoints
 {
     [ApiController]
     [Route("[controller]")]

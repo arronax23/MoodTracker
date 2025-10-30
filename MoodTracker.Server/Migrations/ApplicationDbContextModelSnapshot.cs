@@ -60,7 +60,7 @@ namespace MoodTracker.Server.Migrations
 
                             b1.HasKey("DayId");
 
-                            b1.ToTable("Days");
+                            b1.ToTable("Days", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("DayId");
@@ -93,7 +93,7 @@ namespace MoodTracker.Server.Migrations
 
                             b1.HasKey("MedicationId");
 
-                            b1.ToTable("Medications");
+                            b1.ToTable("Medications", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("MedicationId");
