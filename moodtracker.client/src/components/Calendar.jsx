@@ -1,5 +1,3 @@
-import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid' 
 import Note from './notes/Note'
 import { useState } from 'react'
 

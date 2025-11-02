@@ -10,7 +10,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
 }
 
@@ -28,7 +28,7 @@
   align-items: center;
   min-height: 250px;
   width: 115px;
-  background: pink;
+  background: #a8d4d3;
   border-top: 2px solid black;
   border-bottom: 2px solid black;
   border-left: 2px solid black;
@@ -51,23 +51,26 @@
   font-size: 10px;
   text-align: center;
   width: 70%;
+  margin-top: auto;
+  border: 2px solid black
 }
 
 
-.note .mood {
-  background: green;
+.note .dummy {
+  height: 1rem;
 }
 
-.note .mood .mood-rate-header {
+
+.note .mood .mood-rate-header, 
+.note .medications .medications-header,
+.note .thoughts .thoughts-header 
+{
   font-size: 12px;
-}
-
-.note .medications {
-  background: grey;
-}
-
-.note .thoughts {
-  background: rgb(172, 22, 22);
+  background: #fff;
+  border-radius: .15rem;
+  padding: .15rem;
+  width: 80%;
+  margin: 0 auto .25rem auto;
 }
 
 .note .section {
@@ -78,6 +81,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-top: 2px solid black
+}
+
+.note .section.mood {
+  min-height: 55px;
 }
 
 .note .medication-container {
@@ -92,6 +100,7 @@
   color: white;
   border-radius: .1rem;
 }
+
 
 .note .medication-container .time {
   grid-area: time;
@@ -179,7 +188,7 @@
   position: absolute;
   background: rgba(0, 0, 0, 0.9);
   opacity: .8;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   
 }
@@ -211,10 +220,35 @@
   align-items: center;
 }
 
+
 .form-container form .form-item input {
-  margin-top: .5rem;
-  width: 2rem;
+  text-align: center;
+  font-size: 12px;
 }
+
+.form-container form .form-item input#mood-rate {
+  margin-top: .5rem;
+  width: 3rem;
+  font-size: 18px;
+  text-align: center;
+}
+
+
+.form-container form .form-item input#medication-name
+{
+  margin-top: .5rem;
+  width: 11rem;
+}
+
+
+.form-container form .form-item input#dose-value,
+.form-container form .form-item input#dose-unit {
+  margin-top: .5rem;
+  width: 7rem;
+}
+
+
+
 
 .form-container form button {
   margin-top: auto;
@@ -231,4 +265,5 @@ img.close-form-btn {
   background: #fff;
   border-radius: 50%;
   padding: .15rem;
+  border: 2px solid black;;
 }

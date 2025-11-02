@@ -8,7 +8,7 @@ const MoodRateForm = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form className="rate-mood" onSubmit={onSubmit}>
       <div className="form-item">
         <label htmlFor="mood-rate">
           Ocena nastroju
