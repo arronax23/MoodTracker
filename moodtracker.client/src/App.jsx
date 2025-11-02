@@ -1,5 +1,5 @@
 import Calendar from './components/Calendar';
-import FormPanel from './components/FormPanel';
+import FormPanel from './components/forms/FormPanel';
 import DarkenBackground from './components/DarkenBackground';
 import './App.css';
 

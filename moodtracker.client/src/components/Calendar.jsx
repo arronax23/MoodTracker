@@ -1,6 +1,6 @@
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid' 
-import Note from './Note'
+import Note from './notes/Note'
 import { useState } from 'react'
 
 
@@ -32,7 +32,7 @@ export default function Calendar() {
     <div className='calendar'>
     <img className="arrow left-arrow" src={"/left-arrow.svg" } onClick={leftClick} />
     <img className="arrow right-arrow" src={"/right-arrow.svg"} onClick={rightClick} />
-      {week.map(day => (<Note key={day.name} name={day.name} date={day.date} update={updateNote} />))}
+      {week.map(day => (<Note key={day.name} dayName={day.name} date={day.date} update={updateNote} />))}
     </div>
   )
 }

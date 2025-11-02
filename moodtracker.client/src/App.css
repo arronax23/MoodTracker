@@ -26,25 +26,134 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 200px;
-  width: 100px;
-  padding: 0 .5rem;
+  min-height: 250px;
+  width: 115px;
   background: pink;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-  border-left: 1px solid black;
-}
-
-.note .update-btn {
-  cursor: pointer;
-  margin: auto 0 1rem 0;
-  background: #fff;
-  padding: .5rem;
-  border-radius: .5rem;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  border-left: 2px solid black;
 }
 
 .note:last-child {
-    border-right: 1px solid black;
+    border-right: 2px solid black;
+}
+
+.note .day-name {
+  margin-bottom: .5rem;
+}
+
+
+.note .open-form-btn  {
+  cursor: pointer;
+  background: #fff;
+  padding: .15rem;
+  border-radius: .5rem;
+  font-size: 10px;
+  text-align: center;
+  width: 70%;
+}
+
+
+.note .mood {
+  background: green;
+}
+
+.note .mood .mood-rate-header {
+  font-size: 12px;
+}
+
+.note .medications {
+  background: grey;
+}
+
+.note .thoughts {
+  background: rgb(172, 22, 22);
+}
+
+.note .section {
+  width: 100%;
+  text-align: center;
+  min-height: 75px;
+  padding: .5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.note .medication-container {
+  display: grid;
+  grid-template-areas:
+    "time name name dosage dosage edit";
+  align-items: center;
+  padding: .15rem 0;
+  width: 95%;
+  margin-top: .15rem;
+  background: black;
+  color: white;
+  border-radius: .1rem;
+}
+
+.note .medication-container .time {
+  grid-area: time;
+  justify-self: start;
+  margin-left: .1rem;
+}
+
+.note .medication-container .name {
+  grid-area: name;
+}
+
+.note .medication-container .dosage {
+  grid-area: dosage;
+}
+
+.note .medication-container hr {
+  grid-area: hr;
+  width: 95%;
+  margin: auto;
+}
+
+
+.note .medication-container *, .note .thought-container * {
+  font-size: 8px;
+
+}
+
+.note .medication-container .dosage {
+  display: flex;
+  gap: .15rem;
+}
+
+.note .medication-container img.edit-medication {
+  cursor: pointer;
+  grid-area: edit;
+  height: .75rem;
+  background: white;
+  border-radius: .1rem;
+  justify-self: end;
+  margin-right: .1rem;
+}
+
+.thought-container {
+  background: #000;
+  color: #fff;
+  margin-bottom: .15rem;
+  width: 95%;
+  border-radius: .15rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.thought-container .value {
+  margin-top: .15rem;
+}
+
+.thought-container .line {
+  width: 95%;
+  height: 1px;
+  background: #fff;
 }
 
 .arrow {
@@ -87,17 +196,33 @@
   border-radius: 1rem;
 }
 
-.form-container form, .form-container form * {
-    display: flex;
+.form-container form{
+  height: 100%;
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.form-container form button {
+.form-container form .form-item{
   margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-img.close-btn {
+.form-container form .form-item input {
+  margin-top: .5rem;
+  width: 2rem;
+}
+
+.form-container form button {
+  margin-top: auto;
+  margin-bottom: 2rem;
+  margin-bottom: 2rem;
+}
+
+img.close-form-btn {
   cursor: pointer;
   height: 1.25rem;
   position: absolute;
