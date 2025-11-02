@@ -10,7 +10,7 @@ namespace MoodTracker.Server.Migrations
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
-        {D
+        {
             migrationBuilder.DropForeignKey(
                 name: "FK_Medications_Days_DayId",
                 table: "Medications");

@@ -5,11 +5,13 @@
     font-size: 16px;
   }
 
-#root {
+
+#main-page {
   display: flex;
-    justify-content: center;
+  justify-content: center;
   align-items: center;
   height: 100vh;
+  position: relative;
 }
 
 .calendar {
@@ -20,7 +22,7 @@
 
 }
 
-.day {
+.note {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,7 +35,15 @@
   border-left: 1px solid black;
 }
 
-.day:last-child {
+.note .update-btn {
+  cursor: pointer;
+  margin: auto 0 1rem 0;
+  background: #fff;
+  padding: .5rem;
+  border-radius: .5rem;
+}
+
+.note:last-child {
     border-right: 1px solid black;
 }
 
@@ -54,3 +64,46 @@
   position: absolute;
   right: -4rem;
 } 
+
+
+.darken-background {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.9);
+  opacity: .8;
+  height: 100vh;
+  width: 100vw;
+  
+}
+
+.form-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  height: 400px;
+  width: 200px;
+  border: 2px solid #000;
+  border-radius: 1rem;
+}
+
+.form-container form, .form-container form * {
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-container form button {
+  margin-top: auto;
+}
+
+img.close-btn {
+  cursor: pointer;
+  height: 1.25rem;
+  position: absolute;
+  top: -1.5rem;
+  right: -1.5rem;
+  background: #fff;
+  border-radius: 50%;
+  padding: .15rem;
+}
