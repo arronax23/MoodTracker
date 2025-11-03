@@ -10,12 +10,12 @@ public record Mood : IValueObject
     {
     }
 
-    private Mood(int rate)
+    private Mood(uint rate)
     {
         Rate = (MoodRate)rate;
     }
 
-    public static Mood Create(int rate)
+    public static Mood Create(uint rate)
     {
         if (rate is < 1 or > 10)
             throw new ArgumentOutOfRangeException(nameof(rate), "Mood rate must be between 1 and 10.");

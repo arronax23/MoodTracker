@@ -2,8 +2,9 @@
 
 namespace MoodTracker.Server.Domain;
 
-public record Medication : IValueObject
+public class Medication : EntityBase
 {
+    public TimeOnly Time { get; private set; }
     public string Name { get; private set; } = null!;
     public Dosage Dose { get; private set; } = null!;
 
@@ -11,18 +12,19 @@ public record Medication : IValueObject
     {
     }
 
-    private Medication(string name, Dosage dosage)
+    private Medication(TimeOnly time, string name, Dosage dosage)
     {
+        Time = time;
         Name = name;
         Dose = dosage;
     }
 
-    public static Medication Create(string name, Dosage dosage)
+    public static Medication Create(TimeOnly time, string name, Dosage dosage)
     {
         if (string.IsNullOrWhiteSpace(name))
             throw new ArgumentException($"Medication name cannot be null or empty", nameof(name));
 
-        return new Medication(name, dosage);
+        return new Medication(time, name, dosage);
     }
 
     public class Dosage

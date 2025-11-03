@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MoodTracker.Server.Infrasctructure;
 
@@ -10,9 +11,11 @@ using MoodTracker.Server.Infrasctructure;
 namespace MoodTracker.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251103195808_Add_Time_To_Medications")]
+    partial class Add_Time_To_Medications
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.10");
@@ -23,19 +26,19 @@ namespace MoodTracker.Server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("DayId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<int?>("NoteId")
-                        .HasColumnType("INTEGER");
 
                     b.Property<TimeOnly>("Time")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NoteId");
+                    b.HasIndex("DayId");
 
                     b.ToTable("Medications", (string)null);
                 });
@@ -54,34 +57,11 @@ namespace MoodTracker.Server.Migrations
                     b.ToTable("Notes", (string)null);
                 });
 
-            modelBuilder.Entity("MoodTracker.Server.Domain.Thought", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("NoteId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<TimeOnly>("Time")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NoteId");
-
-                    b.ToTable("Thought");
-                });
-
             modelBuilder.Entity("MoodTracker.Server.Domain.Medication", b =>
                 {
                     b.HasOne("MoodTracker.Server.Domain.Note", null)
                         .WithMany("_medications")
-                        .HasForeignKey("NoteId")
+                        .HasForeignKey("DayId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.OwnsOne("MoodTracker.Server.Domain.Medication+Dosage", "Dose", b1 =>
@@ -133,19 +113,9 @@ namespace MoodTracker.Server.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MoodTracker.Server.Domain.Thought", b =>
-                {
-                    b.HasOne("MoodTracker.Server.Domain.Note", null)
-                        .WithMany("_thoughts")
-                        .HasForeignKey("NoteId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("MoodTracker.Server.Domain.Note", b =>
                 {
                     b.Navigation("_medications");
-
-                    b.Navigation("_thoughts");
                 });
 #pragma warning restore 612, 618
         }

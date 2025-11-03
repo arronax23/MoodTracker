@@ -22,7 +22,12 @@ public class NoteConfiguration : IEntityTypeConfiguration<Note>
 
         builder.HasMany<Medication>("_medications")
                .WithOne()
-               .HasForeignKey("DayId")
+               .HasForeignKey("NoteId")
+               .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany<Thought>("_thoughts")
+               .WithOne()
+               .HasForeignKey("NoteId")
                .OnDelete(DeleteBehavior.Cascade);
     }
 }

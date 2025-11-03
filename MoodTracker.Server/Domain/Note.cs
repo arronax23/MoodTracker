@@ -5,25 +5,40 @@ namespace MoodTracker.Server.Domain;
 public class Note : EntityBase
 {
     private List<Medication> _medications = new List<Medication>();
+    private List<Thought> _thoughts = new List<Thought>();
     public DateOnly Date { get; private set; }
     public Mood Mood { get; private set; } = null!;
-
 
     private Note()
     {
     }
 
-
-    private Note(Mood mood, IEnumerable<Medication> medications)
-    {
-        Mood = mood;
-        _medications = medications.ToList();
+    private Note(DateOnly date)
+    {   
+        Date = date;
     }
 
-    public static Note Create(Mood mood, IEnumerable<Medication> medications)
+    public static Note Create(DateOnly date)
     {
-        return new Note(mood, medications);
+        return new Note(date);
     }
+
+    public void UpdateMood(uint moodRate)
+    {
+        Mood = Mood.Create(moodRate);
+    }
+
+
+    public void AddMedication(Medication medication)
+    {
+        _medications.Add(medication);
+    }
+
+    public void AddThought(Thought thought)
+    {
+        _thoughts.Add(thought);
+    }
+
 
     public void Update(Note day)
     {
@@ -42,4 +57,5 @@ public class Note : EntityBase
     }
 
     public IReadOnlyList<Medication> GetMedications() => _medications.AsReadOnly();
+    public IReadOnlyList<Thought> GetThoughts() => _thoughts.AsReadOnly();
 }
