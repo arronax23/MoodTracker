@@ -2,7 +2,8 @@
 
 public class MedicationDto
 {
-    public TimeOnly Time { get; set; }
+    public int Id { get; set; }
+    public string Time { get; set; } = null!;
     public string Name { get; set; } = null!;
     public DosageDto Dose { get; set; } = null!;
 }

@@ -7,7 +7,7 @@ public class Note : EntityBase
     private List<Medication> _medications = new List<Medication>();
     private List<Thought> _thoughts = new List<Thought>();
     public DateOnly Date { get; private set; }
-    public Mood Mood { get; private set; } = null!;
+    public Mood? Mood { get; private set; }
 
     private Note()
     {
@@ -16,6 +16,11 @@ public class Note : EntityBase
     private Note(DateOnly date)
     {   
         Date = date;
+    }
+
+    public int? GetMoodRate()
+    {
+        return (int?)Mood?.Rate;
     }
 
     public static Note Create(DateOnly date)

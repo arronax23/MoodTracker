@@ -1,6 +1,5 @@
 import { format, eachDayOfInterval, startOfWeek, addWeeks, addDays } from 'date-fns';
 import { pl } from 'date-fns/locale';
-import { daysInWeek } from 'date-fns/constants';
 
 export const getWeek = (weekReference) => {
     const today = new Date();
@@ -13,11 +12,10 @@ export const getWeek = (weekReference) => {
     });
 
     const daysWithNames = days.map(day => ({
-    date: format(day, 'dd.MM.yyyy'),
-    name: capitalizeFirstLetter(format(day, 'EEEE', { locale: pl }))
+        date: format(day, 'yyyy-MM-dd'),
+        dateDisplay: format(day, 'dd.MM.yyyy'),
+        name: capitalizeFirstLetter(format(day, 'EEEE', { locale: pl }))
     }));
-
-    console.log(daysWithNames);
     return daysWithNames;
 }
 

@@ -1,14 +1,40 @@
 import { useState } from "react";
+import { apiRequest } from "../../../utilities/useApi";
+import { useGlobalStore } from "../../../utilities/useGlobalStore";
 
-const AddMedicationForm = () => {
+const AddMedicationForm = ({ date }) => {
   const [medicationName, setMedicationName] = useState('');
   const [doseValue, setDoseValue] = useState('');
   const [doseUnit, setDoseUnit] = useState('');
   const [time, setTime] = useState('');
 
-  const onSubmit = (e) => {
+  const { setFormActive, setUpdateNoteDate } = useGlobalStore(); 
+
+  const onSubmit = async (e) => {
     e.preventDefault();
-  };
+    
+    const medication = {
+      time: time,
+      name: medicationName,
+      dose: {
+        value: doseValue,
+        unit: doseUnit
+      }
+    };
+
+    console.log('type')
+    console.log(typeof time)
+
+    const isSuccess = await apiRequest('/api/Notes/AddMedication','PUT',{
+      date: date,
+      medication: medication
+    });
+    
+    if(isSuccess){
+      setFormActive(false);
+      setUpdateNoteDate(date);
+    }
+  }
 
   return (
     <form className="add-medication" onSubmit={onSubmit}>

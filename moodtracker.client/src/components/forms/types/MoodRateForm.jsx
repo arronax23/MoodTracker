@@ -1,11 +1,24 @@
 import { useState } from "react";
+import { apiRequest } from "../../../utilities/useApi";
+import { useGlobalStore } from "../../../utilities/useGlobalStore";
 
-const MoodRateForm = () => {
+const MoodRateForm = ({ date }) => {
   const [moodRate, setMoodRate] = useState(1);
+  const { setFormActive, setUpdateNoteDate } = useGlobalStore(); 
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-  };
+
+    const isSuccess = await apiRequest('/api/Notes/RateMood','PUT',{
+      date: date,
+      moodRate: moodRate
+    });
+
+    if(isSuccess){
+      setFormActive(false);
+      setUpdateNoteDate(date);
+    }
+  }
 
   return (
     <form className="rate-mood" onSubmit={onSubmit}>

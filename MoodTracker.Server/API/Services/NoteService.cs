@@ -1,4 +1,5 @@
-﻿using MoodTracker.Server.API.DTOs;
+﻿using Microsoft.EntityFrameworkCore;
+using MoodTracker.Server.API.DTOs;
 using MoodTracker.Server.Domain;
 using MoodTracker.Server.Infrasctructure;
 
@@ -6,6 +7,42 @@ namespace MoodTracker.Server.API.Services;
 
 public class NoteService(ApplicationDbContext dbContext)
 {
+    public NoteDto GetNote(DateOnly date)
+    {
+        var note = dbContext.Notes
+            .AsNoTracking()
+            .Include("_medications")
+            .Include("_thoughts")
+            .SingleOrDefault(n => n.Date == date);
+
+        if (note == null)
+            return new NoteDto();
+
+        return new NoteDto()
+        {
+            Date = note.Date,
+            MoodRate = note.GetMoodRate(),
+            Id = note.Id,
+            Medications = note.GetMedications().Select(m => new MedicationDto()
+            {
+                Id = m.Id,
+                Name = m.Name,
+                Time = m.Time.ToString("HH:mm"),
+                Dose = new DosageDto()
+                {
+                    Value = m.Dose.Value,
+                    Unit = m.Dose.Unit
+                }
+            }),
+            Thoughts = note.GetThoughts().Select(t => new ThoughtDto()
+            {
+                Id = t.Id,
+                Text = t.Text,
+                Time = t.Time.ToString("HH:mm"),
+            })
+        };
+
+    }
     public void RateMood(DateOnly date, uint moodRate)
     {
         var dbNote = dbContext.Notes.SingleOrDefault(n => n.Date == date);
@@ -16,7 +53,7 @@ public class NoteService(ApplicationDbContext dbContext)
         {
             var note = Note.Create(date);
             note.UpdateMood(moodRate);
-            dbContext.Add(note);
+            dbContext.Notes.Add(note);
         }
 
         dbContext.SaveChanges();
@@ -32,6 +69,7 @@ public class NoteService(ApplicationDbContext dbContext)
         {
             var note = Note.Create(date);
             note.AddMedication(MapMedicationFromDto(medication));
+            dbContext.Notes.Add(note);
         }
 
         dbContext.SaveChanges();
@@ -47,15 +85,16 @@ public class NoteService(ApplicationDbContext dbContext)
         {
             var note = Note.Create(date);
             note.AddThought(MapThoughtFromDto(thought));
+            dbContext.Notes.Add(note);
         }
 
         dbContext.SaveChanges();
     }
 
     private Medication MapMedicationFromDto(MedicationDto dto)
-        => Medication.Create(dto.Time, dto.Name, Medication.Dosage.Create(dto.Dose.Value, dto.Dose.Unit));
+        => Medication.Create(TimeOnly.Parse(dto.Time), dto.Name, Medication.Dosage.Create(dto.Dose.Value, dto.Dose.Unit));
 
-    private Thought MapThoughtFromDto(ThoughtDto dto) => Thought.Create(dto.Time, dto.Text);
+    private Thought MapThoughtFromDto(ThoughtDto dto) => Thought.Create(TimeOnly.Parse(dto.Time), dto.Text);
 
 
 

@@ -2,6 +2,7 @@
 
 public class ThoughtDto
 {
-    public TimeOnly Time { get; set; }
+    public int Id { get; set; }
+    public string Time { get; set; } = null!;
     public string Text { get; set; } = null!;
 }

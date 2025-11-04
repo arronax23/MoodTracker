@@ -1,33 +1,41 @@
 using Microsoft.AspNetCore.Mvc;
 using MoodTracker.Server.API.DTOs;
+using MoodTracker.Server.API.Endpoints.Requests;
 using MoodTracker.Server.API.Services;
 
 namespace MoodTracker.Server.API.Endpoints;
 
 [ApiController]
-[Route("Notes")]
+[Route("api/Notes")]
 public class NoteController(NoteService noteService) : ControllerBase
 {
-    [HttpPut("RateMood")]
-    public IActionResult RateMood(DateOnly date, uint moodRate)
+
+    [HttpGet("GetNote/{date}")]
+    public NoteDto GetNote(DateOnly date)
     {
-        noteService.RateMood(date, moodRate);
+        return noteService.GetNote(date);
+    }
+
+    [HttpPut("RateMood")]
+    public IActionResult RateMood(RateMoodRequest request)
+    {
+        noteService.RateMood(request.Date, request.MoodRate);
 
         return Ok();
     }
 
     [HttpPut("AddMedication")]
-    public IActionResult AddMedication(DateOnly date, MedicationDto medication)
+    public IActionResult AddMedication(AddMedicationRequest request)
     {
-        noteService.AddMedication(date, medication);
+        noteService.AddMedication(request.Date, request.Medication);
 
         return Ok();
     }
 
     [HttpPut("AddThought")]
-    public IActionResult AddThought(DateOnly date, ThoughtDto thought)
+    public IActionResult AddThought(AddThoughtRequest request)
     {
-        noteService.AddThought(date, thought);
+        noteService.AddThought(request.Date, request.Thought);
 
         return Ok();
     }

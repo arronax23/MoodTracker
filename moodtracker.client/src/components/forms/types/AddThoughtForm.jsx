@@ -1,12 +1,30 @@
 import { useState } from "react";
+import { apiRequest } from "../../../utilities/useApi";
+import { useGlobalStore } from "../../../utilities/useGlobalStore";
 
-const AddThoughtForm = () => {
-  const [thought, setThought] = useState('');
+const AddThoughtForm = ({ date }) => {
+  const [thoughtText, setThoughtText] = useState('');
   const [time, setTime] = useState('');
+  const { setFormActive, setUpdateNoteDate } = useGlobalStore(); 
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-  };
+
+    const thought = {
+      time: time,
+      text: thoughtText
+    }
+
+    const isSuccess = await apiRequest('/api/Notes/AddThought','PUT',{
+      date: date,
+      thought: thought
+    });
+
+    if(isSuccess) {
+      setFormActive(false);
+      setUpdateNoteDate(date);
+    }
+  }
 
   return (
     <form className="add-thought" onSubmit={onSubmit}>
@@ -31,8 +49,8 @@ const AddThoughtForm = () => {
           type="text"
           id="thought"
           name="thought"
-          value={thought}
-          onChange={(e) => setThought(e.target.value)}
+          value={thoughtText}
+          onChange={(e) => setThoughtText(e.target.value)}
         ></input>
       </div>      
          

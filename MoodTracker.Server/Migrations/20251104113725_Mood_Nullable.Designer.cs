@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MoodTracker.Server.Infrasctructure;
 
@@ -10,9 +11,11 @@ using MoodTracker.Server.Infrasctructure;
 namespace MoodTracker.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251104113725_Mood_Nullable")]
+    partial class Mood_Nullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.10");
@@ -74,7 +77,7 @@ namespace MoodTracker.Server.Migrations
 
                     b.HasIndex("NoteId");
 
-                    b.ToTable("Thoughts", (string)null);
+                    b.ToTable("Thought");
                 });
 
             modelBuilder.Entity("MoodTracker.Server.Domain.Medication", b =>

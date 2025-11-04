@@ -5,6 +5,7 @@ namespace MoodTracker.Server.Domain;
 public record Mood : IValueObject
 {
     public MoodRate Rate { get; private set; }
+    public int RateAsInt => (int)Rate;
 
     private Mood()
     {
