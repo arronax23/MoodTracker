@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { apiRequest } from "../../../utilities/useApi";
 import { useGlobalStore } from "../../../utilities/useGlobalStore";
+import { useNavigate } from "react-router-dom";
 
 const AddMedicationForm = ({ date }) => {
   const [medicationName, setMedicationName] = useState('');
   const [doseValue, setDoseValue] = useState('');
   const [doseUnit, setDoseUnit] = useState('');
   const [time, setTime] = useState('');
+  
+  const { setUpdateNoteDate } = useGlobalStore(); 
 
-  const { setFormActive, setUpdateNoteDate } = useGlobalStore(); 
-
+  const navigate = useNavigate();
+  
   const onSubmit = async (e) => {
     e.preventDefault();
     
@@ -31,8 +34,8 @@ const AddMedicationForm = ({ date }) => {
     });
     
     if(isSuccess){
-      setFormActive(false);
       setUpdateNoteDate(date);
+      navigate(-1);
     }
   }
 

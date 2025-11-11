@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { apiRequest } from "../../../utilities/useApi";
 import { useGlobalStore } from "../../../utilities/useGlobalStore";
+import { useNavigate } from "react-router-dom";
 
 const MoodRateForm = ({ date }) => {
   const [moodRate, setMoodRate] = useState(1);
-  const { setFormActive, setUpdateNoteDate } = useGlobalStore(); 
-
+  const { setUpdateNoteDate } = useGlobalStore(); 
+  const navigate = useNavigate();
+  
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -15,8 +17,8 @@ const MoodRateForm = ({ date }) => {
     });
 
     if(isSuccess){
-      setFormActive(false);
       setUpdateNoteDate(date);
+      navigate(-1)
     }
   }
 

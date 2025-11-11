@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { apiRequest } from "../../../utilities/useApi";
 import { useGlobalStore } from "../../../utilities/useGlobalStore";
+import { useNavigate } from "react-router-dom";
 
 const AddThoughtForm = ({ date }) => {
   const [thoughtText, setThoughtText] = useState('');
   const [time, setTime] = useState('');
-  const { setFormActive, setUpdateNoteDate } = useGlobalStore(); 
-
+  const { setUpdateNoteDate } = useGlobalStore(); 
+  const navigate = useNavigate();
+  
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -21,8 +23,8 @@ const AddThoughtForm = ({ date }) => {
     });
 
     if(isSuccess) {
-      setFormActive(false);
       setUpdateNoteDate(date);
+      navigate(-1);
     }
   }
 

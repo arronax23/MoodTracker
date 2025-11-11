@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 export const useGlobalStore = create((set) => ({
-    formActive : false,
+    formActive : true,
     setFormActive: (formActive) => set({ formActive }),
     formType: 0,
     setFormType: (formType) => set({ formType }),    

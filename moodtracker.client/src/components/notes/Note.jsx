@@ -4,15 +4,17 @@ import Medication from "./sections/Medication";
 import Thought from "./sections/Thought";
 import Mood from "./sections/Mood";
 import useFetchNote from "../../utilities/useFetchNote";
+import { useNavigate } from "react-router-dom";
 
 export default function Note({ date, dayName, dateDisplay }) {
   const {
-    setFormActive,
     setFormType,
     setDate,
     setDateDisplay,
     setDayOfTheWeek,
   } = useGlobalStore();
+
+  const navigate = useNavigate();
 
   const { note } = useFetchNote(date);
 
@@ -32,10 +34,11 @@ export default function Note({ date, dayName, dateDisplay }) {
   };
 
   const openForm = () => {
-    setFormActive(true);
     setDayOfTheWeek(dayName);
     setDate(date);
     setDateDisplay(dateDisplay);
+    navigate('/form')
+
   };
 
   return (
