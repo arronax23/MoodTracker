@@ -1,7 +1,17 @@
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useGlobalStore } from "../../../utilities/useGlobalStore";
 
-const Medication = ({ med }) => {
-  useEffect(() => {console.log(typeof med.time)},[med])
+const Medication = ({ noteId, med, dayName, dateDisplay }) => {
+  const navigate = useNavigate();
+
+  const { setDayOfTheWeek, setDateDisplay} = useGlobalStore();
+
+  const editClick = () =>{
+    setDayOfTheWeek(dayName);
+    setDateDisplay(dateDisplay);
+    navigate(`/edit-medication/${noteId}/${med.id}`);
+  }
+
   return (
     med && (
       <div className="medication-container">
@@ -16,6 +26,7 @@ const Medication = ({ med }) => {
           alt="Edit medication"
           className="edit-medication"
           title="Edytuj"
+          onClick={editClick}
         />
       </div>
     )

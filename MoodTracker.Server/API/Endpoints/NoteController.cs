@@ -9,12 +9,29 @@ namespace MoodTracker.Server.API.Endpoints;
 [Route("api/Notes")]
 public class NoteController(NoteService noteService) : ControllerBase
 {
-
     [HttpGet("GetNote/{date}")]
     public NoteDto GetNote(DateOnly date)
     {
         return noteService.GetNote(date);
     }
+
+    [HttpGet("GetMedication/{noteId}/{medicationId}")]
+    public MedicationDto? GetMedication(int noteId, int medicationId)
+    {
+        return noteService.GetMedication(noteId,medicationId);
+    }
+
+    [HttpPatch("EditMedication")]
+    public IActionResult EditMedication(EditMedicationRequest request)
+    {
+        var isSuccess = noteService.EditMedication(request.NoteId, request.Medication);
+
+        if (isSuccess)
+            return Ok();
+        else
+            return Problem();
+    }
+
 
     [HttpPut("RateMood")]
     public IActionResult RateMood(RateMoodRequest request)

@@ -293,6 +293,12 @@
   border-radius: .25rem;
 }
 
+
+form.edit-medication button[type="submit"]{
+  /* background: #973245; */
+  background: #327e46;
+}
+
 img.close-form-btn {
   cursor: pointer;
   height: 1.25rem;

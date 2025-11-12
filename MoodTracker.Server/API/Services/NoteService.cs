@@ -23,7 +23,7 @@ public class NoteService(ApplicationDbContext dbContext)
             Date = note.Date,
             MoodRate = note.GetMoodRate(),
             Id = note.Id,
-            Medications = note.GetMedications().Select(m => new MedicationDto()
+            Medications = note.GetMedications().OrderBy(m => m.Time).Select(m => new MedicationDto()
             {
                 Id = m.Id,
                 Name = m.Name,
@@ -34,7 +34,7 @@ public class NoteService(ApplicationDbContext dbContext)
                     Unit = m.Dose.Unit
                 }
             }),
-            Thoughts = note.GetThoughts().Select(t => new ThoughtDto()
+            Thoughts = note.GetThoughts().OrderBy(t => t.Time).Select(t => new ThoughtDto()
             {
                 Id = t.Id,
                 Text = t.Text,
@@ -43,6 +43,40 @@ public class NoteService(ApplicationDbContext dbContext)
         };
 
     }
+
+    public MedicationDto? GetMedication(int noteId, int medicationId)
+    {
+        var note = dbContext.Notes
+            .AsNoTracking()
+            .Include("_medications")
+            .SingleOrDefault(n => n.Id == noteId);
+
+        if (note is null) 
+            return null;    
+
+        var medication = note.GetMedications().SingleOrDefault(m => m.Id == medicationId);
+
+        if (medication is null)
+            return null;
+
+        return MapMedicationToDto(medication);
+    }
+
+
+    public bool EditMedication(int noteId, MedicationDto dto)
+    {
+        var note = dbContext.Notes
+            .Include("_medications")
+            .SingleOrDefault(n => n.Id == noteId);
+
+        if (note is null)
+            return false;
+
+        note.UpdateMedication(dto.Id, MapMedicationFromDto(dto));
+
+        return dbContext.SaveChanges() > 0;
+    }
+
     public void RateMood(DateOnly date, uint moodRate)
     {
         var dbNote = dbContext.Notes.SingleOrDefault(n => n.Date == date);
@@ -94,35 +128,20 @@ public class NoteService(ApplicationDbContext dbContext)
     private Medication MapMedicationFromDto(MedicationDto dto)
         => Medication.Create(TimeOnly.Parse(dto.Time), dto.Name, Medication.Dosage.Create(dto.Dose.Value, dto.Dose.Unit));
 
+    private MedicationDto MapMedicationToDto(Medication medication)
+    {
+        return new MedicationDto()
+        {
+            Id = medication.Id,
+            Name = medication.Name,
+            Time = medication.Time.ToString(),
+            Dose = new DosageDto()
+            {
+                Value = medication.Dose.Value,
+                Unit = medication.Dose.Unit
+            }
+        };
+    }
+
     private Thought MapThoughtFromDto(ThoughtDto dto) => Thought.Create(TimeOnly.Parse(dto.Time), dto.Text);
-
-
-
-
-    //public void Save(DayDto dto)
-    //{
-    //    var mood = Mood.Create(dto.Moodrate);
-    //    var medications = dto.Medications.Select(m => Medication.Create(m.Name, Dosage.Create(m.Dose.Value, m.Dose.Unit)));
-
-    //    var day = Note.Create(mood, medications);
-
-    //    if (dto.Id == 0)
-    //        Add(day);
-    //    else
-    //        Update(day);
-
-    //    dbContext.SaveChanges();
-    //}
-
-    //private void Add(Note day) => dbContext.Add(day);
-
-    //private void Update(Note day)
-    //{
-    //    var dbDay = dbContext.Notes.SingleOrDefault(d => d.Id == day.Id);
-
-    //    if (dbDay is null)
-    //        throw new ArgumentException("Wrong Day Id in Update");
-
-    //    dbDay.Update(day);
-    //}
 }

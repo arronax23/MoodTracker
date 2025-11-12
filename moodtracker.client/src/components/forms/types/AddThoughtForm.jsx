@@ -47,13 +47,12 @@ const AddThoughtForm = ({ date }) => {
         <label htmlFor="thought">
           Myśl
         </label>
-        <input
-          type="text"
+        <textarea
           id="thought"
           name="thought"
           value={thoughtText}
           onChange={(e) => setThoughtText(e.target.value)}
-        ></input>
+        ></textarea>
       </div>      
          
 

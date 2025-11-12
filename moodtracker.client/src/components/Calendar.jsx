@@ -8,12 +8,12 @@ export default function Calendar() {
   const [week, setWeek] = useState(getWeek(weekReference));
 
   const moveToPreviousWeek = () => {
-    setWeekReference((prev) => --prev);
+    setWeekReference(prev => --prev);
     setWeek(getWeek(weekReference));
   };
 
   const moveToNextWeek = () => {
-    setWeekReference((prev) => ++prev);
+    setWeekReference(prev => ++prev);
     setWeek(getWeek(weekReference));
   };
 

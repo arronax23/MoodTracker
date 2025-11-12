@@ -39,6 +39,14 @@ public class Note : EntityBase
         _medications.Add(medication);
     }
 
+
+    public void UpdateMedication(int medId, Medication updateMedication)
+    {
+        var medication = _medications.Single(m => m.Id == medId);
+
+        medication.Update(updateMedication);
+    }
+
     public void AddThought(Thought thought)
     {
         _thoughts.Add(thought);

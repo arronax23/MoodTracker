@@ -27,6 +27,16 @@ public class Medication : EntityBase
         return new Medication(time, name, dosage);
     }
 
+    public void Update(Medication updateMedication)
+    {
+        if (string.IsNullOrWhiteSpace(updateMedication.Name))
+            throw new ArgumentException($"Medication name cannot be null or empty", nameof(updateMedication.Name));
+
+        this.Time = updateMedication.Time;
+        this.Name = updateMedication.Name;  
+        this.Dose = updateMedication.Dose;
+    }
+
     public class Dosage
     {
         public uint Value { get; set; }

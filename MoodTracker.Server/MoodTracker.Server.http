@@ -3,4 +3,7 @@
 GET {{MoodTracker.Server_HostAddress}}/api/Notes/GetNote/2025-11-03
 Accept: application/json
 
+
 ###
+GET {{MoodTracker.Server_HostAddress}}/api/Notes/GetMedication/7/4
+Accept: application/json
