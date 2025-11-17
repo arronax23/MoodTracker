@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import useFetchGet from "../../utilities/useFetchGet";
 import { apiRequest } from "../../utilities/useApi";
+import { useGlobalStore } from "../../utilities/useGlobalStore";
 
-const EditMedicationForm = ({ noteId, medId }) => {
+const EditMedicationForm = ({noteDate, noteId, medId }) => {
   const { result: med, setResult: setMed } = useFetchGet(`/api/Notes/GetMedication/${noteId}/${medId}`);
   const navigate = useNavigate();
+  const { setUpdatedNoteDate } = useGlobalStore();
   
   const setTime = async (newTime) => {
     setMed(prev => ({...prev, time: newTime}))
@@ -33,7 +35,10 @@ const EditMedicationForm = ({ noteId, medId }) => {
     });
     
     if(isSuccess) {
+      console.log(isSuccess)
       console.log("SUCCESS Editing med")
+      console.log(noteDate)
+      setUpdatedNoteDate(noteDate);
       navigate(-1);
     }
   }

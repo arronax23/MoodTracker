@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const AddThoughtForm = ({ date }) => {
   const [thoughtText, setThoughtText] = useState('');
   const [time, setTime] = useState('');
-  const { setUpdateNoteDate } = useGlobalStore(); 
+  const { setUpdatedNoteDate } = useGlobalStore(); 
   const navigate = useNavigate();
   
   const onSubmit = async (e) => {
@@ -23,7 +23,7 @@ const AddThoughtForm = ({ date }) => {
     });
 
     if(isSuccess) {
-      setUpdateNoteDate(date);
+      setUpdatedNoteDate(date);
       navigate(-1);
     }
   }

@@ -32,6 +32,17 @@ public class NoteController(NoteService noteService) : ControllerBase
             return Problem();
     }
 
+    [HttpDelete("DeleteMedication")]
+    public IActionResult DeleteMedication(DeleteMedicationRequest request)
+    {
+        var isSuccess = noteService.DeleteMedication(request.NoteId, request.MedicationId);
+
+        if (isSuccess)
+            return Ok();
+        else
+            return Problem();
+    }
+
 
     [HttpPut("RateMood")]
     public IActionResult RateMood(RateMoodRequest request)

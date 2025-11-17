@@ -58,7 +58,7 @@ export default function Note({ date, dayName, dateDisplay }) {
         <div className="medications-header">Leki</div>
         {note &&
           note.medications &&
-          note.medications.map((m) => <Medication dayName={dayName} dateDisplay={dateDisplay} noteId={note.id} med={m} />)}
+          note.medications.map((m) => <Medication dayName={dayName} dateDisplay={dateDisplay} noteId={note.id} noteDate={date} med={m} />)}
         <div className="dummy"></div>
         <div
           className="open-form-btn add-medication-btn"

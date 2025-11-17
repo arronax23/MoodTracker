@@ -1,16 +1,39 @@
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGlobalStore } from "../../../utilities/useGlobalStore";
+import { apiRequest } from "../../../utilities/useApi";
 
-const Medication = ({ noteId, med, dayName, dateDisplay }) => {
+const Medication = ({ noteId, noteDate, med, dayName, dateDisplay }) => {
   const navigate = useNavigate();
+  const confirmBox = useRef();
 
-  const { setDayOfTheWeek, setDateDisplay} = useGlobalStore();
+  const { setDayOfTheWeek, setDateDisplay, setUpdatedNoteDate } = useGlobalStore();
 
-  const editClick = () =>{
+  const editClick = () => {
     setDayOfTheWeek(dayName);
     setDateDisplay(dateDisplay);
-    navigate(`/edit-medication/${noteId}/${med.id}`);
-  }
+    navigate(`/edit-medication/${noteDate}/${noteId}/${med.id}`);
+  };
+
+  const deleteClick = () => {
+    confirmBox.current.classList.toggle("active");
+  };
+
+  const closeBox = () => {
+    confirmBox.current.classList.remove("active");
+  };
+
+  const confirmDelete = () => {
+    const isSuccesss = apiRequest('/api/Notes/DeleteMedication','DELETE', {
+      noteId: noteId,
+      medicationId: med.id
+    })
+
+    if (isSuccesss){
+      confirmBox.current.classList.remove("active");
+      setUpdatedNoteDate(noteDate);
+    }
+  };  
 
   return (
     med && (
@@ -28,6 +51,25 @@ const Medication = ({ noteId, med, dayName, dateDisplay }) => {
           title="Edytuj"
           onClick={editClick}
         />
+        <div className="delete-medication">
+          <img
+            src="/delete.svg"
+            alt="Delete medication"
+            className="delete-medication"
+            title="Usuń"
+            onClick={deleteClick}
+          />
+          <div ref={confirmBox} className="delete-medication-confirm-box">
+            <div className="arrow-down"></div>
+            <button onClick={confirmDelete}>Usuń lek</button>
+            <img
+              src="/close-btn.svg"
+              className="close-box"
+              alt="Close delete medication box"
+              onClick={closeBox}
+            />
+          </div>
+        </div>
       </div>
     )
   );

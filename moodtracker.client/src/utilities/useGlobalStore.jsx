@@ -11,6 +11,6 @@ export const useGlobalStore = create((set) => ({
     setDate: (date) => set({ date }),
     dateDisplay: '',
     setDateDisplay: (dateDisplay) => set({ dateDisplay }),
-    updateNoteDate: null,
-    setUpdateNoteDate: (updateNoteDate) => set({ updateNoteDate }), 
+    updatedNoteDate: null,
+    setUpdatedNoteDate: (updatedNoteDate) => set({ updatedNoteDate }), 
 }));

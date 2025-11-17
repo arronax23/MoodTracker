@@ -10,8 +10,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Calendar />}>
         <Route path="/form" element={<FormPanel />} />
-        <Route path="/edit-medication/:noteId/:medId" element={<EditMedicationLayout />} />
-
+        <Route path="/edit-medication/:date/:noteId/:medId" element={<EditMedicationLayout />} />
       </Route>
     </Routes>
   );

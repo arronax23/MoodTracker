@@ -47,6 +47,12 @@ public class Note : EntityBase
         medication.Update(updateMedication);
     }
 
+    public void DeleteMedication(int medId)
+    {
+        var medication = _medications.Single(m => m.Id == medId);
+        _medications.Remove(medication);
+    }
+
     public void AddThought(Thought thought)
     {
         _thoughts.Add(thought);

@@ -7,7 +7,7 @@ const useFetchNote = (date) => {
   const [error, setError] = useState();
   const [httpResponse, setHttpResponse] = useState();
 
-  const { updateNoteDate, setUpdateNoteDate } = useGlobalStore(); 
+  const { updatedNoteDate, setUpdatedNoteDate } = useGlobalStore(); 
 
   const fetchData = async (signal) => {
     try {
@@ -41,19 +41,19 @@ const useFetchNote = (date) => {
 
 
 useEffect(() => {
-  if (updateNoteDate !== date) return;
+  if (updatedNoteDate !== date) return;
 
   const abortController = new AbortController();
 
   const run = async () => {
     await fetchData(abortController.signal);
-    setUpdateNoteDate(null);
+    setUpdatedNoteDate(null);
   };
 
   run();
 
   return () => abortController.abort();
-}, [updateNoteDate, date]);
+}, [updatedNoteDate]);
 
   return { note, isPending, error, httpResponse };
 };

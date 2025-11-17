@@ -9,7 +9,7 @@ const AddMedicationForm = ({ date }) => {
   const [doseUnit, setDoseUnit] = useState('');
   const [time, setTime] = useState('');
   
-  const { setUpdateNoteDate } = useGlobalStore(); 
+  const { setUpdatedNoteDate } = useGlobalStore(); 
 
   const navigate = useNavigate();
   
@@ -34,7 +34,7 @@ const AddMedicationForm = ({ date }) => {
     });
     
     if(isSuccess){
-      setUpdateNoteDate(date);
+      setUpdatedNoteDate(date);
       navigate(-1);
     }
   }

@@ -38,7 +38,7 @@
   flex-direction: column;
   align-items: center;
   min-height: 350px;
-  width: 175px;
+  width: 195px;
   background: #a8d4d3;
   border-top: 2px solid black;
   border-bottom: 2px solid black;
@@ -101,7 +101,7 @@
 .note .medication-container {
   display: grid;
   grid-template-areas:
-    "time name name dosage dosage edit";
+    "time name name dosage dosage edit delete";
   align-items: center;
   padding: .35rem .1rem;
   width: 95%;
@@ -143,14 +143,85 @@
   gap: .15rem;
 }
 
-.note .medication-container img.edit-medication {
-  cursor: pointer;
-  grid-area: edit;
+.note .medication-container img.edit-medication, .note .medication-container .delete-medication {
+    cursor: pointer;
   height: 1rem;
   background: white;
   border-radius: .1rem;
   justify-self: end;
   margin-right: .1rem;
+}
+
+.note .medication-container img.edit-medication {
+  grid-area: edit;
+
+}
+
+.note .medication-container .delete-medication {
+ grid-area: delete;
+ width: 16px;
+ position: relative;
+}
+
+.note .medication-container .delete-medication .delete-medication-confirm-box {
+  display: none;
+  position: absolute;
+  cursor: default;
+  bottom: 25px;
+  left: -57.5px;
+  width: 8rem;
+  height: 3rem;
+  z-index: 6;
+  background: #000;
+  border-radius: .25rem;
+  border: 2px solid #fff;
+}
+
+.note .medication-container .delete-medication .delete-medication-confirm-box.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} 
+
+
+.note .medication-container .delete-medication .delete-medication-confirm-box button {
+  width: 5rem;
+  height: 1.75rem;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  border: 2px solid #fff;
+}
+
+.note .medication-container .delete-medication .delete-medication-confirm-box button:hover {
+    background: #fff;
+  color: #000;
+}
+
+
+.note .medication-container .delete-medication .delete-medication-confirm-box img.close-box {
+  cursor: pointer;
+  width: .85rem;
+  background: #fff;
+  color: #000;
+  position: absolute;
+  right: .1rem;
+  top: .1rem;
+  padding: .05rem;
+  border-radius: 50%;
+  border: 2px solid #000;
+}
+
+
+.note .medication-container .delete-medication .delete-medication-confirm-box .arrow-down {
+  position: absolute;
+  bottom: -10px;
+  width: 0; 
+  height: 0; 
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  
+  border-top: 10px solid #fff;
 }
 
 .thought-container {

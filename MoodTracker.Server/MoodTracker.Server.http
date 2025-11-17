@@ -7,3 +7,12 @@ Accept: application/json
 ###
 GET {{MoodTracker.Server_HostAddress}}/api/Notes/GetMedication/7/4
 Accept: application/json
+
+
+###
+DELETE {{MoodTracker.Server_HostAddress}}/api/Notes/DeleteMedication
+Content-Type: application/json
+{
+  "noteId": 7,
+  "medicationId": 5
+}

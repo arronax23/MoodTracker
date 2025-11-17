@@ -77,6 +77,21 @@ public class NoteService(ApplicationDbContext dbContext)
         return dbContext.SaveChanges() > 0;
     }
 
+    public bool DeleteMedication(int noteId, int medicationId)
+    {
+        var note = dbContext.Notes
+            .Include("_medications")
+            .SingleOrDefault(n => n.Id == noteId);
+
+        if (note is null)
+            return false;
+
+        note.DeleteMedication(medicationId);
+
+        return dbContext.SaveChanges() > 0;
+    }
+
+
     public void RateMood(DateOnly date, uint moodRate)
     {
         var dbNote = dbContext.Notes.SingleOrDefault(n => n.Date == date);

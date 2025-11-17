@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const MoodRateForm = ({ date }) => {
   const [moodRate, setMoodRate] = useState(1);
-  const { setUpdateNoteDate } = useGlobalStore(); 
+  const { setUpdatedNoteDate } = useGlobalStore(); 
   const navigate = useNavigate();
   
   const onSubmit = async (e) => {
@@ -17,7 +17,7 @@ const MoodRateForm = ({ date }) => {
     });
 
     if(isSuccess){
-      setUpdateNoteDate(date);
+      setUpdatedNoteDate(date);
       navigate(-1)
     }
   }
