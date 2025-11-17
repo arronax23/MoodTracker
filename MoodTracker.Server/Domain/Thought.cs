@@ -24,4 +24,13 @@ public class Thought : EntityBase
 
         return new Thought(time, text);
     }
+
+    public void Update(Thought updateThought)
+    {
+        if (string.IsNullOrWhiteSpace(updateThought.Text))
+            throw new ArgumentException($"Thought text cannot be null or empty", nameof(updateThought.Text));
+
+        this.Time = updateThought.Time;
+        this.Text = updateThought.Text;
+    }
 }

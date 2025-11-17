@@ -62,6 +62,24 @@ public class NoteService(ApplicationDbContext dbContext)
         return MapMedicationToDto(medication);
     }
 
+    public ThoughtDto? GetThought(int noteId, int thoughtId)
+    {
+        var note = dbContext.Notes
+            .AsNoTracking()
+            .Include("_thoughts")
+            .SingleOrDefault(n => n.Id == noteId);
+
+        if (note is null)
+            return null;
+
+        var thought = note.GetThoughts().SingleOrDefault(t => t.Id == thoughtId);
+
+        if (thought is null)
+            return null;
+
+        return MapThoughtToDto(thought);
+    }
+
 
     public bool EditMedication(int noteId, MedicationDto dto)
     {
@@ -77,6 +95,20 @@ public class NoteService(ApplicationDbContext dbContext)
         return dbContext.SaveChanges() > 0;
     }
 
+    public async Task<bool> EditThought(int noteId, ThoughtDto dto)
+    {
+        var note = dbContext.Notes
+            .Include("_thoughts")
+            .SingleOrDefault(n => n.Id == noteId);
+
+        if (note is null)
+            return false;
+
+        note.UpdateThought(dto.Id, MapThoughtFromDto(dto));
+
+        return await dbContext.SaveChangesAsync() > 0;
+    }
+
     public bool DeleteMedication(int noteId, int medicationId)
     {
         var note = dbContext.Notes
@@ -87,6 +119,21 @@ public class NoteService(ApplicationDbContext dbContext)
             return false;
 
         note.DeleteMedication(medicationId);
+
+        return dbContext.SaveChanges() > 0;
+    }
+
+
+    public bool DeleteThought(int noteId, int thoughtId)
+    {
+        var note = dbContext.Notes
+            .Include("_thoughts")
+            .SingleOrDefault(n => n.Id == noteId);
+
+        if (note is null)
+            return false;
+
+        note.DeleteThought(thoughtId);
 
         return dbContext.SaveChanges() > 0;
     }
@@ -159,4 +206,14 @@ public class NoteService(ApplicationDbContext dbContext)
     }
 
     private Thought MapThoughtFromDto(ThoughtDto dto) => Thought.Create(TimeOnly.Parse(dto.Time), dto.Text);
+
+    private ThoughtDto MapThoughtToDto(Thought thought)
+    {
+        return new ThoughtDto()
+        {
+            Id = thought.Id,
+            Text = thought.Text,
+            Time = thought.Time.ToString(),
+        };
+    }
 }

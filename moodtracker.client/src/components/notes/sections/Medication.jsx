@@ -23,13 +23,13 @@ const Medication = ({ noteId, noteDate, med, dayName, dateDisplay }) => {
     confirmBox.current.classList.remove("active");
   };
 
-  const confirmDelete = () => {
-    const isSuccesss = apiRequest('/api/Notes/DeleteMedication','DELETE', {
+  const confirmDelete = async () => {
+    const isSuccess = await apiRequest('/api/Notes/DeleteMedication','DELETE', {
       noteId: noteId,
       medicationId: med.id
     })
 
-    if (isSuccesss){
+    if (isSuccess){
       confirmBox.current.classList.remove("active");
       setUpdatedNoteDate(noteDate);
     }

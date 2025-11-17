@@ -194,7 +194,7 @@
 }
 
 .note .medication-container .delete-medication .delete-medication-confirm-box button:hover {
-    background: #fff;
+  background: #fff;
   color: #000;
 }
 
@@ -224,27 +224,124 @@
   border-top: 10px solid #fff;
 }
 
+
+/* Thought */
+
 .thought-container {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-template-areas:
+  ". time edit-delete"
+  "line line line"
+  "text text text";
   background: #000;
   color: #fff;
   margin-bottom: .35rem;
   width: 95%;
+  padding: .35rem .1rem;
   border-radius: .15rem;
+}
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.thought-container .time {
+  grid-area: time;
 }
 
 .thought-container .text {
+  grid-area: text;
   margin-top: .35rem;
 }
 
 .thought-container .line {
-  width: 95%;
+  grid-area: line;
+  width: 97.5%;
+  justify-self: center;
   height: 1px;
   background: #fff;
+  margin-top: .25rem;
 }
+
+.thought-container .edit-delete {
+  grid-area: edit-delete;
+  display: flex;
+  gap: .35rem;
+  justify-content: end;
+}
+
+.thought-container img.edit-thought, .thought-container .delete-thought {
+  cursor: pointer;
+  height: 1rem;
+  background: white;
+  border-radius: .1rem;
+}
+
+
+.thought-container .delete-thought {
+ width: 16px;
+ position: relative;
+ margin-right: .15rem;
+}
+
+.thought-container .delete-thought .delete-thought-confirm-box {
+  display: none;
+  position: absolute;
+  cursor: default;
+  bottom: 25px;
+  left: -57.5px;
+  width: 8rem;
+  height: 3rem;
+  z-index: 6;
+  background: #000;
+  border-radius: .25rem;
+  border: 2px solid #fff;
+}
+
+.thought-container .delete-thought .delete-thought-confirm-box.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} 
+
+.thought-container .delete-thought .delete-thought-confirm-box img.close-box {
+  cursor: pointer;
+  width: .85rem;
+  background: #fff;
+  color: #000;
+  position: absolute;
+  right: .1rem;
+  top: .1rem;
+  padding: .05rem;
+  border-radius: 50%;
+  border: 2px solid #000;
+}
+
+.thought-container .delete-thought .delete-thought-confirm-box button {
+  width: 5rem;
+  height: 1.75rem;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  border: 2px solid #fff;
+}
+
+
+.thought-container .delete-thought .delete-thought-confirm-box button:hover {
+  background: #fff;
+  color: #000;
+}
+
+.thought-container .delete-thought .delete-thought-confirm-box .arrow-down {
+  position: absolute;
+  bottom: -10px;
+  width: 0; 
+  height: 0; 
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  
+  border-top: 10px solid #fff;
+}
+
+
+
 
 .arrow {
   cursor: pointer;

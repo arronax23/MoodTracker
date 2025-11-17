@@ -11,7 +11,7 @@ const useFetchNote = (date) => {
 
   const fetchData = async (signal) => {
     try {
-      const response = await fetch(`api/Notes/GetNote/${date}`, { signal: signal });
+      const response = await fetch(`/api/Notes/GetNote/${date}`, { signal: signal });
       setHttpResponse(response.status);
       console.log(response);
 
@@ -53,7 +53,7 @@ useEffect(() => {
   run();
 
   return () => abortController.abort();
-}, [updatedNoteDate]);
+}, [updatedNoteDate, date]);
 
   return { note, isPending, error, httpResponse };
 };

@@ -71,7 +71,7 @@ export default function Note({ date, dayName, dateDisplay }) {
         <div className="thoughts-header">Przemyślenia</div>
         {note &&
           note.thoughts &&
-          note.thoughts.map((t) => <Thought thought={t} />)}
+          note.thoughts.map((t) => <Thought dayName={dayName} dateDisplay={dateDisplay} noteId={note.id} noteDate={date} thought={t} />)}
         <div className="dummy"></div>
         <div
           className="open-form-btn share-thoughts-btn"

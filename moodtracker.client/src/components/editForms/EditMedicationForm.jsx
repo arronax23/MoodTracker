@@ -35,9 +35,6 @@ const EditMedicationForm = ({noteDate, noteId, medId }) => {
     });
     
     if(isSuccess) {
-      console.log(isSuccess)
-      console.log("SUCCESS Editing med")
-      console.log(noteDate)
       setUpdatedNoteDate(noteDate);
       navigate(-1);
     }

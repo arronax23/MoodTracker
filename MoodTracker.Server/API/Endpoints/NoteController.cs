@@ -21,6 +21,12 @@ public class NoteController(NoteService noteService) : ControllerBase
         return noteService.GetMedication(noteId,medicationId);
     }
 
+    [HttpGet("GetThought/{noteId}/{thoughtId}")]
+    public ThoughtDto? GetThought(int noteId, int thoughtId)
+    {
+        return noteService.GetThought(noteId, thoughtId);
+    }
+
     [HttpPatch("EditMedication")]
     public IActionResult EditMedication(EditMedicationRequest request)
     {
@@ -32,10 +38,32 @@ public class NoteController(NoteService noteService) : ControllerBase
             return Problem();
     }
 
+    [HttpPatch("EditThought")]
+    public async Task<IActionResult> EditThought(EditThoughtRequest request)
+    {
+        var isSuccess = await noteService.EditThought(request.NoteId, request.Thought);
+
+        if (isSuccess)
+            return Ok();
+        else
+            return Problem();
+    }
+
     [HttpDelete("DeleteMedication")]
     public IActionResult DeleteMedication(DeleteMedicationRequest request)
     {
         var isSuccess = noteService.DeleteMedication(request.NoteId, request.MedicationId);
+
+        if (isSuccess)
+            return Ok();
+        else
+            return Problem();
+    }
+
+    [HttpDelete("DeleteThought")]
+    public IActionResult DeleteThought(DeleteThoughtRequest request)
+    {
+        var isSuccess = noteService.DeleteThought(request.NoteId, request.ThoughtId);
 
         if (isSuccess)
             return Ok();

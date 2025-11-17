@@ -39,6 +39,11 @@ public class Note : EntityBase
         _medications.Add(medication);
     }
 
+    public void AddThought(Thought thought)
+    {
+        _thoughts.Add(thought);
+    }
+
 
     public void UpdateMedication(int medId, Medication updateMedication)
     {
@@ -47,15 +52,22 @@ public class Note : EntityBase
         medication.Update(updateMedication);
     }
 
+    public void UpdateThought(int thoughtId, Thought updateThought)
+    {
+        var thought = _thoughts.Single(t => t.Id == thoughtId);
+
+        thought.Update(updateThought);
+    }
+
     public void DeleteMedication(int medId)
     {
         var medication = _medications.Single(m => m.Id == medId);
         _medications.Remove(medication);
     }
-
-    public void AddThought(Thought thought)
+    public void DeleteThought(int thoughtId)
     {
-        _thoughts.Add(thought);
+        var thought = _thoughts.Single(t => t.Id == thoughtId);
+        _thoughts.Remove(thought);
     }
 
 
