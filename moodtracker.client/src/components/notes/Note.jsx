@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useGlobalStore } from "../../utilities/useGlobalStore";
 import { FORM_TYPE } from "../../utilities/formTypes";
 import Medication from "./sections/Medication";
@@ -5,6 +6,7 @@ import Thought from "./sections/Thought";
 import Mood from "./sections/Mood";
 import useFetchNote from "../../utilities/useFetchNote";
 import { useNavigate } from "react-router-dom";
+
 
 export default function Note({ date, dayName, dateDisplay }) {
   const {
@@ -14,8 +16,8 @@ export default function Note({ date, dayName, dateDisplay }) {
     setDayOfTheWeek,
   } = useGlobalStore();
 
+  const moodSection = useRef();
   const navigate = useNavigate();
-
   const { note } = useFetchNote(date);
 
   const rateMood = () => {
@@ -48,8 +50,8 @@ export default function Note({ date, dayName, dateDisplay }) {
       <div className="day-name">{dayName}</div>        
       </div>
    
-      <div className="section mood">
-        <Mood note={note} />
+      <div className="section mood" ref={moodSection}>
+        <Mood note={note} moodSection={moodSection} />
         <div className="open-form-btn rate-mood-btn" onClick={rateMood}>
           Oceń
         </div>

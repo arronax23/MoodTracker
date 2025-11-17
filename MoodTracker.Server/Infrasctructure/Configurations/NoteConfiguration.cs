@@ -18,6 +18,11 @@ public class NoteConfiguration : IEntityTypeConfiguration<Note>
                 .HasColumnName("MoodRate")
                 .HasConversion<int>()
                 .IsRequired();
+
+            mood.Property(m => m.Color)
+                .HasColumnName("MoodColor")
+                .HasConversion<int>()
+                .IsRequired();
         });
 
         builder.HasMany<Medication>("_medications")

@@ -6,6 +6,6 @@ public class NoteDto
     public IEnumerable<MedicationDto>? Medications { get; set; }
     public IEnumerable<ThoughtDto>? Thoughts { get; set; }
     public DateOnly Date { get; set; }
-    public int? MoodRate { get; set; }
+    public MoodDto? Mood { get; set; }
 
 }

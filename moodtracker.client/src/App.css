@@ -94,6 +94,18 @@
   min-height: 55px;
 }
 
+.note .section.mood.red {
+  background: red;
+}
+
+.note .section.mood.yellow {
+  background: yellow;
+}
+
+.note .section.mood.green {
+  background: green;
+}
+
 .note .section.mood .mood-rate-value {
   font-size: 26px;
 }
@@ -447,6 +459,10 @@
   width: 7rem;
 }
 
+
+.form-container form .form-item textarea#thought  {
+  height: 10rem;
+}
 
 
 

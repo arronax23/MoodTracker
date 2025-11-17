@@ -21,7 +21,7 @@ public class NoteService(ApplicationDbContext dbContext)
         return new NoteDto()
         {
             Date = note.Date,
-            MoodRate = note.GetMoodRate(),
+            Mood = MapMoodToDto(note.Mood),
             Id = note.Id,
             Medications = note.GetMedications().OrderBy(m => m.Time).Select(m => new MedicationDto()
             {
@@ -185,6 +185,18 @@ public class NoteService(ApplicationDbContext dbContext)
         }
 
         dbContext.SaveChanges();
+    }
+
+    private MoodDto? MapMoodToDto(Mood? mood)
+    {
+        if (mood is null)
+            return null;
+
+        return new MoodDto()
+        {
+            Rate = (int)mood.Rate,
+            Color = mood.Color.ToString()
+        };
     }
 
     private Medication MapMedicationFromDto(MedicationDto dto)
