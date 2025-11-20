@@ -21,6 +21,21 @@
   gap: 0;
 }
 
+.calendar.blink {
+  animation: blink .25s;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
 .date-section {
   display: flex;
   flex-direction: column;
@@ -495,3 +510,5 @@ img.close-form-btn {
   border: 2px solid black;;
   z-index: 5;
 }
+
+

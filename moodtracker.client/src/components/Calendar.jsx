@@ -1,26 +1,39 @@
 import Note from "./notes/Note";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { getWeek } from "../utilities/dateUtils";
 import { Outlet } from "react-router";
 
 export default function Calendar() {
   const [weekReference, setWeekReference] = useState(0);
   const [week, setWeek] = useState(getWeek(weekReference));
+  const calendar = useRef();
 
   const moveToPreviousWeek = () => {
     setWeekReference(prev => --prev);
     setWeek(getWeek(weekReference));
+    blink();
   };
+
+
 
   const moveToNextWeek = () => {
     setWeekReference(prev => ++prev);
     setWeek(getWeek(weekReference));
+    blink();
   };
+
+
+  const blink = () => {
+    calendar.current.classList.add('blink');
+    setTimeout(() => {
+      calendar.current.classList.remove('blink');
+    }, 250);
+  }
 
   return (
     <div>
       <Outlet />
-      <div className="calendar">
+      <div className="calendar" ref={calendar}>
         <img
           className="arrow left-arrow"
           src={"/left-arrow.svg"}

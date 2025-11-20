@@ -18,6 +18,9 @@ const Mood = ({ note, moodSection }) => {
           break;
       }
     }
+    else {
+       moodSection.current.style.background = '#a8d4d3';
+    }
   },[note, moodSection])
 
   return (
