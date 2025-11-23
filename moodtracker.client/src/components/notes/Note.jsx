@@ -6,19 +6,17 @@ import Thought from "./sections/Thought";
 import Mood from "./sections/Mood";
 import useFetchNote from "../../utilities/useFetchNote";
 import { useNavigate } from "react-router-dom";
-
+import useFetchGet from "../../utilities/useFetchGet";
 
 export default function Note({ date, dayName, dateDisplay }) {
-  const {
-    setFormType,
-    setDate,
-    setDateDisplay,
-    setDayOfTheWeek,
-  } = useGlobalStore();
+  const { setFormType, setDate, setDateDisplay, setDayOfTheWeek } =
+    useGlobalStore();
 
   const moodSection = useRef();
   const navigate = useNavigate();
   const { note } = useFetchNote(date);
+
+  const { result: isWellbutrinDay } = useFetchGet(`/api/Wellbutrin/GetWellbutrinDay/${date}`);
 
   const rateMood = () => {
     openForm();
@@ -39,17 +37,20 @@ export default function Note({ date, dayName, dateDisplay }) {
     setDayOfTheWeek(dayName);
     setDate(date);
     setDateDisplay(dateDisplay);
-    navigate('/form')
-
+    navigate("/form");
   };
 
   return (
     <div className="note">
       <div className="date-section">
-      <div className="date">{dateDisplay}</div>
-      <div className="day-name">{dayName}</div>        
+        <div className="date">{dateDisplay}</div>
+        <div className="day-name">{dayName}</div>
+        {isWellbutrinDay && (
+          <div className="wellbutrin-day" title="Dzień Wellbutrinu">
+            <img src="/pill.svg" alt="" />
+          </div>
+        )}
       </div>
-   
       <div className="section mood" ref={moodSection}>
         <Mood note={note} moodSection={moodSection} />
         <div className="open-form-btn rate-mood-btn" onClick={rateMood}>
@@ -60,7 +61,15 @@ export default function Note({ date, dayName, dateDisplay }) {
         <div className="medications-header">Leki</div>
         {note &&
           note.medications &&
-          note.medications.map((m) => <Medication dayName={dayName} dateDisplay={dateDisplay} noteId={note.id} noteDate={date} med={m} />)}
+          note.medications.map((m) => (
+            <Medication
+              dayName={dayName}
+              dateDisplay={dateDisplay}
+              noteId={note.id}
+              noteDate={date}
+              med={m}
+            />
+          ))}
         <div className="dummy"></div>
         <div
           className="open-form-btn add-medication-btn"
@@ -73,7 +82,15 @@ export default function Note({ date, dayName, dateDisplay }) {
         <div className="thoughts-header">Przemyślenia</div>
         {note &&
           note.thoughts &&
-          note.thoughts.map((t) => <Thought dayName={dayName} dateDisplay={dateDisplay} noteId={note.id} noteDate={date} thought={t} />)}
+          note.thoughts.map((t) => (
+            <Thought
+              dayName={dayName}
+              dateDisplay={dateDisplay}
+              noteId={note.id}
+              noteDate={date}
+              thought={t}
+            />
+          ))}
         <div className="dummy"></div>
         <div
           className="open-form-btn share-thoughts-btn"

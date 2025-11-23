@@ -70,23 +70,6 @@ public class Note : EntityBase
         _thoughts.Remove(thought);
     }
 
-
-    public void Update(Note day)
-    {
-        if (day.Id != Id)
-            throw new InvalidOperationException("Wrong Id");
-
-        Update(day.Mood, day._medications);
-
-    }
-
-    private void Update(Mood mood, IEnumerable<Medication> medications)
-    {
-        Mood = mood;
-        _medications.Clear();
-        _medications = medications.ToList();
-    }
-
     public IReadOnlyList<Medication> GetMedications() => _medications.AsReadOnly();
     public IReadOnlyList<Thought> GetThoughts() => _thoughts.AsReadOnly();
 }
