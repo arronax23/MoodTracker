@@ -13,7 +13,7 @@ const useFetchNote = (date) => {
     try {
       const response = await fetch(`/api/Notes/GetNote/${date}`, { signal: signal });
       setHttpResponse(response.status);
-      console.log(response);
+      // console.log(response);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

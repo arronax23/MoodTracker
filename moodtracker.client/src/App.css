@@ -76,6 +76,11 @@
     border-right: 2px solid black;
 }
 
+
+.note.today {
+  /* background: #75d2d1; */
+}
+
 .note .open-form-btn  {
   cursor: pointer;
   background: #fff;

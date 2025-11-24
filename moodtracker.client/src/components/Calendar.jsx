@@ -9,16 +9,18 @@ export default function Calendar() {
   const calendar = useRef();
 
   const moveToPreviousWeek = () => {
-    setWeekReference(prev => --prev);
-    setWeek(getWeek(weekReference));
+    setWeekReference(prev => {
+      setWeek(getWeek(--prev));
+      return prev;
+    });
     blink();
   };
 
-
-
   const moveToNextWeek = () => {
-    setWeekReference(prev => ++prev);
-    setWeek(getWeek(weekReference));
+    setWeekReference(prev => {
+      setWeek(getWeek(++prev));
+      return prev;
+    });
     blink();
   };
 
@@ -50,6 +52,7 @@ export default function Calendar() {
             dayName={day.name}
             dateDisplay={day.dateDisplay}
             date={day.date}
+            isToday = {day.isToday}
           />
         ))}
       </div>

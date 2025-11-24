@@ -8,11 +8,12 @@ import useFetchNote from "../../utilities/useFetchNote";
 import { useNavigate } from "react-router-dom";
 import useFetchGet from "../../utilities/useFetchGet";
 
-export default function Note({ date, dayName, dateDisplay }) {
+export default function Note({ date, dayName, dateDisplay, isToday }) {
   const { setFormType, setDate, setDateDisplay, setDayOfTheWeek } =
     useGlobalStore();
 
   const moodSection = useRef();
+  const noteDiv = useRef();
   const navigate = useNavigate();
   const { note } = useFetchNote(date);
 
@@ -41,7 +42,7 @@ export default function Note({ date, dayName, dateDisplay }) {
   };
 
   return (
-    <div className="note">
+    <div className={isToday ? "note today" : "note"}>
       <div className="date-section">
         <div className="date">{dateDisplay}</div>
         <div className="day-name">{dayName}</div>
@@ -58,6 +59,7 @@ export default function Note({ date, dayName, dateDisplay }) {
         </div>
       </div>
       <div className="section medications">
+
         <div className="medications-header">Leki</div>
         {note &&
           note.medications &&

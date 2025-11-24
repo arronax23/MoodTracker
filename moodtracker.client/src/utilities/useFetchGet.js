@@ -17,7 +17,7 @@ const useFetchGet = (url) => {
       }
 
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       setResult(data);
 
     } catch (err) {
