@@ -19,6 +19,7 @@
   display: grid;
   grid-template-columns: repeat(7,1fr);
   gap: 0;
+  margin-top: 2px;
 }
 
 .calendar.blink {
@@ -67,18 +68,17 @@
   min-height: 350px;
   width: 195px;
   background: #a8d4d3;
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
-  border-left: 2px solid black;
+  border: 2px solid black;
 }
-
-.note:last-child {
-    border-right: 2px solid black;
-}
-
 
 .note.today {
-  /* background: #75d2d1; */
+  border-left: 4px solid black;
+  border-right: 4px solid black;
+  border-top: 6px solid black;
+  border-bottom: 6px solid black;
+  width: 190px;
+  margin-top: -4px;
+  margin-bottom: -4px;
 }
 
 .note .open-form-btn  {
