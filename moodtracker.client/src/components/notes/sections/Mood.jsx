@@ -19,7 +19,7 @@ const Mood = ({ note, moodSection }) => {
       }
     }
     else {
-       moodSection.current.style.background = '#a8d4d3';
+       moodSection.current.style.background = '#a8d4d3  ';
     }
   },[note, moodSection])
 

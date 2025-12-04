@@ -23,6 +23,11 @@ public class Note : EntityBase
         return (int?)Mood?.Rate;
     }
 
+    public string? GetMoodColor()
+    {
+        return Mood?.Color.ToString();
+    }
+
     public static Note Create(DateOnly date)
     {
         return new Note(date);

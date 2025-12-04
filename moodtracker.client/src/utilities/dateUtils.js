@@ -23,6 +23,32 @@ export const getWeek = (weekReference) => {
 }
 
 
+export const getFirstDayOfCurrentMonth = () => {
+     const today = new Date();
+     today.setDate(1);
+
+     return today;
+}
+
+export const incrementMonth = (date) => {
+    const newDate = new Date(date.getTime());
+    newDate.setMonth(newDate.getMonth() + 1)
+
+    return newDate;
+}
+
+export const decrementMonth = (date) => {
+    const newDate = new Date(date.getTime());
+    newDate.setMonth(newDate.getMonth() - 1)
+
+    return newDate;
+}
+
+export const formatDate = (date) => {
+    return format(date, 'yyyy-MM-dd');
+}
+
+
 export const capitalizeFirstLetter = (val) => {
     return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }

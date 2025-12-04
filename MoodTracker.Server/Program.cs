@@ -4,14 +4,13 @@ using MoodTracker.Server.Infrasctructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 builder.Services.AddSingleton<Settings>();
 builder.Services.AddScoped<NoteService>();
+builder.Services.AddScoped<MoodProgressService>();
 builder.Services.AddScoped<WellbutrinInfoService>();
-
 
 builder.Services.AddDbContext<ApplicationDbContext>(
     options => options.UseSqlite("Data Source=moodTracker.db"));

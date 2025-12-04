@@ -16,3 +16,8 @@ Content-Type: application/json
   "noteId": 7,
   "medicationId": 5
 }
+
+###
+GET {{MoodTracker.Server_HostAddress}}/api/MoodProgress/GetProgress/2025-11-08
+Accept: application/json
+
