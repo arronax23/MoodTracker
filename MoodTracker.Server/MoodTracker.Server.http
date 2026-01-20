@@ -1,4 +1,4 @@
-@MoodTracker.Server_HostAddress = http://localhost:5267
+@MoodTracker.Server_HostAddress = https://localhost:7013
 
 GET {{MoodTracker.Server_HostAddress}}/api/Notes/GetNote/2025-11-03
 Accept: application/json
@@ -21,3 +21,16 @@ Content-Type: application/json
 GET {{MoodTracker.Server_HostAddress}}/api/MoodProgress/GetProgress/2025-11-08
 Accept: application/json
 
+
+GET {{MoodTracker.Server_HostAddress}}/api/MoodProgress/GetProgress/{date}
+
+###
+
+@date=2025-12-04
+GET {{MoodTracker.Server_HostAddress}}/api/Wellbutrin/GetWellbutrinDay/{{date}}
+
+###
+@date=2026-01-04
+GET {{MoodTracker.Server_HostAddress}}/api/Histogram/GetHistogram/{{date}}
+
+###

@@ -9,7 +9,7 @@ namespace MoodTracker.Server.API.Endpoints;
 public class MoodProgressController(MoodProgressService service) : ControllerBase
 {
     [HttpGet("GetProgress/{date}")]
-    public MoodProgressDto GetNote(DateOnly date)
+    public MoodProgressDto GetProgress(DateOnly date)
     {
         return service.GetProgress(date);
     }

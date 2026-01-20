@@ -11,6 +11,7 @@ builder.Services.AddSingleton<Settings>();
 builder.Services.AddScoped<NoteService>();
 builder.Services.AddScoped<MoodProgressService>();
 builder.Services.AddScoped<WellbutrinInfoService>();
+builder.Services.AddScoped<HistogramService>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(
     options => options.UseSqlite("Data Source=moodTracker.db"));

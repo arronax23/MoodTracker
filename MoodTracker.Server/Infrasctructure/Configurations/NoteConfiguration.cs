@@ -10,9 +10,13 @@ public class NoteConfiguration : IEntityTypeConfiguration<Note>
     {
         builder.ToTable("Notes");
 
-        builder.HasKey(d => d.Id);
+        builder.HasKey(n => n.Id);
 
-        builder.OwnsOne(d => d.Mood, mood =>
+        builder
+            .HasIndex(n => n.Date)
+            .IsUnique();
+
+        builder.OwnsOne(n => n.Mood, mood =>
         {
             mood.Property(m => m.Rate)
                 .HasColumnName("MoodRate")
