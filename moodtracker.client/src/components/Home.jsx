@@ -19,11 +19,16 @@ const Home = () => {
     navigate('/chart');
   }
 
+  const histogramClick = () => {
+    navigate('/histogram');
+  }
+
   return (
     <div onScroll={e => scroll(e)} className="home">
       <nav className="navbar" ref={navbar}>
         <div onClick={calendarClick} className="nav-item calednar-btn">Kalendarz</div>
         <div onClick={chartClick} className="nav-item chart">Wykres</div>
+        <div onClick={histogramClick} className="nav-item histogram">Histogram</div>
         <h1 className="nav-item header">Dziennik nastroju</h1>
       </nav>
       <Outlet   />

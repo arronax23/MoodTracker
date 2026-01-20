@@ -1,6 +1,7 @@
 ﻿using MoodTracker.Server.API.DTOs;
 using MoodTracker.Server.Domain;
 using MoodTracker.Server.Infrasctructure;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -13,16 +14,30 @@ public class HistogramService(ApplicationDbContext dbContext)
         var items = dbContext.Notes
             .Where(NoteIsWithinSpecifiedDate(date))
             .Where(n => n.Mood != null)
-            .GroupBy(n => (int)n.Mood!.Rate)
+            .GroupBy(n => new { Rate = (int)n.Mood!.Rate, Color = n.Mood!.Color.ToString() })
             .Select(g => new HistogramDto.HistogramItemDto()
             {
-                MoodRate = g.Key,
+                MoodRate = g.Key.Rate,
+                MoodColor = g.Key.Color,
                 Count = g.Count()
-            });
+            })
+            .OrderByDescending(x => x.Count);
 
-        return new HistogramDto() { Items = items };
+        return new HistogramDto() 
+        { 
+            Items = items,
+            Month = GetMonthNameInPolish(date),
+            Year = date.Year
+        };
     }
 
     private Expression<Func<Note,bool>> NoteIsWithinSpecifiedDate(DateOnly date) 
         => (n) => n.Date.Month == date.Month && n.Date.Year == date.Year;
+
+    private string GetMonthNameInPolish(DateOnly date)
+    {
+        var monthName = date.ToString("MMMM", new CultureInfo("pl-PL"));
+
+        return char.ToUpper(monthName[0]) + monthName.Substring(1);
+    }
 }

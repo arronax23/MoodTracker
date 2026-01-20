@@ -1,4 +1,4 @@
-const CustomTooltip = ({ active, payload, label }) => {
+const MoodChartTooltip = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null;
 
   // Pierwszy payload to słupek (Bar)
@@ -12,4 +12,4 @@ const CustomTooltip = ({ active, payload, label }) => {
   );
 };
 
-export default CustomTooltip;
+export default MoodChartTooltip;

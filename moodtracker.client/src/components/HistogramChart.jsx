@@ -1,13 +1,11 @@
+import { useRef, useState } from "react";
 import useFetchGet from "../utilities/useFetchGet";
-import { useState, useRef } from "react";
-import MoodChartTooltip from "./MoodChartTooltip";
 import {
-  getFirstDayOfCurrentMonth,
   formatDate,
+  getFirstDayOfCurrentMonth,
   incrementMonth,
   decrementMonth,
 } from "../utilities/dateUtils";
-
 import {
   ComposedChart,
   Line,
@@ -19,13 +17,14 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import HistogramTooltip from "./HistogramTooltip";
 
-const MoodChart = () => {
+const HistogramChart = () => {
   const [date, setDate] = useState(getFirstDayOfCurrentMonth());
   const leftArrow = useRef();
   const rightArrow = useRef();
-  const { result: moodProgress } = useFetchGet(
-    `/api/MoodProgress/GetProgress/${formatDate(date)}`
+  const { result: histogram } = useFetchGet(
+    `/api/Histogram/GetHistogram/${formatDate(date)}`,
   );
 
   const blink = (arrowRef) => {
@@ -33,6 +32,18 @@ const MoodChart = () => {
     setTimeout(() => {
       arrowRef.current.classList.remove("blink");
     }, 250);
+  };
+
+  const increment = () => {
+    const newDate = incrementMonth(date);
+    blink(rightArrow);
+    setDate(newDate);
+  };
+
+  const decrement = () => {
+    const newDate = decrementMonth(date);
+    blink(leftArrow);
+    setDate(newDate);
   };
 
   const mapColor = (color) => {
@@ -46,18 +57,6 @@ const MoodChart = () => {
       default:
         "#000";
     }
-  };
-
-  const increment = () => {
-    const newDate = incrementMonth(date);
-    blink(rightArrow);
-    setDate(newDate);
-  };
-
-  const decrement = () => {
-    const newDate = decrementMonth(date);
-    blink(leftArrow);
-    setDate(newDate);
   };
 
   return (
@@ -74,41 +73,31 @@ const MoodChart = () => {
         src={"/right-arrow.svg"}
         onClick={increment}
       />
-      {moodProgress && (
+      {histogram && (
         <div className="chart">
-          <h1 className="header">Wykres nastroju</h1>
+          <h1 className="header">Histogram</h1>
           <h3 className="date">
-            {moodProgress.month} {moodProgress.year}
+            {histogram.month} {histogram.year}
           </h3>
           <ResponsiveContainer width="100%" height={450}>
             <ComposedChart
               margin={{ top: 50 }}
-              data={moodProgress.progress.map((p) => ({
-                name: p.day,
-                value: p.moodRate,
-                color: p.moodColor,
+              data={histogram.items.map((i) => ({
+                name: i.moodRate,
+                value: i.count,
               }))}
             >
               <CartesianGrid strokeDasharray="3" vertical={false} />
-              <XAxis dataKey="name" />
+              <XAxis  dataKey="name"   />
               <YAxis
-                domain={[0, 10]}
-                ticks={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-                interval={0}
+                dataKey="value"
               />
-              <Tooltip content={<MoodChartTooltip />} />
+              <Tooltip content={<HistogramTooltip />} />
               <Bar dataKey="value">
-                {moodProgress.progress.map((p) => (
-                  <Cell key={p.day} fill={mapColor(p.moodColor)} />
+                {histogram.items.map((i) => (
+                  <Cell key={i.moodRate} fill={mapColor(i.moodColor)} />
                 ))}
               </Bar>
-              <Line
-                type="linear"
-                dataKey="value"
-                stroke="#000"
-                strokeWidth={2}
-                dot={{ r: 3 }}
-              />
             </ComposedChart>
           </ResponsiveContainer>
         </div>
@@ -116,4 +105,4 @@ const MoodChart = () => {
     </div>
   );
 };
-export default MoodChart;
+export default HistogramChart;

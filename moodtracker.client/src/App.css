@@ -534,8 +534,8 @@ nav.navbar {
   position: fixed;
   background: pink;
   display: grid;
-  grid-template-columns: 1fr 1fr 15fr 1fr 1fr;
-  grid-template-areas: "calendar chart header . .";
+  grid-template-columns: 2fr 1.5fr 2fr 19fr 2fr 2fr 2fr;
+  grid-template-areas: "calendar chart histogram header . . .";
   height: 2.5rem;
   width: 100%;
   z-index: 2;
@@ -557,7 +557,13 @@ nav.navbar {
 
 }
 
-.calednar-btn.nav-item , .chart.nav-item  {
+.histogram.nav-item {
+  grid-area: histogram;
+
+}
+
+.calednar-btn.nav-item , .chart.nav-item, .histogram.nav-item {
+  cursor: pointer;
   justify-self: left;
   margin-left: .5rem;
   padding: .25rem;
@@ -575,6 +581,7 @@ nav.navbar {
   grid-area: header;
   justify-self: center;
   font-size: 1.5rem;
+  margin-right: .5rem;
   letter-spacing: .05rem;
 }
 
