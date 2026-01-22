@@ -8,10 +8,16 @@ namespace MoodTracker.Server.API.Endpoints;
 [Route("api/Histogram")]
 public class HistogramController(HistogramService service) : ControllerBase
 {
-    [HttpGet("GetHistogram/{date}")]
-    public HistogramDto GetHistogram(DateOnly date)
+    [HttpGet("GetMoodRateHistogram/{date}")]
+    public MoodRateHistogramDto GetMoodRateHistogram(DateOnly date)
     {
-        return service.GetHistogramData(date);
+        return service.GetMoodRateHistogram(date);
+    }
+
+    [HttpGet("GetMoodColorHistogram/{date}")]
+    public MoodColorHistogramDto GetMoodColorHistogram(DateOnly date)
+    {
+        return service.GetMoodColorHistogram(date);
     }
 }
 

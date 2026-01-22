@@ -4,7 +4,7 @@ import EditMedicationLayout from "./components/editForms/EditMedicationLayout";
 import EditThoughtLayout from "./components/editForms/EditThoughtLayout";
 import Home from "./components/Home";
 import MoodChart from "./components/MoodChart";
-import HistogramChart from "./components/HistogramChart";
+import HistogramChart from "./components/histogram/HistogramChart";
 import { Route, Routes } from "react-router";
 import "./App.css";
 

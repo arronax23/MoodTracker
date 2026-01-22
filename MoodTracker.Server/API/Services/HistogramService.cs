@@ -2,20 +2,21 @@
 using MoodTracker.Server.Domain;
 using MoodTracker.Server.Infrasctructure;
 using System.Globalization;
-using System.Linq;
 using System.Linq.Expressions;
+using static MoodTracker.Server.API.DTOs.MoodColorHistogramDto;
+using static MoodTracker.Server.API.DTOs.MoodRateHistogramDto;
 
 namespace MoodTracker.Server.API.Services;
 
 public class HistogramService(ApplicationDbContext dbContext)
 {
-    public HistogramDto GetHistogramData(DateOnly date)
+    public MoodRateHistogramDto GetMoodRateHistogram(DateOnly date)
     {
         var items = dbContext.Notes
             .Where(NoteIsWithinSpecifiedDate(date))
             .Where(n => n.Mood != null)
             .GroupBy(n => new { Rate = (int)n.Mood!.Rate, Color = n.Mood!.Color.ToString() })
-            .Select(g => new HistogramDto.HistogramItemDto()
+            .Select(g => new MoodRateHistogramItemDto()
             {
                 MoodRate = g.Key.Rate,
                 MoodColor = g.Key.Color,
@@ -23,13 +24,35 @@ public class HistogramService(ApplicationDbContext dbContext)
             })
             .OrderByDescending(x => x.Count);
 
-        return new HistogramDto() 
+        return new MoodRateHistogramDto() 
         { 
             Items = items,
             Month = GetMonthNameInPolish(date),
             Year = date.Year
         };
     }
+
+    public MoodColorHistogramDto GetMoodColorHistogram(DateOnly date)
+    {
+        var items = dbContext.Notes
+            .Where(NoteIsWithinSpecifiedDate(date))
+            .Where(n => n.Mood != null)
+            .GroupBy(n => n.Mood!.Color.ToString())
+            .Select(g => new HistogramItemDto()
+            {
+                MoodColor = g.Key,
+                Count = g.Count()
+            })
+            .OrderByDescending(x => x.Count);
+
+        return new MoodColorHistogramDto()
+        {
+            Items = items,
+            Month = GetMonthNameInPolish(date),
+            Year = date.Year
+        };
+    }
+
 
     private Expression<Func<Note,bool>> NoteIsWithinSpecifiedDate(DateOnly date) 
         => (n) => n.Date.Month == date.Month && n.Date.Year == date.Year;
@@ -40,4 +63,8 @@ public class HistogramService(ApplicationDbContext dbContext)
 
         return char.ToUpper(monthName[0]) + monthName.Substring(1);
     }
+
+
+
+
 }

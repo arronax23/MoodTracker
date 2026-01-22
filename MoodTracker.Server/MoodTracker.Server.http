@@ -31,6 +31,10 @@ GET {{MoodTracker.Server_HostAddress}}/api/Wellbutrin/GetWellbutrinDay/{{date}}
 
 ###
 @date=2026-01-04
-GET {{MoodTracker.Server_HostAddress}}/api/Histogram/GetHistogram/{{date}}
+GET {{MoodTracker.Server_HostAddress}}/api/Histogram/GetMoodRateHistogram/{{date}}
+
+###
+@date=2026-01-04
+GET {{MoodTracker.Server_HostAddress}}/api/Histogram/GetMoodColorHistogram/{{date}}
 
 ###
