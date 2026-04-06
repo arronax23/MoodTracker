@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MoodTracker.Server.Domain;
+using MoodTracker.Server.Domain.NoteAggregate;
 
 namespace MoodTracker.Server.Infrasctructure;
 

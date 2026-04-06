@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MoodTracker.Server.API.DTOs;
 using MoodTracker.Server.API.Services;
 
 namespace MoodTracker.Server.API.Endpoints;
@@ -11,5 +12,11 @@ public class WellbutrinInfoController(WellbutrinInfoService service) : Controlle
     public bool GetWellbutrinDay(DateTime date)
     {
         return service.IsWellbutrinDay(date);
+    }
+
+    [HttpGet("GetRatingByWellbutrin")]
+    public RatingByWellbutrinDayDto GetRatingByWellbutrin()
+    {
+        return service.GetRatingByWellbutrinDay();
     }
 }

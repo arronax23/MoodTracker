@@ -1,6 +1,6 @@
 ﻿using MoodTracker.Server.Domain.Abstractions;
 
-namespace MoodTracker.Server.Domain;
+namespace MoodTracker.Server.Domain.NoteAggregate;
 
 public class Medication : EntityBase
 {

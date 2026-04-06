@@ -1,8 +1,8 @@
 ﻿using MoodTracker.Server.Domain.Abstractions;
 
-namespace MoodTracker.Server.Domain;
+namespace MoodTracker.Server.Domain.NoteAggregate;
 
-public class Note : EntityBase
+public class Note : EntityBase, IAggreateRoot
 {
     private List<Medication> _medications = new List<Medication>();
     private List<Thought> _thoughts = new List<Thought>();
@@ -69,6 +69,7 @@ public class Note : EntityBase
         var medication = _medications.Single(m => m.Id == medId);
         _medications.Remove(medication);
     }
+
     public void DeleteThought(int thoughtId)
     {
         var thought = _thoughts.Single(t => t.Id == thoughtId);

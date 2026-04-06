@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MoodTracker.Server.Domain;
+using MoodTracker.Server.Domain.NoteAggregate;
 
 namespace MoodTracker.Server.Infrastructure.Configurations;
 

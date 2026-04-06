@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MoodTracker.Server.API.DTOs;
 using MoodTracker.Server.Domain;
+using MoodTracker.Server.Domain.NoteAggregate;
 using MoodTracker.Server.Infrasctructure;
 
 namespace MoodTracker.Server.API.Services;
@@ -200,7 +201,7 @@ public class NoteService(ApplicationDbContext dbContext)
     }
 
     private Medication MapMedicationFromDto(MedicationDto dto)
-        => Medication.Create(TimeOnly.Parse(dto.Time), dto.Name, Medication.Dosage.Create(dto.Dose.Value, dto.Dose.Unit));
+        => Medication.Create(TimeOnly.Parse(dto.Time), dto.Name, Dosage.Create(dto.Dose.Value, dto.Dose.Unit));
 
     private MedicationDto MapMedicationToDto(Medication medication)
     {

@@ -1,5 +1,5 @@
 ﻿using MoodTracker.Server.API.DTOs;
-using MoodTracker.Server.Domain;
+using MoodTracker.Server.Domain.NoteAggregate;
 using MoodTracker.Server.Infrasctructure;
 using System.Globalization;
 using System.Linq.Expressions;
