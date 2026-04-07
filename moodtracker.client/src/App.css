@@ -534,8 +534,8 @@ nav.navbar {
   position: fixed;
   background: pink;
   display: grid;
-  grid-template-columns: 2fr 1.5fr 2fr 19fr 2fr 2fr 2fr;
-  grid-template-areas: "calendar chart histogram header . . .";
+  grid-template-columns: 2fr 1.5fr 2fr 4fr 12fr 2fr 2fr 2fr 4fr;
+  grid-template-areas: "calendar chart histogram sets header . . . .";
   height: 2.5rem;
   width: 100%;
   z-index: 2;
@@ -562,7 +562,13 @@ nav.navbar {
 
 }
 
-.calednar-btn.nav-item , .chart.nav-item, .histogram.nav-item {
+.sets.nav-item {
+  grid-area: sets;
+
+}
+
+
+.calednar-btn.nav-item , .chart.nav-item, .histogram.nav-item, .sets.nav-item {
   cursor: pointer;
   justify-self: left;
   margin-left: .5rem;
@@ -623,4 +629,18 @@ nav.navbar {
   50% {
     opacity: 0;
   }
+}
+
+
+/* Medication Sets */
+
+
+img.plus-btn {
+  cursor: pointer;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.medication-sets-container .form-container {
+  overflow-y: scroll;
 }
