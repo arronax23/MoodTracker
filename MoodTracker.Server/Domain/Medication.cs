@@ -39,20 +39,20 @@ public class Medication : EntityBase
 
     public class Dosage
     {
-        public uint Value { get; set; }
+        public decimal Value { get; set; }
         public string Unit { get; set; } = null!;
 
         private Dosage()
         {
         }
 
-        public Dosage(uint value, string unit)
+        public Dosage(decimal value, string unit)
         {
             Value = value;
             Unit = unit;
         }
 
-        public static Dosage Create(uint value, string unit)
+        public static Dosage Create(decimal value, string unit)
         {
             if (string.IsNullOrWhiteSpace(unit))
                 throw new ArgumentException($"Dose Unit cannot be null or empty", nameof(unit));

@@ -77,6 +77,8 @@ const EditMedicationForm = ({noteDate, noteId, medId }) => {
           type="number"
           id="dose-value"
           name="dose-value"
+          lang="en"
+          step=".01"
           defaultValue={med.dose.value}
           onChange={(e) => setDoseValue(e.target.value)}
         ></input>
