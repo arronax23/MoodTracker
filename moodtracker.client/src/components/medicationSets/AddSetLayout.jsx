@@ -10,9 +10,9 @@ const AddSetLayout = () => {
 
   return (
     <div className="form-container-wrapper">
-      <div className="darken-background">AddSet</div>
-        <div className="form-container">
-        <h1>Dodaj zestaw</h1>
+      <div className="darken-background"></div>
+        <div className="form-container medication-sets-form">
+        <h1>Stwórz zestaw</h1>
         <AddSetForm />
         <img
           className="close-form-btn"

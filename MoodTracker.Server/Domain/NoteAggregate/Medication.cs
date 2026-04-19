@@ -36,31 +36,4 @@ public class Medication : EntityBase
         this.Name = updateMedication.Name;  
         this.Dose = updateMedication.Dose;
     }
-
-    public class Dosage
-    {
-        public decimal Value { get; set; }
-        public string Unit { get; set; } = null!;
-
-        private Dosage()
-        {
-        }
-
-        public Dosage(decimal value, string unit)
-        {
-            Value = value;
-            Unit = unit;
-        }
-
-        public static Dosage Create(decimal value, string unit)
-        {
-            if (string.IsNullOrWhiteSpace(unit))
-                throw new ArgumentException($"Dose Unit cannot be null or empty", nameof(unit));
-
-            if (value == 0)
-                throw new ArgumentException($"Dose Value cannot 0", nameof(value));
-
-            return new Dosage(value, unit);
-        }
-    }
 }

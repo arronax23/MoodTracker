@@ -639,8 +639,70 @@ img.plus-btn {
   cursor: pointer;
   height: 1.5rem;
   width: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-.medication-sets-container .form-container {
+form.add-set {
   overflow-y: scroll;
+  width: 100%;
+}
+
+
+.add-set-item {
+  border-top: 2px solid black;
+  padding-top: 1rem;
+  width: 90%;
+}
+
+form.add-set .add-set-item:first-child {
+  border-top: none;
+} 
+
+button.add-set-btn {
+  height: 3rem !important;
+}
+
+
+.add-set .remove-medication {
+  cursor: pointer;
+}
+
+.add-set .remove-medication, .add-set .remove-medication img {
+  height: 1.5rem;
+  width: 1.5rem;
+  background: #fff;
+  border-radius: .15rem;
+}
+
+.add-set .med-header .remove-medication {
+  margin-right: .5rem;
+    margin-left: auto;
+}
+
+
+.add-set .med-header  .med-index {
+  margin-left: 1rem;
+  font-size: 1.25rem;
+
+}
+
+.med-header  .empty {
+  margin-right: auto;
+  width: 1.5rem;
+}
+
+
+.add-set .med-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #000;
+  color: #fff;
+  height: 2rem;
+  border-radius: .15rem;
+  margin-bottom: 1rem;
+}
+
+.medication-sets-form {
+  width: 600px;
 }
