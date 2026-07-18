@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react'
+import { useGlobalStore } from './useGlobalStore';
 
-const useFetchGet = (url, refresh = null) => {
+
+const useFetchGet = (url) => {
   const [result, setResult] = useState();
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState();
   const [httpResponse, setHttpResponse] = useState();
+
+  const { fetchGet } = useGlobalStore();   
 
   const fetchData = async (signal) => {
     try {
@@ -34,7 +38,7 @@ const useFetchGet = (url, refresh = null) => {
     fetchData(abortController.signal);
 
     return () => abortController.abort();
-  }, [url, refresh]);
+  }, [url, fetchGet]);
 
 
   return { result, setResult, isPending, error, httpResponse };

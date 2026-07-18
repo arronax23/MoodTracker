@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { apiRequest } from "../../utilities/useApi";
 import { useNavigate } from "react-router-dom";
+import { useGlobalStore } from "../../utilities/useGlobalStore";
 import MedicationFormItem from "./MedicationFormItem";
 
 const emptyMedication = {
@@ -13,6 +14,7 @@ const emptyMedication = {
 
 const AddSetForm = () => {
   const [medicationSet, setMedicationSet] = useState([emptyMedication]);
+  const { fetchGet, setFetchGet } = useGlobalStore();  
   const navigate = useNavigate();
 
   const onSubmit = async (e) => {
@@ -25,6 +27,7 @@ const AddSetForm = () => {
 
     if (isSuccess) {
       navigate(-1);
+      setFetchGet(prev => !prev);
     }
   };
 

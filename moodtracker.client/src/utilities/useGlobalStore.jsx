@@ -13,4 +13,6 @@ export const useGlobalStore = create((set) => ({
     setDateDisplay: (dateDisplay) => set({ dateDisplay }),
     updatedNoteDate: null,
     setUpdatedNoteDate: (updatedNoteDate) => set({ updatedNoteDate }), 
+    fetchGet: false,
+    setFetchGet: (fetchGet) => set({ fetchGet }),     
 }));

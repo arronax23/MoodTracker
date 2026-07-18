@@ -49,7 +49,7 @@ public class MedicationSetService(ApplicationDbContext dbContext)
             .SingleOrDefault(s => s.Id == id);
 
         if (set is null)
-            throw new Exception("Set not found");
+            return false;
 
         dbContext.MedicationSets.Remove(set);
         return dbContext.SaveChanges() > 0 ;

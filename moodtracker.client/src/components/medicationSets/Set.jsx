@@ -1,8 +1,10 @@
 import { useRef, useEffect } from "react";
 import { apiRequest } from "./../../utilities/useApi"
+import { useGlobalStore } from "../../utilities/useGlobalStore";
 
-const Set = ({ id, name, meds, setRefresh }) => {
+const Set = ({ id, name, meds }) => {
   const deleteBoxRef = useRef(null);
+  const { fetchGet, setFetchGet } = useGlobalStore();
 
   useEffect(() => {
     console.log(id);
@@ -17,7 +19,7 @@ const Set = ({ id, name, meds, setRefresh }) => {
 
     if (isSuccess){
       deleteBoxRef.current.classList.remove("active");
-      setRefresh(prev => !prev);
+      setFetchGet(prev => !prev);
     }
   };
 
