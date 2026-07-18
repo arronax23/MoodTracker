@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const useFetchGet = (url) => {
+const useFetchGet = (url, refresh = null) => {
   const [result, setResult] = useState();
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState();
@@ -34,7 +34,7 @@ const useFetchGet = (url) => {
     fetchData(abortController.signal);
 
     return () => abortController.abort();
-  }, [url]);
+  }, [url, refresh]);
 
 
   return { result, setResult, isPending, error, httpResponse };

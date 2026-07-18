@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router";
+import List from "./List";
 
 const MedicationSets = () => {
   const navigate = useNavigate();
@@ -11,7 +12,8 @@ const MedicationSets = () => {
   return (
     <div className="medication-sets-container">
       <Outlet />
-      <div>MedicationSets</div>
+      <h1 className="header">Zestawy leków</h1>
+      <List />
       <button onClick={addSetClick}>Dodaj zestaw</button>
     </div>
   )

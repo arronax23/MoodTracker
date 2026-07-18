@@ -24,4 +24,15 @@ public class MedicationSetController(MedicationSetService medicationSetService) 
         return Created();
     }
 
+    [HttpDelete("DeleteSet")]
+    public IActionResult DeleteSet(DeleteSetRequest request)
+    {
+        var isSuccess = medicationSetService.DeleteSet(request.SetId);
+
+        if (isSuccess)
+            return Ok();
+        else
+            return Problem();
+    }
+
 }

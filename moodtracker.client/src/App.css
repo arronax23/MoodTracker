@@ -703,6 +703,140 @@ button.add-set-btn {
   margin-bottom: 1rem;
 }
 
+.medication-sets-container h1.header {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
 .medication-sets-form {
   width: 600px;
+}
+
+
+.medication-sets-container{
+  min-width: 400px;
+  min-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+}
+
+.set-list {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  
+}
+
+.set-item {
+  border: 2.5px solid black;
+  height: 150px;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: .5rem;
+  border-radius: .5rem;
+  padding:0 1rem;
+  position: relative;
+}
+
+
+.set-item .meds {
+  color: #fff;
+ background: #000;
+ width: 100%;
+  height: 100%;
+  padding:0 1rem;
+}
+
+.set-item .med {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  margin-top: .25rem;
+  position: relative;
+  
+}
+
+.set-item .med::after {
+  content: "";
+  position: absolute;
+  bottom: -2px ;
+  left: -1rem;
+  display: block;
+  width: calc(150px + 2rem);
+  height: 2px;
+  background: #fff; 
+}
+
+.set-item .med * {
+  font-size: .75rem;
+}
+
+
+.set-item .delete-set {
+  position: relative;
+  left: 4.5rem;
+  top: .1rem;
+}
+
+.set-item .delete-set-btn {
+  cursor: pointer;
+  height: 1rem;
+  position: absolute;
+}
+
+
+.set-item .confirm-delete-box{
+  display: none;
+}
+
+.set-item .confirm-delete-box.active {
+  position: absolute;
+  left: -3.5rem;
+  bottom: .5rem;
+  background: #000;
+  width: 8rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: .25rem;
+}
+
+
+.confirm-delete-box .close-btn {
+  cursor: pointer;
+  position: absolute;
+  height: .75rem;
+  background: #fff;
+  right: .1rem;
+  top: .1rem;
+  padding: .05rem;
+  border-radius: 50%;
+} 
+
+.confirm-delete-btn {
+  cursor: pointer;
+  font-size: .75rem;
+  color: #fff;
+  border: 2px solid #fff;
+  padding: .25rem;
+}
+
+.confirm-delete-btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+.set-item  .delete-set  .arrow-down {
+  position: absolute;
+  bottom: -10px;
+  left: 3.4rem;
+  width: 0; 
+  height: 0; 
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  
+  border-top: 10px solid #000;
 }

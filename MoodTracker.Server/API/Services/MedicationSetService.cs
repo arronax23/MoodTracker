@@ -12,7 +12,8 @@ public class MedicationSetService(ApplicationDbContext dbContext)
     {
         var sets = dbContext.MedicationSets
             .AsNoTracking()
-            .Include("_medications");
+            .Include("_medications")
+            .ToList();
 
         return sets.Select(s => new MedicationSetDto()
         {
@@ -40,6 +41,19 @@ public class MedicationSetService(ApplicationDbContext dbContext)
         dbContext.MedicationSets.Add(set);
         dbContext.SaveChanges();
     }
+
+    public bool DeleteSet(int id)
+    {
+        var set = dbContext.MedicationSets
+            .Include("_medications")
+            .SingleOrDefault(s => s.Id == id);
+
+        if (set is null)
+            throw new Exception("Set not found");
+
+        dbContext.MedicationSets.Remove(set);
+        return dbContext.SaveChanges() > 0 ;
+    }   
 
 
     private MedicationSet MapSetFromDto(MedicationSetDto dto) => MedicationSet.Create(dto.Name);
