@@ -647,6 +647,11 @@ form.add-set {
   width: 100%;
 }
 
+form.add-set .set-name {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 
 .add-set-item {
   border-top: 2px solid black;

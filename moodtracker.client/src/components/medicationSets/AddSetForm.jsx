@@ -13,36 +13,37 @@ const emptyMedication = {
 };
 
 const AddSetForm = () => {
-  const [medicationSet, setMedicationSet] = useState([emptyMedication]);
-  const { fetchGet, setFetchGet } = useGlobalStore();  
+  const [meds, setMeds] = useState([emptyMedication]);
+  const [setName, setSetName] = useState("");
+  const { fetchGet, setFetchGet } = useGlobalStore();
   const navigate = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
     const isSuccess = await apiRequest("/api/MedicationSet/AddSet", "POST", {
-      name: "Dummy",
-      meds: medicationSet,
+      name: setName,
+      meds: meds,
     });
 
     if (isSuccess) {
       navigate(-1);
-      setFetchGet(prev => !prev);
+      setFetchGet((prev) => !prev);
     }
   };
 
   const handleChange = (index, field, value) => {
-    const updated = [...medicationSet];
+    const updated = [...meds];
     updated[index] = {
       ...updated[index],
       [field]: value,
     };
-    setMedicationSet(updated);
+    setMeds(updated);
     console.log(updated);
   };
 
   const handleDoseChange = (index, field, value) => {
-    const updated = [...medicationSet];
+    const updated = [...meds];
     updated[index] = {
       ...updated[index],
       dose: {
@@ -50,22 +51,32 @@ const AddSetForm = () => {
         [field]: value,
       },
     };
-    setMedicationSet(updated);
+    setMeds(updated);
     console.log(updated);
   };
 
   const removeMedication = (index) => {
-    const updated = medicationSet.filter((_, i) => i !== index);
-    setMedicationSet(updated);
+    const updated = meds.filter((_, i) => i !== index);
+    setMeds(updated);
   };
 
   const plusClick = () => {
-    setMedicationSet([...medicationSet, emptyMedication]);
+    setMeds([...meds, emptyMedication]);
   };
 
   return (
     <form className="add-set" onSubmit={onSubmit}>
-      {medicationSet.map((med, index) => (
+      <div className="form-item set-name">
+        <label htmlFor="set-name">Nazwa zestawu</label>
+        <input
+          type="text"
+          id="set-name"
+          name="set-name"
+          value={setName}
+          onChange={(e) => setSetName(e.target.value)}
+        ></input>
+      </div>
+      {meds.map((med, index) => (
         <div className="add-set-item" key={index}>
           <div className="med-header">
             <div className="empty"></div>
