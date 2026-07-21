@@ -396,16 +396,16 @@
 }
 
 .left-arrow, .right-arrow {
-  position: absolute;
+  position: fixed;
   top: 50%;
   transform: translateY(-50%)
 } 
 .left-arrow {
-  left: -4rem;
+  left: 1rem;
 }
 
 .right-arrow {
-  right: -4rem;
+  right: 1rem;
 } 
 
 .form-container-wrapper {

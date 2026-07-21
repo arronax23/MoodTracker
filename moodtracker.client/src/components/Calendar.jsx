@@ -29,7 +29,7 @@ export default function Calendar() {
     calendar.current.classList.add('blink');
     setTimeout(() => {
       calendar.current.classList.remove('blink');
-    }, 250);
+    }, 150);
   }
 
   return (
