@@ -15,6 +15,12 @@ public class MedicationSetController(MedicationSetService medicationSetService) 
         return medicationSetService.GetSets();
     }
 
+    [HttpGet("GetSet/{id}")]
+    public MedicationSetDto? GetSet(int id)
+    {
+        return medicationSetService.GetSet(id);
+    }
+
 
     [HttpPost("AddSet")]
     public IActionResult AddSet(MedicationSetDto dto)
@@ -23,6 +29,18 @@ public class MedicationSetController(MedicationSetService medicationSetService) 
 
         return Created();
     }
+
+    [HttpPatch("UpdateSet")]
+    public IActionResult UpdateSet(UpdateSetRequest request)
+    {
+        var isSuccess = medicationSetService.UpdateSet(request.Set);
+
+        if (isSuccess)
+            return Ok();
+        else
+            return Problem();
+    }
+
 
     [HttpDelete("DeleteSet")]
     public IActionResult DeleteSet(DeleteSetRequest request)

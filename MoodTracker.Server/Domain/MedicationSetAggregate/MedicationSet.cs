@@ -22,6 +22,22 @@ public class MedicationSet : AuditableEntityBase, IAggreateRoot
         return new MedicationSet(name);
     }
 
+    public void Update(MedicationSet updateSet)
+    {
+        if (string.IsNullOrWhiteSpace(updateSet.Name))
+            throw new ArgumentException($"Medication set name cannot be null or empty", nameof(updateSet.Name));
+
+        var updatedMedications = updateSet.GetMedications();
+
+        if (updatedMedications.Count > 0)
+        {
+            _medications.Clear();
+            _medications = updatedMedications.ToList();
+        }
+
+        this.Name = updateSet.Name;
+        this.UpdatedAt = DateTime.Now;
+    }
 
     public void AddMedications(IEnumerable<Med> medications)
     {

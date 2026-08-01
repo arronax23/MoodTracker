@@ -43,3 +43,6 @@ GET {{MoodTracker.Server_HostAddress}}/api/Histogram/GetMoodColorHistogram/{{dat
 GET {{MoodTracker.Server_HostAddress}}/api/Wellbutrin/GetRatingByWellbutrin
 
 ###
+GET {{MoodTracker.Server_HostAddress}}/api/MedicationSet/GetSet/1
+
+###

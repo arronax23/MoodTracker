@@ -1,10 +1,14 @@
 import { useRef, useEffect } from "react";
-import { apiRequest } from "./../../utilities/useApi"
+import { apiRequest } from "./../../utilities/useApi";
 import { useGlobalStore } from "../../utilities/useGlobalStore";
+import { useNavigate } from "react-router-dom";
+import { Outlet } from "react-router";
+import List from "./List";
 
 const Set = ({ id, name, meds }) => {
+  const navigate = useNavigate();
   const deleteBoxRef = useRef(null);
-  const { fetchGet, setFetchGet } = useGlobalStore();
+  const { setFetchGet } = useGlobalStore();
 
   useEffect(() => {
     console.log(id);
@@ -15,12 +19,20 @@ const Set = ({ id, name, meds }) => {
   };
 
   const confirmDeleteSet = async () => {
-    const isSuccess = await apiRequest('/api/MedicationSet/DeleteSet','DELETE', { setId: id })
+    const isSuccess = await apiRequest(
+      "/api/MedicationSet/DeleteSet",
+      "DELETE",
+      { setId: id },
+    );
 
-    if (isSuccess){
+    if (isSuccess) {
       deleteBoxRef.current.classList.remove("active");
-      setFetchGet(prev => !prev);
+      setFetchGet((prev) => !prev);
     }
+  };
+
+  const openUpdateForm = () => {
+       navigate(`/sets/update-set/${id}`);
   };
 
   return (
@@ -42,6 +54,13 @@ const Set = ({ id, name, meds }) => {
           />
           <div className="arrow-down"></div>
         </div>
+      </div>
+      <div className="update-set">
+        <img
+          className="update-set-btn"
+          src={"/edit.svg"}
+          onClick={openUpdateForm}
+        />
       </div>
       <div className="header">{name}</div>
       <div className="meds">

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { apiRequest } from "../../utilities/useApi";
 import { useNavigate } from "react-router-dom";
 import { useGlobalStore } from "../../utilities/useGlobalStore";
-import MedicationFormItem from "./MedicationFormItem";
 
 const emptyMedication = {
   name: "",
@@ -15,7 +14,7 @@ const emptyMedication = {
 const AddSetForm = () => {
   const [meds, setMeds] = useState([emptyMedication]);
   const [setName, setSetName] = useState("");
-  const { fetchGet, setFetchGet } = useGlobalStore();
+  const { setFetchGet } = useGlobalStore();
   const navigate = useNavigate();
 
   const onSubmit = async (e) => {

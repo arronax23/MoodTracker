@@ -32,14 +32,53 @@ public class MedicationSetService(ApplicationDbContext dbContext)
         });
     }
 
+    public MedicationSetDto? GetSet(int id)
+    {
+        var set = dbContext.MedicationSets
+            .AsNoTracking() 
+            .Include("_medications")
+            .SingleOrDefault(s => s.Id == id);
 
+        if (set is null)
+            return null;
+
+        return new MedicationSetDto()
+        {
+            Id = set.Id,
+            Name = set.Name,
+            Meds = set.GetMedications().Select(m => new MedDto()
+            {
+                Id = m.Id,
+                Name = m.Name,
+                Dose = new DosageDto()
+                {
+                    Value = m.Dose.Value,
+                    Unit = m.Dose.Unit
+                }
+            })
+        };      
+
+    }
     public void AddSet(MedicationSetDto dto)
     {
         var set = MapSetFromDto(dto);
-        set.AddMedications(dto.Meds.Select(MapMedFromDto));
 
         dbContext.MedicationSets.Add(set);
         dbContext.SaveChanges();
+    }
+
+    public bool UpdateSet(MedicationSetDto dto)
+    {
+        var set = dbContext.MedicationSets.Include("_medications").SingleOrDefault(s => s.Id == dto.Id);
+
+        if (set is null)
+            return false;
+
+        set.Update(MapSetFromDto(dto));
+
+        var entries = dbContext.ChangeTracker.Entries().ToList();
+
+        return dbContext.SaveChanges() > 0;
     }
 
     public bool DeleteSet(int id)
@@ -56,6 +95,14 @@ public class MedicationSetService(ApplicationDbContext dbContext)
     }   
 
 
-    private MedicationSet MapSetFromDto(MedicationSetDto dto) => MedicationSet.Create(dto.Name);
-    private Med MapMedFromDto(MedDto dto) => Med.Create(dto.Name, Dosage.Create(dto.Dose.Value, dto.Dose.Unit));
+    private MedicationSet MapSetFromDto(MedicationSetDto dto)
+    {
+        var set = MedicationSet.Create(dto.Name);
+        set.AddMedications(dto.Meds.Select(MapMedFromDto));
+
+        return set;
+    }
+
+    private Med MapMedFromDto(MedDto dto) => Med.CreateWithId(dto.Id, dto.Name, Dosage.Create(dto.Dose.Value, dto.Dose.Unit));
+
 }

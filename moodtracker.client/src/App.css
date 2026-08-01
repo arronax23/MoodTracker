@@ -735,7 +735,7 @@ button.add-set-btn {
 .set-item {
   border: 2.5px solid black;
   height: 150px;
-  width: 150px;
+  width: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -769,7 +769,7 @@ button.add-set-btn {
   bottom: -2px ;
   left: -1rem;
   display: block;
-  width: calc(150px + 2rem);
+  width: calc(200px + 2rem);
   height: 2px;
   background: #fff; 
 }
@@ -781,15 +781,23 @@ button.add-set-btn {
 
 .set-item .delete-set {
   position: relative;
-  left: 4.5rem;
+  left: 6rem;
   top: .1rem;
 }
 
-.set-item .delete-set-btn {
+.set-item .update-set {
+  position: relative;
+  left: 4.75rem;
+  top: .1rem;
+}
+
+.set-item .delete-set-btn,.set-item .update-set-btn {
   cursor: pointer;
   height: 1rem;
   position: absolute;
 }
+
+
 
 
 .set-item .confirm-delete-box{

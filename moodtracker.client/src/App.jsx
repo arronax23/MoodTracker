@@ -7,6 +7,7 @@ import MoodChart from "./components/MoodChart";
 import HistogramChart from "./components/histogram/HistogramChart";
 import MedicationSets from "./components/medicationSets/MedicationSets";
 import AddSetLayout from "./components/medicationSets/AddSetLayout";
+import UpdateSetLayout from "./components/medicationSets/update/UpdateSetLayout";
 import { Route, Routes } from "react-router";
 import "./App.css";
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/histogram" element={<HistogramChart />}></Route>
         <Route path="/sets" element={<MedicationSets />}>
           <Route path="/sets/add-set" element={<AddSetLayout />} />
+          <Route path="/sets/update-set/:setId" element={<UpdateSetLayout />} />
         </Route>
       </Route>
     </Routes>
