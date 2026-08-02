@@ -3,6 +3,7 @@ using MoodTracker.Server.API.DTOs;
 using MoodTracker.Server.Domain;
 using MoodTracker.Server.Domain.MedicationSetAggregate;
 using MoodTracker.Server.Infrasctructure;
+using static MoodTracker.Server.Domain.MedicationSetAggregate.MedicationSet;
 
 namespace MoodTracker.Server.API.Services;
 
@@ -74,7 +75,7 @@ public class MedicationSetService(ApplicationDbContext dbContext)
         if (set is null)
             return false;
 
-        set.Update(MapSetFromDto(dto));
+        set.Update(dto.Name, dto.Meds.Select(MapMedDataFromMedDto));
 
         var entries = dbContext.ChangeTracker.Entries().ToList();
 
@@ -92,17 +93,27 @@ public class MedicationSetService(ApplicationDbContext dbContext)
 
         dbContext.MedicationSets.Remove(set);
         return dbContext.SaveChanges() > 0 ;
-    }   
+    }
+
 
 
     private MedicationSet MapSetFromDto(MedicationSetDto dto)
     {
         var set = MedicationSet.Create(dto.Name);
-        set.AddMedications(dto.Meds.Select(MapMedFromDto));
+        set.AddMedications(dto.Meds.Select(MapMedDataFromMedDto));
 
         return set;
     }
 
-    private Med MapMedFromDto(MedDto dto) => Med.CreateWithId(dto.Id, dto.Name, Dosage.Create(dto.Dose.Value, dto.Dose.Unit));
+    private MedicationData MapMedDataFromMedDto(MedDto dto)
+    {
+        return new MedicationData()
+        {
+            Id = dto.Id,
+            Name = dto.Name,
+            Dosage = Dosage.Create(dto.Dose.Value, dto.Dose.Unit)
+        };
+    }
+
 
 }

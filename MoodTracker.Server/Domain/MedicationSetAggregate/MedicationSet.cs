@@ -22,27 +22,42 @@ public class MedicationSet : AuditableEntityBase, IAggreateRoot
         return new MedicationSet(name);
     }
 
-    public void Update(MedicationSet updateSet)
+    public void Update(string name, IEnumerable<MedicationData> updateMeds)
     {
-        if (string.IsNullOrWhiteSpace(updateSet.Name))
-            throw new ArgumentException($"Medication set name cannot be null or empty", nameof(updateSet.Name));
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException($"Medication set name cannot be null or empty", nameof(name));
 
-        var updatedMedications = updateSet.GetMedications();
+        var updateMedsCopy = updateMeds.ToList();
 
-        if (updatedMedications.Count > 0)
+        if (updateMedsCopy.Any())
         {
-            _medications.Clear();
-            _medications = updatedMedications.ToList();
+            var medicationsIdsToRemove = new List<int>();
+
+            foreach (var med in _medications)
+            {
+                var updateMed = updateMedsCopy.FirstOrDefault(m => m.Id == med.Id);
+
+                if (updateMed is not null)
+                {
+                    med.Update(updateMed.Name, updateMed.Dosage);
+                    updateMedsCopy.Remove(updateMed);
+                }   
+                else
+                    medicationsIdsToRemove.Add(med.Id);
+            }
+
+            _medications.AddRange(updateMedsCopy.Select(m => Med.Create(m.Name, m.Dosage)));
+            _medications.RemoveAll(m => medicationsIdsToRemove.Contains(m.Id));
         }
 
-        this.Name = updateSet.Name;
+        this.Name = name;
         this.UpdatedAt = DateTime.Now;
     }
 
-    public void AddMedications(IEnumerable<Med> medications)
+    public void AddMedications(IEnumerable<MedicationData> medications)
     {
         foreach (var med in medications)
-            this.AddMedication(med);
+            this.AddMedication(Med.Create(med.Name, med.Dosage));
     }
 
     public void AddMedication(Med medication)
@@ -51,13 +66,13 @@ public class MedicationSet : AuditableEntityBase, IAggreateRoot
         this.UpdatedAt = DateTime.Now;
     }
 
-    public void UpdateMedication(int medId, Med updateMedication)
-    {
-        var medication = _medications.Single(m => m.Id == medId);
+    //public void UpdateMedication(MedicationData medication)
+    //{
+    //    var med = _medications.Single(m => m.Id == medication.Id);
 
-        medication.Update(updateMedication);
-        this.UpdatedAt = DateTime.Now;  
-    }
+    //    med.Update(medication.Name, medication.Dosage);
+    //    this.UpdatedAt = DateTime.Now;  
+    //}
 
     public void DeleteMedication(int medId)
     {
@@ -68,4 +83,12 @@ public class MedicationSet : AuditableEntityBase, IAggreateRoot
 
 
     public IReadOnlyList<Med> GetMedications() => _medications.AsReadOnly();
+
+
+    public class MedicationData
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = null!;
+        public Dosage Dosage { get; set; } = null!;
+    }
 }
