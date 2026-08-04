@@ -46,7 +46,7 @@ public class MedicationSet : AuditableEntityBase, IAggreateRoot
                     medicationsIdsToRemove.Add(med.Id);
             }
 
-            _medications.AddRange(updateMedsCopy.Select(m => Med.Create(m.Name, m.Dosage)));
+            AddMedications(updateMedsCopy);
             _medications.RemoveAll(m => medicationsIdsToRemove.Contains(m.Id));
         }
 
@@ -57,22 +57,14 @@ public class MedicationSet : AuditableEntityBase, IAggreateRoot
     public void AddMedications(IEnumerable<MedicationData> medications)
     {
         foreach (var med in medications)
-            this.AddMedication(Med.Create(med.Name, med.Dosage));
+            this.AddMedication(med);
     }
 
-    public void AddMedication(Med medication)
+    public void AddMedication(MedicationData medication)
     {
-        _medications.Add(medication);
+        _medications.Add(Med.Create(medication.Name, medication.Dosage));
         this.UpdatedAt = DateTime.Now;
     }
-
-    //public void UpdateMedication(MedicationData medication)
-    //{
-    //    var med = _medications.Single(m => m.Id == medication.Id);
-
-    //    med.Update(medication.Name, medication.Dosage);
-    //    this.UpdatedAt = DateTime.Now;  
-    //}
 
     public void DeleteMedication(int medId)
     {
