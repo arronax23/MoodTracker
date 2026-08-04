@@ -1,10 +1,10 @@
-import { useState } from "react";
 import { apiRequest } from "../../../utilities/useApi";
 import { useGlobalStore } from "../../../utilities/useGlobalStore";
 import { useNavigate } from "react-router-dom";
+import useFetchGet from "../../../utilities/useFetchGet";
 
 const MoodRateForm = ({ date }) => {
-  const [moodRate, setMoodRate] = useState(1);
+  const { result: moodRate, setResult: setMoodRate } = useFetchGet(`/api/Notes/GetMoodRate/${date}`);  
   const { setUpdatedNoteDate } = useGlobalStore(); 
   const navigate = useNavigate();
   
@@ -34,7 +34,7 @@ const MoodRateForm = ({ date }) => {
           name="mood-rate"
           min="1"
           max="10"
-          value={moodRate}
+          value={moodRate ?? 1}
           onChange={(e) => setMoodRate(e.target.value)}
         ></input>
       </div>

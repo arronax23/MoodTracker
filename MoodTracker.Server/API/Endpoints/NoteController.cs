@@ -15,6 +15,12 @@ public class NoteController(NoteService noteService) : ControllerBase
         return noteService.GetNote(date);
     }
 
+    [HttpGet("GetMoodRate/{date}")]
+    public int? GetMoodRate(DateOnly date)
+    {
+        return noteService.GetMoodRate(date);
+    }
+
     [HttpGet("GetMedication/{noteId}/{medicationId}")]
     public MedicationDto? GetMedication(int noteId, int medicationId)
     {

@@ -45,6 +45,20 @@ public class NoteService(ApplicationDbContext dbContext)
 
     }
 
+    public int? GetMoodRate(DateOnly date)
+    {
+        var note = dbContext.Notes
+            .AsNoTracking()
+            .SingleOrDefault(n => n.Date == date);
+
+        if (note is null || note.Mood is null)
+            return null;
+
+        return (int)note.Mood.Rate;
+    }
+
+
+
     public MedicationDto? GetMedication(int noteId, int medicationId)
     {
         var note = dbContext.Notes
