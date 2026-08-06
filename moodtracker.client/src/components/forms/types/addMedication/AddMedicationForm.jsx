@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { apiRequest } from "../../../utilities/useApi";
+import { apiRequest } from "../../../../utilities/useApi";
 
-import { useGlobalStore } from "../../../utilities/useGlobalStore";
+import { useGlobalStore } from "../../../../utilities/useGlobalStore";
 import { useNavigate } from "react-router-dom";
+import { FORM_TYPE } from "../../../../utilities/formTypes";
 
 const AddMedicationForm = ({ date }) => {
   const [medicationName, setMedicationName] = useState('');
@@ -10,10 +11,14 @@ const AddMedicationForm = ({ date }) => {
   const [doseUnit, setDoseUnit] = useState('');
   const [time, setTime] = useState('');
   
-  const { setUpdatedNoteDate } = useGlobalStore(); 
+  const { setUpdatedNoteDate, setFormType } = useGlobalStore(); 
 
   const navigate = useNavigate();
   
+  const goBack = () => {
+    setFormType(FORM_TYPE.add_medication);
+  }
+
   const onSubmit = async (e) => {
     e.preventDefault();
     
@@ -42,6 +47,11 @@ const AddMedicationForm = ({ date }) => {
 
   return (
     <form className="add-medication" onSubmit={onSubmit}>
+        <img
+          className="back-btn"
+          src={"/back.svg"}
+           onClick={goBack}
+        />      
       <div className="form-item">
         <label htmlFor="time">
           Czas

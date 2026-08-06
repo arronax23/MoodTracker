@@ -94,6 +94,14 @@ public class NoteController(NoteService noteService) : ControllerBase
         return Ok();
     }
 
+    [HttpPut("AddMedicationsFromSet")]
+    public IActionResult AddMedicationsFromSet(AddMedicationsFromSetRequest request)
+    {
+        noteService.AddMedicationsFromSet(request.NoteDate, request.Time, request.MedicationSetId);
+        return Ok();
+    }
+
+
     [HttpPut("AddThought")]
     public IActionResult AddThought(AddThoughtRequest request)
     {

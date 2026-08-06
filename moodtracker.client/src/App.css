@@ -1,10 +1,9 @@
 ﻿* {
-    margin: 0;
-    padding: 0;
-    font-family: "DynaPuff", system-ui;
-    font-size: 16px;
-  }
-
+  margin: 0;
+  padding: 0;
+  font-family: "DynaPuff", system-ui;
+  font-size: 16px;
+}
 
 #root {
   display: flex;
@@ -17,13 +16,13 @@
 .calendar {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(7,1fr);
+  grid-template-columns: repeat(7, 1fr);
   gap: 0;
   margin-top: 3rem;
 }
 
 .calendar.blink {
-  animation: blink .25s;
+  animation: blink 0.25s;
 }
 
 @keyframes blink {
@@ -45,18 +44,17 @@
   justify-content: center;
   height: 5rem;
   width: 100%;
-
 }
 .date-section * {
-    font-size: 22px;
+  font-size: 22px;
 }
 
 .date-section .wellbutrin-day img {
   position: absolute;
-  top: .25rem;
-  right: .25rem;
+  top: 0.25rem;
+  right: 0.25rem;
   width: 1rem;
-  padding: .2rem;
+  padding: 0.2rem;
   border-radius: 50%;
   background: #fff;
 }
@@ -81,45 +79,42 @@
   margin-bottom: -4px;
 }
 
-.note .open-form-btn  {
+.note .open-form-btn {
   cursor: pointer;
   background: #fff;
-  padding: .15rem;
-  border-radius: .5rem;
+  padding: 0.15rem;
+  border-radius: 0.5rem;
   font-size: 16px;
   text-align: center;
   width: 70%;
   margin-top: auto;
-  border: 2px solid black
+  border: 2px solid black;
 }
-
 
 .note .dummy {
   height: 1rem;
 }
 
-
-.note .mood .mood-rate-header, 
+.note .mood .mood-rate-header,
 .note .medications .medications-header,
-.note .thoughts .thoughts-header 
-{
+.note .thoughts .thoughts-header {
   font-size: 18px;
   background: #fff;
-  border-radius: .15rem;
-  padding: .55rem;
+  border-radius: 0.15rem;
+  padding: 0.55rem;
   width: 80%;
-  margin: 0 auto .35rem auto;
+  margin: 0 auto 0.35rem auto;
 }
 
 .note .section {
   width: 100%;
   text-align: center;
   min-height: 75px;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-top: 2px solid black
+  border-top: 2px solid black;
 }
 
 .note .section.mood {
@@ -144,22 +139,20 @@
 
 .note .medication-container {
   display: grid;
-  grid-template-areas:
-    "time name name dosage dosage edit delete";
+  grid-template-areas: "time name name dosage dosage edit delete";
   align-items: center;
-  padding: .35rem .1rem;
+  padding: 0.35rem 0.1rem;
   width: 95%;
-  margin-bottom: .35rem;
+  margin-bottom: 0.35rem;
   background: black;
   color: white;
-  border-radius: .1rem;
+  border-radius: 0.1rem;
 }
-
 
 .note .medication-container .time {
   grid-area: time;
   justify-self: start;
-  margin-left: .1rem;
+  margin-left: 0.1rem;
 }
 
 .note .medication-container .name {
@@ -176,35 +169,34 @@
   margin: auto;
 }
 
-
-.note .medication-container *, .note .thought-container * {
+.note .medication-container *,
+.note .thought-container * {
   font-size: 12px;
-
 }
 
 .note .medication-container .dosage {
   display: flex;
-  gap: .15rem;
+  gap: 0.15rem;
 }
 
-.note .medication-container img.edit-medication, .note .medication-container .delete-medication {
-    cursor: pointer;
+.note .medication-container img.edit-medication,
+.note .medication-container .delete-medication {
+  cursor: pointer;
   height: 1rem;
   background: white;
-  border-radius: .1rem;
+  border-radius: 0.1rem;
   justify-self: end;
-  margin-right: .1rem;
+  margin-right: 0.1rem;
 }
 
 .note .medication-container img.edit-medication {
   grid-area: edit;
-
 }
 
 .note .medication-container .delete-medication {
- grid-area: delete;
- width: 16px;
- position: relative;
+  grid-area: delete;
+  width: 16px;
+  position: relative;
 }
 
 .note .medication-container .delete-medication .delete-medication-confirm-box {
@@ -217,18 +209,24 @@
   height: 3rem;
   z-index: 6;
   background: #000;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   border: 2px solid #fff;
 }
 
-.note .medication-container .delete-medication .delete-medication-confirm-box.active {
+.note
+  .medication-container
+  .delete-medication
+  .delete-medication-confirm-box.active {
   display: flex;
   justify-content: center;
   align-items: center;
-} 
+}
 
-
-.note .medication-container .delete-medication .delete-medication-confirm-box button {
+.note
+  .medication-container
+  .delete-medication
+  .delete-medication-confirm-box
+  button {
   width: 5rem;
   height: 1.75rem;
   background: #000;
@@ -237,53 +235,62 @@
   border: 2px solid #fff;
 }
 
-.note .medication-container .delete-medication .delete-medication-confirm-box button:hover {
+.note
+  .medication-container
+  .delete-medication
+  .delete-medication-confirm-box
+  button:hover {
   background: #fff;
   color: #000;
 }
 
-
-.note .medication-container .delete-medication .delete-medication-confirm-box img.close-box {
+.note
+  .medication-container
+  .delete-medication
+  .delete-medication-confirm-box
+  img.close-box {
   cursor: pointer;
-  width: .85rem;
+  width: 0.85rem;
   background: #fff;
   color: #000;
   position: absolute;
-  right: .1rem;
-  top: .1rem;
-  padding: .05rem;
+  right: 0.1rem;
+  top: 0.1rem;
+  padding: 0.05rem;
   border-radius: 50%;
   border: 2px solid #000;
 }
 
-
-.note .medication-container .delete-medication .delete-medication-confirm-box .arrow-down {
+.note
+  .medication-container
+  .delete-medication
+  .delete-medication-confirm-box
+  .arrow-down {
   position: absolute;
   bottom: -10px;
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  
+
   border-top: 10px solid #fff;
 }
-
 
 /* Thought */
 
 .thought-container {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-areas:
-  ". time edit-delete"
-  "line line line"
-  "text text text";
+    ". time edit-delete"
+    "line line line"
+    "text text text";
   background: #000;
   color: #fff;
-  margin-bottom: .35rem;
+  margin-bottom: 0.35rem;
   width: 95%;
-  padding: .35rem .1rem;
-  border-radius: .15rem;
+  padding: 0.35rem 0.1rem;
+  border-radius: 0.15rem;
 }
 
 .thought-container .time {
@@ -292,7 +299,7 @@
 
 .thought-container .text {
   grid-area: text;
-  margin-top: .35rem;
+  margin-top: 0.35rem;
 }
 
 .thought-container .line {
@@ -301,28 +308,28 @@
   justify-self: center;
   height: 1px;
   background: #fff;
-  margin-top: .25rem;
+  margin-top: 0.25rem;
 }
 
 .thought-container .edit-delete {
   grid-area: edit-delete;
   display: flex;
-  gap: .35rem;
+  gap: 0.35rem;
   justify-content: end;
 }
 
-.thought-container img.edit-thought, .thought-container .delete-thought {
+.thought-container img.edit-thought,
+.thought-container .delete-thought {
   cursor: pointer;
   height: 1rem;
   background: white;
-  border-radius: .1rem;
+  border-radius: 0.1rem;
 }
 
-
 .thought-container .delete-thought {
- width: 16px;
- position: relative;
- margin-right: .15rem;
+  width: 16px;
+  position: relative;
+  margin-right: 0.15rem;
 }
 
 .thought-container .delete-thought .delete-thought-confirm-box {
@@ -335,7 +342,7 @@
   height: 3rem;
   z-index: 6;
   background: #000;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   border: 2px solid #fff;
 }
 
@@ -343,17 +350,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-} 
+}
 
 .thought-container .delete-thought .delete-thought-confirm-box img.close-box {
   cursor: pointer;
-  width: .85rem;
+  width: 0.85rem;
   background: #fff;
   color: #000;
   position: absolute;
-  right: .1rem;
-  top: .1rem;
-  padding: .05rem;
+  right: 0.1rem;
+  top: 0.1rem;
+  padding: 0.05rem;
   border-radius: 50%;
   border: 2px solid #000;
 }
@@ -367,7 +374,6 @@
   border: 2px solid #fff;
 }
 
-
 .thought-container .delete-thought .delete-thought-confirm-box button:hover {
   background: #fff;
   color: #000;
@@ -376,37 +382,35 @@
 .thought-container .delete-thought .delete-thought-confirm-box .arrow-down {
   position: absolute;
   bottom: -10px;
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  
+
   border-top: 10px solid #fff;
 }
-
-
-
 
 .arrow {
   cursor: pointer;
   background: rgb(198, 198, 190);
   border-radius: 2rem;
-  padding: .5rem;
+  padding: 0.5rem;
   height: 2rem;
 }
 
-.left-arrow, .right-arrow {
+.left-arrow,
+.right-arrow {
   position: fixed;
   top: 50%;
-  transform: translateY(-50%)
-} 
+  transform: translateY(-50%);
+}
 .left-arrow {
   left: 1rem;
 }
 
 .right-arrow {
   right: 1rem;
-} 
+}
 
 .form-container-wrapper {
   position: absolute;
@@ -425,8 +429,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-  opacity: .8;
+  background: rgba(0, 0, 0, 0.9);
+  opacity: 0.8;
 }
 
 .form-container {
@@ -443,18 +447,18 @@
   opacity: unset;
 }
 
-.form-container h1{
+.form-container h1 {
   font-size: 1.75rem;
 }
 
-.form-container form{
+.form-container form {
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.form-container form .form-item{
+.form-container form .form-item {
   margin-top: auto;
   display: flex;
   flex-direction: column;
@@ -465,38 +469,31 @@
   font-size: 1.5rem;
 }
 
-
 .form-container form .form-item input {
   text-align: center;
   font-size: 1.25rem;
 }
 
 .form-container form .form-item input#mood-rate {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   width: 3rem;
   text-align: center;
 }
 
-
-.form-container form .form-item input#medication-name
-{
-  margin-top: .5rem;
+.form-container form .form-item input#medication-name {
+  margin-top: 0.5rem;
   width: 11rem;
 }
 
-
 .form-container form .form-item input#dose-value,
 .form-container form .form-item input#dose-unit {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   width: 7rem;
 }
 
-
-.form-container form .form-item textarea#thought  {
+.form-container form .form-item textarea#thought {
   height: 10rem;
 }
-
-
 
 .form-container form button {
   cursor: pointer;
@@ -506,11 +503,10 @@
   height: 2rem;
   background: #000;
   color: #fff;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
 }
 
-
-form.edit-medication button[type="submit"]{
+form.edit-medication button[type="submit"] {
   /* background: #973245; */
   background: #327e46;
 }
@@ -523,12 +519,10 @@ img.close-form-btn {
   right: -2rem;
   background: #fff;
   border-radius: 50%;
-  padding: .15rem;
-  border: 4px solid black;;
+  padding: 0.15rem;
+  border: 4px solid black;
   z-index: 5;
 }
-
-
 
 nav.navbar {
   position: fixed;
@@ -540,7 +534,7 @@ nav.navbar {
   width: 100%;
   z-index: 2;
   top: 0;
-  left:0;
+  left: 0;
 }
 
 .nav-item {
@@ -549,54 +543,51 @@ nav.navbar {
 
 .calednar-btn.nav-item {
   grid-area: calendar;
-
 }
 
 .chart.nav-item {
   grid-area: chart;
-
 }
 
 .histogram.nav-item {
   grid-area: histogram;
-
 }
 
 .sets.nav-item {
   grid-area: sets;
-
 }
 
-
-.calednar-btn.nav-item , .chart.nav-item, .histogram.nav-item, .sets.nav-item {
+.calednar-btn.nav-item,
+.chart.nav-item,
+.histogram.nav-item,
+.sets.nav-item {
   cursor: pointer;
   justify-self: left;
-  margin-left: .5rem;
-  padding: .25rem;
+  margin-left: 0.5rem;
+  padding: 0.25rem;
   background: #fff;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   border: 2px solid #000;
-} 
+}
 
-
-.calednar-btn.nav-item:hover, .chart.nav-item:hover {
+.calednar-btn.nav-item:hover,
+.chart.nav-item:hover {
   cursor: pointer;
-} 
+}
 
 .header.nav-item {
   grid-area: header;
   justify-self: center;
   font-size: 1.5rem;
-  margin-right: .5rem;
-  letter-spacing: .05rem;
+  margin-right: 0.5rem;
+  letter-spacing: 0.05rem;
 }
-
 
 /* Mood Chart */
 
 .mood-chart {
   width: 1200px;
-  position: relative
+  position: relative;
 }
 
 .chart {
@@ -613,12 +604,9 @@ nav.navbar {
   font-size: 1.25rem;
 }
 
-
-
 .mood-chart .arrow.blink {
-  animation: blink .25s;
+  animation: blink 0.25s;
 }
-
 
 @keyframes blink {
   0%,
@@ -631,9 +619,7 @@ nav.navbar {
   }
 }
 
-
 /* Medication Sets */
-
 
 img.plus-btn {
   cursor: pointer;
@@ -652,7 +638,6 @@ form.add-set .set-name {
   margin-bottom: 1rem;
 }
 
-
 .add-set-item {
   border-top: 2px solid black;
   padding-top: 1rem;
@@ -661,41 +646,38 @@ form.add-set .set-name {
 
 form.add-set .add-set-item:first-child {
   border-top: none;
-} 
+}
 
 button.add-set-btn {
   height: 3rem !important;
 }
 
-
 .add-set .remove-medication {
   cursor: pointer;
 }
 
-.add-set .remove-medication, .add-set .remove-medication img {
+.add-set .remove-medication,
+.add-set .remove-medication img {
   height: 1.5rem;
   width: 1.5rem;
   background: #fff;
-  border-radius: .15rem;
+  border-radius: 0.15rem;
 }
 
 .add-set .med-header .remove-medication {
-  margin-right: .5rem;
-    margin-left: auto;
+  margin-right: 0.5rem;
+  margin-left: auto;
 }
 
-
-.add-set .med-header  .med-index {
+.add-set .med-header .med-index {
   margin-left: 1rem;
   font-size: 1.25rem;
-
 }
 
-.med-header  .empty {
+.med-header .empty {
   margin-right: auto;
   width: 1.5rem;
 }
-
 
 .add-set .med-header {
   display: flex;
@@ -704,7 +686,7 @@ button.add-set-btn {
   background: #000;
   color: #fff;
   height: 2rem;
-  border-radius: .15rem;
+  border-radius: 0.15rem;
   margin-bottom: 1rem;
 }
 
@@ -717,8 +699,7 @@ button.add-set-btn {
   width: 600px;
 }
 
-
-.medication-sets-container{
+.medication-sets-container {
   min-width: 400px;
   min-height: calc(100vh - 100px);
   display: flex;
@@ -729,7 +710,6 @@ button.add-set-btn {
   display: flex;
   align-items: center;
   margin-top: 1rem;
-  
 }
 
 .set-item {
@@ -739,102 +719,96 @@ button.add-set-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: .5rem;
-  border-radius: .5rem;
-  padding:0 1rem;
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
   position: relative;
 }
 
-
 .set-item .meds {
   color: #fff;
- background: #000;
- width: 100%;
+  background: #000;
+  width: 100%;
   height: 100%;
-  padding:0 1rem;
+  padding: 0 1rem;
 }
 
 .set-item .med {
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-items: center;
-  margin-top: .25rem;
+  margin-top: 0.25rem;
   position: relative;
-  
 }
 
 .set-item .med::after {
   content: "";
   position: absolute;
-  bottom: -2px ;
+  bottom: -2px;
   left: -1rem;
   display: block;
   width: calc(200px + 2rem);
   height: 2px;
-  background: #fff; 
+  background: #fff;
 }
 
 .set-item .med * {
-  font-size: .75rem;
+  font-size: 0.75rem;
 }
-
 
 .set-item .delete-set {
   position: relative;
   left: 6rem;
-  top: .1rem;
+  top: 0.1rem;
 }
 
 .set-item .update-set {
   position: relative;
   left: 4.75rem;
-  top: .1rem;
+  top: 0.1rem;
 }
 
-.set-item .delete-set-btn,.set-item .update-set-btn {
+.set-item .delete-set-btn,
+.set-item .update-set-btn {
   cursor: pointer;
   height: 1rem;
   position: absolute;
 }
 
-
-
-
-.set-item .confirm-delete-box{
+.set-item .confirm-delete-box {
   display: none;
 }
 
 .set-item .confirm-delete-box.active {
   position: absolute;
   left: -3.5rem;
-  bottom: .5rem;
+  bottom: 0.5rem;
   background: #000;
   width: 8rem;
   height: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
 }
-
 
 .confirm-delete-box .close-btn {
   cursor: pointer;
   position: absolute;
-  height: .75rem;
+  height: 0.75rem;
   background: #fff;
-  right: .1rem;
-  top: .1rem;
-  padding: .05rem;
+  right: 0.1rem;
+  top: 0.1rem;
+  padding: 0.05rem;
   border-radius: 50%;
-} 
+}
 
 .confirm-delete-btn {
   cursor: pointer;
-  font-size: .75rem;
+  font-size: 0.75rem;
   color: #fff;
   border: 2px solid #fff;
-  padding: .25rem;
+  padding: 0.25rem;
 }
 
 .confirm-delete-btn:hover {
@@ -842,14 +816,140 @@ button.add-set-btn {
   color: #000;
 }
 
-.set-item  .delete-set  .arrow-down {
+.set-item .delete-set .arrow-down {
   position: absolute;
   bottom: -10px;
   left: 3.4rem;
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  
+
   border-top: 10px solid #000;
 }
+
+.add-medication-options {
+  width: 85%;
+}
+
+.add-medication-options fieldset {
+  border: 2px solid black;
+  width: 100%;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.add-medication-options fieldset .options {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.add-medication-options fieldset .submit-btn {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+.add-medication-options fieldset .submit-btn button {
+  margin: unset;
+  margin-top: 1rem;
+  width: 7rem;
+}
+
+.add-medication-set .back-btn,
+.add-medication .back-btn {
+  cursor: pointer;
+  height: 2rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.add-medication-options {
+  height: 100%;
+}
+
+.add-medication-options form fieldset {
+  width: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.add-medication-set h1.header {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.add-medication-set .sets .set {
+  border: 2.5px solid black;
+  border-radius: 0.5rem;
+  text-align: center;
+  margin-bottom: 0.25rem;
+  padding: 0 .35rem;
+}
+
+.set .set-header {
+  cursor: pointer;
+  border-bottom: unset;
+}
+
+.set .set-body {
+  height: 0;
+  transition: all 0.25s ease-in-out;
+  padding: 0 12px;
+}
+
+.set.open .set-header {
+  border-bottom: 2.5px solid black;
+}
+
+.set.open .set-body {
+  height: 100px;
+  margin-bottom: 1rem;
+}
+
+.add-medication-set .set .meds {
+  width: 100%;
+  height: 100%;
+  padding: 0 .45rem;
+  overflow-y: scroll;
+}
+
+.add-medication-set .set .med {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  margin-top: 0.25rem;
+  position: relative;
+  border-bottom: 2.5px solid black;
+}
+
+
+.add-medication-set .set-body .pick img {
+  cursor: pointer;
+  height: 2rem;
+  margin-top: 1rem;
+}
+
+
+.add-medication-set .set-body .pick img:hover {
+  border-bottom: 2.5px dotted black;
+}
+
+.add-medication-set .time-picker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.add-medication-set .time-picker label, 
+.add-medication-set .time-picker input{
+  font-size: 1.25rem;
+}
+

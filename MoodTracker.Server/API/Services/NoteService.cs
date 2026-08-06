@@ -186,6 +186,25 @@ public class NoteService(ApplicationDbContext dbContext)
         dbContext.SaveChanges();
     }
 
+    public bool AddMedicationsFromSet(DateOnly noteDate, string time, int medicationSetId)
+    {
+        var note = dbContext.Notes.SingleOrDefault(n => n.Date == noteDate);
+        var set = dbContext.MedicationSets.Include("_medications").SingleOrDefault(ms => ms.Id == medicationSetId);
+
+        if (note is null)
+            note = Note.Create(noteDate);
+
+        if (set is null)
+            return false;   
+
+        foreach (var medication in set.GetMedications())
+            note.AddMedication(Medication.Create(TimeOnly.Parse(time), medication.Name, medication.Dose));
+
+        dbContext.Notes.Update(note);
+
+        return dbContext.SaveChanges() > 0;
+    }   
+
     public void AddThought(DateOnly date, ThoughtDto thought)
     {
         var dbNote = dbContext.Notes.SingleOrDefault(n => n.Date == date);

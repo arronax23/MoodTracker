@@ -13,7 +13,6 @@ export default function Note({ date, dayName, dateDisplay, isToday }) {
     useGlobalStore();
 
   const moodSection = useRef();
-  const noteDiv = useRef();
   const navigate = useNavigate();
   const { note } = useFetchNote(date);
 
