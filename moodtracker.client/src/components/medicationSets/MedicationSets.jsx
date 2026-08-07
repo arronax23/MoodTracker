@@ -14,7 +14,9 @@ const MedicationSets = () => {
       <Outlet />
       <h1 className="header">Zestawy leków</h1>
       <List />
-      <button onClick={addSetClick}>Dodaj zestaw</button>
+      <button className="add-set-btn" onClick={addSetClick}>
+        Dodaj zestaw
+      </button>
     </div>
   )
 }
