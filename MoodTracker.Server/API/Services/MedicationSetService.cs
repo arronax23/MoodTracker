@@ -2,8 +2,8 @@
 using MoodTracker.Server.API.DTOs;
 using MoodTracker.Server.Domain;
 using MoodTracker.Server.Domain.MedicationSetAggregate;
+using MoodTracker.Server.Domain.Models;
 using MoodTracker.Server.Infrasctructure;
-using static MoodTracker.Server.Domain.MedicationSetAggregate.MedicationSet;
 
 namespace MoodTracker.Server.API.Services;
 

@@ -1,6 +1,8 @@
-﻿namespace MoodTracker.Server.Domain;
+﻿using MoodTracker.Server.Domain.Abstractions;
 
-public class Dosage
+namespace MoodTracker.Server.Domain;
+
+public record Dosage : IValueObject
 {
     public decimal Value { get; set; }
     public string Unit { get; set; } = null!;

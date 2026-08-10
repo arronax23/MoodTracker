@@ -1,4 +1,5 @@
 ﻿using MoodTracker.Server.Domain.Abstractions;
+using MoodTracker.Server.Domain.Models;
 
 namespace MoodTracker.Server.Domain.MedicationSetAggregate;
 
@@ -75,12 +76,4 @@ public class MedicationSet : AuditableEntityBase, IAggreateRoot
 
 
     public IReadOnlyList<Med> GetMedications() => _medications.AsReadOnly();
-
-
-    public class MedicationData
-    {
-        public int Id { get; set; }
-        public string Name { get; set; } = null!;
-        public Dosage Dosage { get; set; } = null!;
-    }
 }

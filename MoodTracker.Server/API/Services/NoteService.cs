@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MoodTracker.Server.API.DTOs;
 using MoodTracker.Server.Domain;
+using MoodTracker.Server.Domain.Models;
 using MoodTracker.Server.Domain.NoteAggregate;
 using MoodTracker.Server.Infrasctructure;
 
@@ -105,7 +106,7 @@ public class NoteService(ApplicationDbContext dbContext)
         if (note is null)
             return false;
 
-        note.UpdateMedication(dto.Id, MapMedicationFromDto(dto));
+        note.UpdateMedication(MapMedicationAtFromDto(dto));
 
         return dbContext.SaveChanges() > 0;
     }
@@ -119,7 +120,7 @@ public class NoteService(ApplicationDbContext dbContext)
         if (note is null)
             return false;
 
-        note.UpdateThought(dto.Id, MapThoughtFromDto(dto));
+        note.UpdateThought(MapThoughtFromDto(dto));
 
         return await dbContext.SaveChangesAsync() > 0;
     }
@@ -210,11 +211,11 @@ public class NoteService(ApplicationDbContext dbContext)
         var dbNote = dbContext.Notes.SingleOrDefault(n => n.Date == date);
 
         if (dbNote is not null)
-            dbNote.AddThought(MapThoughtFromDto(thought));
+            dbNote.AddThought(Thought.Create(TimeOnly.Parse(thought.Time), thought.Text));
         else
         {
             var note = Note.Create(date);
-            note.AddThought(MapThoughtFromDto(thought));
+            note.AddThought(Thought.Create(TimeOnly.Parse(thought.Time), thought.Text));
             dbContext.Notes.Add(note);
         }
 
@@ -236,6 +237,14 @@ public class NoteService(ApplicationDbContext dbContext)
     private Medication MapMedicationFromDto(MedicationDto dto)
         => Medication.Create(TimeOnly.Parse(dto.Time), dto.Name, Dosage.Create(dto.Dose.Value, dto.Dose.Unit));
 
+    private MedicationAtData MapMedicationAtFromDto(MedicationDto dto) => new MedicationAtData()
+    {
+        Id = dto.Id,
+        Name = dto.Name,
+        Time = TimeOnly.Parse(dto.Time),
+        Dosage = Dosage.Create(dto.Dose.Value, dto.Dose.Unit)
+    };
+
     private MedicationDto MapMedicationToDto(Medication medication)
     {
         return new MedicationDto()
@@ -251,7 +260,12 @@ public class NoteService(ApplicationDbContext dbContext)
         };
     }
 
-    private Thought MapThoughtFromDto(ThoughtDto dto) => Thought.Create(TimeOnly.Parse(dto.Time), dto.Text);
+    private ThoughtData MapThoughtFromDto(ThoughtDto dto) => new ThoughtData() 
+    {
+        Id = dto.Id,
+        Time = TimeOnly.Parse(dto.Time),
+        Text = dto.Text
+    };
 
     private ThoughtDto MapThoughtToDto(Thought thought)
     {

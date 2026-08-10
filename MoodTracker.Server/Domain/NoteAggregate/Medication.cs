@@ -1,4 +1,5 @@
 ﻿using MoodTracker.Server.Domain.Abstractions;
+using MoodTracker.Server.Domain.Models;
 
 namespace MoodTracker.Server.Domain.NoteAggregate;
 
@@ -27,13 +28,13 @@ public class Medication : EntityBase
         return new Medication(time, name, dosage);
     }
 
-    public void Update(Medication updateMedication)
+    public void Update(MedicationAtData updateMedication)
     {
         if (string.IsNullOrWhiteSpace(updateMedication.Name))
             throw new ArgumentException($"Medication name cannot be null or empty", nameof(updateMedication.Name));
 
         this.Time = updateMedication.Time;
         this.Name = updateMedication.Name;  
-        this.Dose = updateMedication.Dose;
+        this.Dose = updateMedication.Dosage;
     }
 }

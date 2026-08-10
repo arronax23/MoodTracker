@@ -1,4 +1,5 @@
 ﻿using MoodTracker.Server.Domain.Abstractions;
+using MoodTracker.Server.Domain.Models;
 
 namespace MoodTracker.Server.Domain.NoteAggregate;
 
@@ -25,7 +26,7 @@ public class Thought : EntityBase
         return new Thought(time, text);
     }
 
-    public void Update(Thought updateThought)
+    public void Update(ThoughtData updateThought)
     {
         if (string.IsNullOrWhiteSpace(updateThought.Text))
             throw new ArgumentException($"Thought text cannot be null or empty", nameof(updateThought.Text));

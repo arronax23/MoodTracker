@@ -1,4 +1,5 @@
 ﻿using MoodTracker.Server.Domain.Abstractions;
+using MoodTracker.Server.Domain.Models;
 
 namespace MoodTracker.Server.Domain.NoteAggregate;
 
@@ -50,16 +51,16 @@ public class Note : EntityBase, IAggreateRoot
     }
 
 
-    public void UpdateMedication(int medId, Medication updateMedication)
+    public void UpdateMedication(MedicationAtData updateMedication)
     {
-        var medication = _medications.Single(m => m.Id == medId);
+        var medication = _medications.Single(m => m.Id == updateMedication.Id);
 
         medication.Update(updateMedication);
     }
 
-    public void UpdateThought(int thoughtId, Thought updateThought)
+    public void UpdateThought(ThoughtData updateThought)
     {
-        var thought = _thoughts.Single(t => t.Id == thoughtId);
+        var thought = _thoughts.Single(t => t.Id == updateThought.Id);
 
         thought.Update(updateThought);
     }
