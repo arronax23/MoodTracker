@@ -717,9 +717,8 @@ select#mood-characteristics {
 }
 
 .medication-sets-container {
-  margin-bottom: 120px;
   min-width: 400px;
-  min-height: 50vh;
+  height: 500px;
   display: flex;
   flex-direction: column;
   background: #fff;
@@ -730,7 +729,8 @@ select#mood-characteristics {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 1rem;
+  padding: 1rem;
+  overflow-y: auto;
 }
 
 .medication-sets-container h1.header {
@@ -743,8 +743,8 @@ select#mood-characteristics {
 }
 
 .set-list {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3,250px);
   margin-top: 1rem;
 }
 
