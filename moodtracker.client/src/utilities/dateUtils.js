@@ -52,3 +52,7 @@ export const formatDate = (date) => {
 export const capitalizeFirstLetter = (val) => {
     return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }
+
+export const getLocalTime = () => {
+    return format(new Date(), 'HH:mm', { locale: pl })
+}

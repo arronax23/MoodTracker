@@ -4,11 +4,12 @@ import { useGlobalStore } from "../../../../utilities/useGlobalStore";
 import useFetchGet from "../../../../utilities/useFetchGet";
 import { apiRequest } from "../../../../utilities/useApi";
 import { useNavigate } from "react-router-dom";
+import { getLocalTime } from "../../../../utilities/dateUtils"
 
 const AddMedicationSetForm = ({ date }) => {
   const { setUpdatedNoteDate, setFormType } = useGlobalStore();  
   const navigate = useNavigate();
-  const [time, setTime] = useState('');
+  const [time, setTime] = useState(getLocalTime());
   const { result: medicationSets } = useFetchGet("/api/MedicationSet/GetSets");
 
   const goBack = () => {

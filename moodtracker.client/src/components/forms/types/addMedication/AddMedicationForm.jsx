@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { apiRequest } from "../../../../utilities/useApi";
 
+import { getLocalTime } from "../../../../utilities/dateUtils"
+
 import { useGlobalStore } from "../../../../utilities/useGlobalStore";
 import { useNavigate } from "react-router-dom";
 import { FORM_TYPE } from "../../../../utilities/formTypes";
@@ -9,7 +11,7 @@ const AddMedicationForm = ({ date }) => {
   const [medicationName, setMedicationName] = useState('');
   const [doseValue, setDoseValue] = useState('');
   const [doseUnit, setDoseUnit] = useState('');
-  const [time, setTime] = useState('');
+  const [time, setTime] = useState(getLocalTime());
   
   const { setUpdatedNoteDate, setFormType } = useGlobalStore(); 
 

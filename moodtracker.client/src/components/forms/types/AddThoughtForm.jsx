@@ -2,10 +2,11 @@ import { useState } from "react";
 import { apiRequest } from "../../../utilities/useApi";
 import { useGlobalStore } from "../../../utilities/useGlobalStore";
 import { useNavigate } from "react-router-dom";
+import { getLocalTime } from "../../../utilities/dateUtils"
 
 const AddThoughtForm = ({ date }) => {
   const [thoughtText, setThoughtText] = useState('');
-  const [time, setTime] = useState('');
+  const [time, setTime] = useState(getLocalTime());
   const { setUpdatedNoteDate } = useGlobalStore(); 
   const navigate = useNavigate();
   
