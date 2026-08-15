@@ -62,7 +62,9 @@ public class MedicationSetService(ApplicationDbContext dbContext)
     }
     public void AddSet(MedicationSetDto dto)
     {
-        var set = MapSetFromDto(dto);
+        var set = MedicationSet.Create(dto.Name);
+
+        set.AddMedications(dto.Meds.Select(m => Med.Create(m.Name, Dosage.Create(m.Dose.Value, m.Dose.Unit))));
 
         dbContext.MedicationSets.Add(set);
         dbContext.SaveChanges();
@@ -92,17 +94,7 @@ public class MedicationSetService(ApplicationDbContext dbContext)
             return false;
 
         dbContext.MedicationSets.Remove(set);
-        return dbContext.SaveChanges() > 0 ;
-    }
-
-
-
-    private MedicationSet MapSetFromDto(MedicationSetDto dto)
-    {
-        var set = MedicationSet.Create(dto.Name);
-        set.AddMedications(dto.Meds.Select(MapMedDataFromMedDto));
-
-        return set;
+        return dbContext.SaveChanges() > 0;
     }
 
     private MedicationData MapMedDataFromMedDto(MedDto dto)
@@ -114,6 +106,4 @@ public class MedicationSetService(ApplicationDbContext dbContext)
             Dosage = Dosage.Create(dto.Dose.Value, dto.Dose.Unit)
         };
     }
-
-
 }

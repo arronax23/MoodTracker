@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36603.0 d17.14
+# Visual Studio Version 18
+VisualStudioVersion = 18.8.12023.21 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "moodtracker.client", "moodtracker.client\moodtracker.client.esproj", "{CBE4E95F-E631-71C1-CE9E-1FF1DC8C9210}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodTracker.Server", "MoodTracker.Server\MoodTracker.Server.csproj", "{A040CF94-0784-4C2A-88F1-7B38B3932062}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodTracker.UnitTests", "MoodTracker.UnitTests\MoodTracker.UnitTests.csproj", "{B4A4FB92-3981-482B-8048-B3EE5851DAA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{A040CF94-0784-4C2A-88F1-7B38B3932062}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A040CF94-0784-4C2A-88F1-7B38B3932062}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A040CF94-0784-4C2A-88F1-7B38B3932062}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4A4FB92-3981-482B-8048-B3EE5851DAA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4A4FB92-3981-482B-8048-B3EE5851DAA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4A4FB92-3981-482B-8048-B3EE5851DAA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4A4FB92-3981-482B-8048-B3EE5851DAA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
