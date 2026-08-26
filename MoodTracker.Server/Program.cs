@@ -13,6 +13,7 @@ builder.Services.AddScoped<MoodProgressService>();
 builder.Services.AddScoped<WellbutrinInfoService>();
 builder.Services.AddScoped<HistogramService>();
 builder.Services.AddScoped<MedicationSetService>();
+builder.Services.AddScoped<StatsService>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(
     options => options.UseSqlite("Data Source=moodTracker.db"));

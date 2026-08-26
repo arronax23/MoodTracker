@@ -13,7 +13,7 @@ public class MedicationSetService(ApplicationDbContext dbContext)
     {
         var sets = dbContext.MedicationSets
             .AsNoTracking()
-            .Include("_medications")
+            .Include(n => n.Medications)
             .ToList();
 
         return sets.Select(s => new MedicationSetDto()
@@ -37,7 +37,7 @@ public class MedicationSetService(ApplicationDbContext dbContext)
     {
         var set = dbContext.MedicationSets
             .AsNoTracking() 
-            .Include("_medications")
+            .Include(n => n.Medications)
             .SingleOrDefault(s => s.Id == id);
 
         if (set is null)
@@ -72,7 +72,7 @@ public class MedicationSetService(ApplicationDbContext dbContext)
 
     public bool UpdateSet(MedicationSetDto dto)
     {
-        var set = dbContext.MedicationSets.Include("_medications").SingleOrDefault(s => s.Id == dto.Id);
+        var set = dbContext.MedicationSets.Include(n => n.Medications).SingleOrDefault(s => s.Id == dto.Id);
 
         if (set is null)
             return false;
@@ -87,7 +87,7 @@ public class MedicationSetService(ApplicationDbContext dbContext)
     public bool DeleteSet(int id)
     {
         var set = dbContext.MedicationSets
-            .Include("_medications")
+            .Include(n => n.Medications)
             .SingleOrDefault(s => s.Id == id);
 
         if (set is null)

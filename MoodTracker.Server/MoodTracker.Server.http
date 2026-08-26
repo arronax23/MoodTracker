@@ -46,3 +46,6 @@ GET {{MoodTracker.Server_HostAddress}}/api/Wellbutrin/GetRatingByWellbutrin
 GET {{MoodTracker.Server_HostAddress}}/api/MedicationSet/GetSet/1
 
 ###
+@startDate=2026-01-01
+@endDate=2026-02-22
+GET {{MoodTracker.Server_HostAddress}}/api/Stats/GetMedCountForTimePeriod/{{startDate}}/{{endDate}}

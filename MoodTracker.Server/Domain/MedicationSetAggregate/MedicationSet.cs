@@ -6,6 +6,8 @@ namespace MoodTracker.Server.Domain.MedicationSetAggregate;
 public class MedicationSet : AuditableEntityBase, IAggreateRoot
 {
     private List<Med> _medications = new List<Med>();
+
+    public IReadOnlyList<Med> Medications => _medications;
     public string Name { get; private set; }
 
     private MedicationSet(string name)

@@ -10,9 +10,9 @@ public class MedicationSetConfiguration : IEntityTypeConfiguration<MedicationSet
     {
         builder.ToTable("MedicationSets", "sets");
 
-        builder.HasKey(n => n.Id);
+        builder.HasKey(ms => ms.Id);
 
-        builder.HasMany<Med>("_medications")
+        builder.HasMany<Med>(ms => ms.Medications)
                .WithOne()
                .HasForeignKey("MedicationSetId")
                .OnDelete(DeleteBehavior.Cascade)

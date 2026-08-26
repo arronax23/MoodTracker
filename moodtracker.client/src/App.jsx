@@ -8,6 +8,7 @@ import HistogramChart from "./components/histogram/HistogramChart";
 import MedicationSets from "./components/medicationSets/MedicationSets";
 import AddSetLayout from "./components/medicationSets/AddSetLayout";
 import UpdateSetLayout from "./components/medicationSets/update/UpdateSetLayout";
+import Stats from "./components/stats/Stats";
 import { Route, Routes } from "react-router";
 import "./App.css";
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/sets/add-set" element={<AddSetLayout />} />
           <Route path="/sets/update-set/:setId" element={<UpdateSetLayout />} />
         </Route>
+        <Route path="/stats" element={<Stats />}></Route>        
       </Route>
     </Routes>
   );

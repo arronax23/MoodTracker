@@ -27,4 +27,9 @@ public record Dosage : IValueObject
 
         return new Dosage(value, unit);
     }
+
+    public override string ToString()
+    {
+        return $"{Value}{Unit}";
+    }
 }

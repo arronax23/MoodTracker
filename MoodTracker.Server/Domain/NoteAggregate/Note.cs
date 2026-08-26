@@ -7,6 +7,9 @@ public class Note : EntityBase, IAggreateRoot
 {
     private List<Medication> _medications = new List<Medication>();
     private List<Thought> _thoughts = new List<Thought>();
+
+    public IReadOnlyList<Medication> Medications => _medications;
+    public IReadOnlyList<Thought> Thoughts => _thoughts;
     public DateOnly Date { get; private set; }
     public Mood? Mood { get; private set; }
 
@@ -76,7 +79,4 @@ public class Note : EntityBase, IAggreateRoot
         var thought = _thoughts.Single(t => t.Id == thoughtId);
         _thoughts.Remove(thought);
     }
-
-    public IReadOnlyList<Medication> GetMedications() => _medications.AsReadOnly();
-    public IReadOnlyList<Thought> GetThoughts() => _thoughts.AsReadOnly();
 }

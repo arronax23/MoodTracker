@@ -29,13 +29,13 @@ public class NoteConfiguration : IEntityTypeConfiguration<Note>
                 .IsRequired();
         });
 
-        builder.HasMany<Medication>("_medications")
+        builder.HasMany<Medication>(n => n.Medications)
                .WithOne()
                .HasForeignKey("NoteId")
                .OnDelete(DeleteBehavior.Cascade)
                .IsRequired();
 
-        builder.HasMany<Thought>("_thoughts")
+        builder.HasMany<Thought>(n => n.Thoughts)
                .WithOne()
                .HasForeignKey("NoteId")
                .OnDelete(DeleteBehavior.Cascade)

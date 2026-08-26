@@ -13,8 +13,8 @@ public class NoteService(ApplicationDbContext dbContext)
     {
         var note = dbContext.Notes
             .AsNoTracking()
-            .Include("_medications")
-            .Include("_thoughts")
+            .Include(n => n.Medications)
+            .Include(n => n.Thoughts)
             .SingleOrDefault(n => n.Date == date);
 
         if (note == null)
@@ -25,7 +25,7 @@ public class NoteService(ApplicationDbContext dbContext)
             Date = note.Date,
             Mood = MapMoodToDto(note.Mood),
             Id = note.Id,
-            Medications = note.GetMedications().OrderBy(m => m.Time).Select(m => new MedicationDto()
+            Medications = note.Medications.OrderBy(m => m.Time).Select(m => new MedicationDto()
             {
                 Id = m.Id,
                 Name = m.Name,
@@ -36,7 +36,7 @@ public class NoteService(ApplicationDbContext dbContext)
                     Unit = m.Dose.Unit
                 }
             }),
-            Thoughts = note.GetThoughts().OrderBy(t => t.Time).Select(t => new ThoughtDto()
+            Thoughts = note.Thoughts.OrderBy(t => t.Time).Select(t => new ThoughtDto()
             {
                 Id = t.Id,
                 Text = t.Text,
@@ -64,13 +64,13 @@ public class NoteService(ApplicationDbContext dbContext)
     {
         var note = dbContext.Notes
             .AsNoTracking()
-            .Include("_medications")
+            .Include(n => n.Medications)
             .SingleOrDefault(n => n.Id == noteId);
 
         if (note is null) 
             return null;    
 
-        var medication = note.GetMedications().SingleOrDefault(m => m.Id == medicationId);
+        var medication = note.Medications.SingleOrDefault(m => m.Id == medicationId);
 
         if (medication is null)
             return null;
@@ -82,13 +82,13 @@ public class NoteService(ApplicationDbContext dbContext)
     {
         var note = dbContext.Notes
             .AsNoTracking()
-            .Include("_thoughts")
+            .Include(n => n.Thoughts)
             .SingleOrDefault(n => n.Id == noteId);
 
         if (note is null)
             return null;
 
-        var thought = note.GetThoughts().SingleOrDefault(t => t.Id == thoughtId);
+        var thought = note.Thoughts.SingleOrDefault(t => t.Id == thoughtId);
 
         if (thought is null)
             return null;
@@ -100,7 +100,7 @@ public class NoteService(ApplicationDbContext dbContext)
     public bool EditMedication(int noteId, MedicationDto dto)
     {
         var note = dbContext.Notes
-            .Include("_medications")
+            .Include(n => n.Medications)
             .SingleOrDefault(n => n.Id == noteId);
 
         if (note is null)
@@ -114,7 +114,7 @@ public class NoteService(ApplicationDbContext dbContext)
     public async Task<bool> EditThought(int noteId, ThoughtDto dto)
     {
         var note = dbContext.Notes
-            .Include("_thoughts")
+            .Include(n => n.Thoughts)
             .SingleOrDefault(n => n.Id == noteId);
 
         if (note is null)
@@ -128,7 +128,7 @@ public class NoteService(ApplicationDbContext dbContext)
     public bool DeleteMedication(int noteId, int medicationId)
     {
         var note = dbContext.Notes
-            .Include("_medications")
+            .Include(n => n.Medications)
             .SingleOrDefault(n => n.Id == noteId);
 
         if (note is null)
@@ -143,7 +143,7 @@ public class NoteService(ApplicationDbContext dbContext)
     public bool DeleteThought(int noteId, int thoughtId)
     {
         var note = dbContext.Notes
-            .Include("_thoughts")
+            .Include(n => n.Thoughts)
             .SingleOrDefault(n => n.Id == noteId);
 
         if (note is null)
@@ -190,7 +190,7 @@ public class NoteService(ApplicationDbContext dbContext)
     public bool AddMedicationsFromSet(DateOnly noteDate, string time, int medicationSetId)
     {
         var note = dbContext.Notes.SingleOrDefault(n => n.Date == noteDate);
-        var set = dbContext.MedicationSets.Include("_medications").SingleOrDefault(ms => ms.Id == medicationSetId);
+        var set = dbContext.MedicationSets.Include(n => n.Medications).SingleOrDefault(ms => ms.Id == medicationSetId);
 
         if (note is null)
             note = Note.Create(noteDate);

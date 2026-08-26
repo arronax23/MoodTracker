@@ -37,4 +37,9 @@ public class Medication : EntityBase
         this.Name = updateMedication.Name;  
         this.Dose = updateMedication.Dosage;
     }
+
+    public override string ToString()
+    {
+        return $"{Name} {Dose.ToString()}";
+    }
 }
