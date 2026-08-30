@@ -27,6 +27,10 @@ const Home = () => {
     navigate('/sets');
   }  
 
+  const statsClick = () => {
+    navigate('/stats');
+  }    
+
   return (
     <div onScroll={e => scroll(e)} className="home">
       <nav className="navbar" ref={navbar}>
@@ -34,6 +38,7 @@ const Home = () => {
         <div onClick={chartClick} className="nav-item chart">Wykres</div>
         <div onClick={histogramClick} className="nav-item histogram">Histogram</div>
         <div onClick={setsClick} className="nav-item sets">Zestawy leków</div>
+        <div onClick={statsClick} className="nav-item stats">Statystyki</div>
         <h1 className="nav-item header">Dziennik nastroju</h1>
       </nav>
       <Outlet   />

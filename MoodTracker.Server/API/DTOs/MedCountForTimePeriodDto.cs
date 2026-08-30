@@ -10,6 +10,6 @@ public class MedCountForTimePeriodDto
 
 public class MedWithDoseDto
 {
-    public string MedicationWithDose { get; set; } = null!;
+    public string MedicationName { get; set; } = null!;
     public int Count { get; set; }
 }

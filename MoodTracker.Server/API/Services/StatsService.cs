@@ -30,7 +30,7 @@ public class StatsService(ApplicationDbContext dbContext)
                 .GroupBy(med => new { med.Name, med.Dose.Value, med.Dose.Unit })
                 .Select(gr => new MedWithDoseDto()
                 {
-                    MedicationWithDose = $"{gr.Key.Name} {gr.Key.Value}{gr.Key.Unit}",
+                    MedicationName = $"{gr.Key.Name} {gr.Key.Value}{gr.Key.Unit}",
                     Count = gr.Count()
                 });
 
@@ -39,16 +39,4 @@ public class StatsService(ApplicationDbContext dbContext)
 
         return generalMeds;
    }
-
-    private class MedsData 
-    {
-        public string MedicationName { get; set; } = null!;
-        public int Count { get; set; } 
-
-    }
-    private class MedsData2 : MedsData
-    {
-        public string MedicationNameWithDose { get; set; } = null!;
-
-    }
 }
