@@ -19,20 +19,20 @@ $publishPath = Join-Path $basePath $today
 # Publish
 # ==========================
 
-# Write-Host "Publishing MoodTracker..."
-# Write-Host "Target: $publishPath"
+Write-Host "Publishing MoodTracker..."
+Write-Host "Target: $publishPath"
 
-# New-Item -ItemType Directory -Path $publishPath -Force | Out-Null
+New-Item -ItemType Directory -Path $publishPath -Force | Out-Null
 
-# dotnet publish `
-#     $projectPath `
-#     --configuration Release `
-#     --output $publishPath
+dotnet publish `
+    $projectPath `
+    --configuration Release `
+    --output $publishPath
 
-# if ($LASTEXITCODE -ne 0) {
-#     Write-Error "dotnet publish failed."
-#     exit $LASTEXITCODE
-# }
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "dotnet publish failed."
+    exit $LASTEXITCODE
+}
 
 
 # ==========================
