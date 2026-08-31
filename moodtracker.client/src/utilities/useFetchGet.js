@@ -12,6 +12,7 @@ const useFetchGet = (url) => {
 
   const fetchData = async (signal) => {
     try {
+      setIsPending(true);
       const response = await fetch(`${url}`, { signal: signal });
       setHttpResponse(response.status);
       console.log(response);

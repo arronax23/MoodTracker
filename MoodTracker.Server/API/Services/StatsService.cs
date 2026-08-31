@@ -20,7 +20,9 @@ public class StatsService(ApplicationDbContext dbContext)
             {
                 Count = g.Count(),
                 MedicationName = $"{g.Key.Name}",
-            }).ToList();
+            })
+            .OrderByDescending(dto => dto.Count)
+            .ToList();
 
 
         foreach (var item in generalMeds)
@@ -32,7 +34,8 @@ public class StatsService(ApplicationDbContext dbContext)
                 {
                     MedicationName = $"{gr.Key.Name} {gr.Key.Value}{gr.Key.Unit}",
                     Count = gr.Count()
-                });
+                })
+                .OrderByDescending(dto => dto.Count);
 
             item.MedicationWithDose = new(detailedMeds);
         }
