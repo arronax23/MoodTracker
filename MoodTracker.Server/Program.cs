@@ -5,6 +5,7 @@ using MoodTracker.API.DependencyInjection;
 using MoodTracker.Infrastructure.AppSettings;
 using MoodTracker.Infrastructure.Data;
 using MoodTracker.Infrastructure.Data.Interceptors;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,11 @@ builder.Services.AddDbContext<ApplicationDbContext>((sp, options) =>
 });
 
 builder.Services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
+
+builder.Services.AddMediatR(cfg => {
+    cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+    cfg.RegisterServicesFromAssemblyContaining(typeof(MoodTracker.API.IAssemblyMarker));
+});
 
 var app = builder.Build();
 

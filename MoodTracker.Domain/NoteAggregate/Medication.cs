@@ -1,5 +1,6 @@
 ﻿using MoodTracker.Domain.Abstractions;
 using MoodTracker.Domain.Models;
+using MoodTracker.Domain.NoteAggregate.Events;
 
 namespace MoodTracker.Domain.NoteAggregate;
 
@@ -18,6 +19,8 @@ public class Medication : EntityBase
         Time = time;
         Name = name;
         Dose = dosage;
+
+        AddDomainEvent(new MedicationCreatedEvent(this));
     }
 
     public static Medication Create(TimeOnly time, string name, Dosage dosage)
@@ -36,6 +39,8 @@ public class Medication : EntityBase
         this.Time = updateMedication.Time;
         this.Name = updateMedication.Name;  
         this.Dose = updateMedication.Dosage;
+
+        AddDomainEvent(new MedicationUpdatedEvent(this));
     }
 
     public override string ToString()
