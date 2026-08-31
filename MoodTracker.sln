@@ -1,13 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.8.12023.21 stable
+VisualStudioVersion = 18.8.12023.21
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "moodtracker.client", "moodtracker.client\moodtracker.client.esproj", "{CBE4E95F-E631-71C1-CE9E-1FF1DC8C9210}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodTracker.Server", "MoodTracker.Server\MoodTracker.Server.csproj", "{A040CF94-0784-4C2A-88F1-7B38B3932062}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodTracker.Infrastructure", "MoodTracker.Server\MoodTracker.Infrastructure.csproj", "{A040CF94-0784-4C2A-88F1-7B38B3932062}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodTracker.UnitTests", "MoodTracker.UnitTests\MoodTracker.UnitTests.csproj", "{B4A4FB92-3981-482B-8048-B3EE5851DAA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodTracker.Domain", "MoodTracker.Domain\MoodTracker.Domain.csproj", "{2BAF32D6-1393-40CB-9F04-06128BC2DF27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodTracker.API", "MoodTracker.API\MoodTracker.API.csproj", "{5C61157C-0652-4B89-8806-1CAD91543379}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{421BD1FD-69A0-4CB7-9C22-B02104DBED95}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{53ABE3C3-7FD1-40F1-BAE0-0E89AA4C38FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,9 +37,24 @@ Global
 		{B4A4FB92-3981-482B-8048-B3EE5851DAA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4A4FB92-3981-482B-8048-B3EE5851DAA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4A4FB92-3981-482B-8048-B3EE5851DAA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BAF32D6-1393-40CB-9F04-06128BC2DF27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BAF32D6-1393-40CB-9F04-06128BC2DF27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BAF32D6-1393-40CB-9F04-06128BC2DF27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BAF32D6-1393-40CB-9F04-06128BC2DF27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C61157C-0652-4B89-8806-1CAD91543379}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C61157C-0652-4B89-8806-1CAD91543379}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C61157C-0652-4B89-8806-1CAD91543379}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C61157C-0652-4B89-8806-1CAD91543379}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CBE4E95F-E631-71C1-CE9E-1FF1DC8C9210} = {53ABE3C3-7FD1-40F1-BAE0-0E89AA4C38FD}
+		{A040CF94-0784-4C2A-88F1-7B38B3932062} = {53ABE3C3-7FD1-40F1-BAE0-0E89AA4C38FD}
+		{B4A4FB92-3981-482B-8048-B3EE5851DAA3} = {421BD1FD-69A0-4CB7-9C22-B02104DBED95}
+		{2BAF32D6-1393-40CB-9F04-06128BC2DF27} = {53ABE3C3-7FD1-40F1-BAE0-0E89AA4C38FD}
+		{5C61157C-0652-4B89-8806-1CAD91543379} = {53ABE3C3-7FD1-40F1-BAE0-0E89AA4C38FD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {664BCEDC-A40D-4664-A058-FAFD884E9075}

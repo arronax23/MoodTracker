@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MoodTracker.Server\MoodTracker.Server.csproj" />
+    <ProjectReference Include="..\MoodTracker.Server\MoodTracker.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

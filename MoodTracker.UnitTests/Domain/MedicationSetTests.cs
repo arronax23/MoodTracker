@@ -1,7 +1,7 @@
-﻿using MoodTracker.Server.Domain;
-using MoodTracker.Server.Domain.Abstractions;
-using MoodTracker.Server.Domain.MedicationSetAggregate;
-using MoodTracker.Server.Domain.Models;
+﻿using MoodTracker.Domain;
+using MoodTracker.Domain.Abstractions;
+using MoodTracker.Domain.MedicationSetAggregate;
+using MoodTracker.Domain.Models;
 
 namespace MoodTracker.UnitTests.Domain;
 

@@ -1,22 +1,21 @@
 using Microsoft.EntityFrameworkCore;
-using MoodTracker.Server.API.Services;
-using MoodTracker.Server.Infrasctructure;
+using MoodTracker.API.Abstractions;
+using MoodTracker.API.DependencyInjection;
+using MoodTracker.Infrastructure.AppSettings;
+using MoodTracker.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
-builder.Services.AddSingleton<Settings>();
-builder.Services.AddScoped<NoteService>();
-builder.Services.AddScoped<MoodProgressService>();
-builder.Services.AddScoped<WellbutrinInfoService>();
-builder.Services.AddScoped<HistogramService>();
-builder.Services.AddScoped<MedicationSetService>();
-builder.Services.AddScoped<StatsService>();
+builder.Services.AddSingleton<ISettings, Settings>();
+builder.Services.AddAPIServices();
 
 builder.Services.AddDbContext<ApplicationDbContext>(
     options => options.UseSqlite("Data Source=moodTracker.db"));
+
+builder.Services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
 
 var app = builder.Build();
 
