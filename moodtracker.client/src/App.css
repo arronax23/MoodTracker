@@ -401,7 +401,9 @@ body {
 
 .arrow {
   cursor: pointer;
-  background: rgb(198, 198, 190);
+  /* background: rgb(198, 198, 190); */
+  background: #fff;
+  border: 2px solid #000;
   border-radius: 2rem;
   padding: 0.5rem;
   height: 2rem;
