@@ -552,6 +552,8 @@ nav.navbar {
   align-self: center;
 }
 
+
+
 .calednar-btn.nav-item {
   grid-area: calendar;
 }
@@ -591,6 +593,11 @@ nav.navbar {
   background: #fff;
   border-radius: 0.5rem;
   border: 2px solid #000;
+}
+
+.nav-item.active {
+  background: #000;
+  color: #fff;
 }
 
 .calednar-btn.nav-item:hover,

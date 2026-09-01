@@ -7,7 +7,7 @@ $ErrorActionPreference = "Stop"
 # ==========================
 
 $basePath = "C:\Users\wikto\Desktop\MoodTrackerHosting"
-$projectPath = Join-Path $PSScriptRoot "..\MoodTracker.Server\MoodTracker.Server.csproj"
+$projectPath = Join-Path $PSScriptRoot "..\MoodTracker.Server\MoodTracker.Infrastructure.csproj"
 
 $iisSite = "Default Web Site"
 $appPool = "DefaultAppPool"
