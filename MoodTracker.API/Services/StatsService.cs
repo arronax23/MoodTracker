@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MoodTracker.API.Abstractions;
 using MoodTracker.API.DTOs;
+using System.Globalization;
 
 namespace MoodTracker.API.Services;
 
@@ -30,12 +31,21 @@ public class StatsService(IApplicationDbContext dbContext)
             var detailedMeds = validMeds
                 .Where(m => m.Name == item.MedicationName)
                 .GroupBy(med => new { med.Name, med.Dose.Value, med.Dose.Unit })
-                .Select(gr => new MedWithDoseDto()
+                .Select(gr => new MedWithDoseData()
                 {
-                    MedicationName = $"{gr.Key.Name} {gr.Key.Value}{gr.Key.Unit}",
+                    Name = gr.Key.Name,
+                    DoseValue = gr.Key.Value,
+                    DoseUnit = gr.Key.Unit,
                     Count = gr.Count()
                 })
+                .ToList()
+                .Select(data => new MedWithDoseDto()
+                {
+                    MedicationName = $"{data.Name} {FormatDoseValue(data.DoseValue)}{data.DoseUnit}",
+                    Count = data.Count
+                })
                 .OrderByDescending(dto => dto.Count);
+
 
             item.MedicationWithDose = new(detailedMeds);
         }
@@ -43,6 +53,7 @@ public class StatsService(IApplicationDbContext dbContext)
         return generalMeds;
     }
 
+    
     public IEnumerable<MedCountForTimePeriodDto> GetMedCountForTimePeriod_Fast(DateOnly startDate, DateOnly endDate)
     {
         return dbContext.MedCounts
@@ -59,5 +70,24 @@ public class StatsService(IApplicationDbContext dbContext)
                 })
                 .ToList()
             });
+    }
+
+
+    private string FormatDoseValue(decimal doseValue)
+    {
+        if (doseValue == decimal.Truncate(doseValue))
+            return ((int)doseValue).ToString();
+
+        return doseValue.ToString(CultureInfo.InvariantCulture);
+        
+    }
+
+
+    private class MedWithDoseData
+    {
+        public string Name { get; set; } = null!;
+        public decimal DoseValue { get; set; } 
+        public string DoseUnit { get; set; } = null!;
+        public int Count { get; set; }
     }
 }
