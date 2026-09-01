@@ -13,6 +13,11 @@ public class StatsController(StatsService service) : ControllerBase
     {
         return service.GetMedCountForTimePeriod(startDate,endDate);
     }
+    [HttpGet("GetMedCountForTimePeriod_Fast")]
+    public IEnumerable<MedCountForTimePeriodDto> GetMedCountForTimePeriod_Fast(DateOnly startDate, DateOnly endDate)
+    {
+        return service.GetMedCountForTimePeriod_Fast(startDate, endDate);
+    }
 
 }
 

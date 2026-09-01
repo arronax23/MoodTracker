@@ -6,8 +6,8 @@ namespace MoodTracker.API.Services;
 
 public class StatsService(IApplicationDbContext dbContext)
 {
-   public IEnumerable<MedCountForTimePeriodDto> GetMedCountForTimePeriod(DateOnly startDate, DateOnly endDate)
-   {
+    public IEnumerable<MedCountForTimePeriodDto> GetMedCountForTimePeriod(DateOnly startDate, DateOnly endDate)
+    {
         var validMeds = dbContext.Notes
             .AsNoTracking()
             .Where(n => n.Date >= startDate && n.Date <= endDate)
@@ -41,5 +41,23 @@ public class StatsService(IApplicationDbContext dbContext)
         }
 
         return generalMeds;
-   }
+    }
+
+    public IEnumerable<MedCountForTimePeriodDto> GetMedCountForTimePeriod_Fast(DateOnly startDate, DateOnly endDate)
+    {
+        return dbContext.MedCounts
+            .AsNoTracking()
+            .Where(mc => mc.Parent == null)
+            .Select(mc => new MedCountForTimePeriodDto()
+            {
+                Count = mc.Count,
+                MedicationName = mc.MedicationName,
+                MedicationWithDose = mc.Children.Select(child => new MedWithDoseDto()
+                {
+                    MedicationName = child.MedicationName,
+                    Count = child.Count
+                })
+                .ToList()
+            });
+    }
 }

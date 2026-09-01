@@ -15,4 +15,8 @@
     <ProjectReference Include="..\MoodTracker.Domain\MoodTracker.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="MoodTracker.UnitTests" />
+  </ItemGroup>
+
 </Project>

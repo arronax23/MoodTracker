@@ -1,4 +1,5 @@
 ﻿using MoodTracker.Domain.Abstractions;
+using System.Globalization;
 
 namespace MoodTracker.Domain;
 
@@ -30,6 +31,9 @@ public record Dosage : IValueObject
 
     public override string ToString()
     {
-        return $"{Value}{Unit}";
+        if (Value == decimal.Truncate(Value))
+            return $"{(int)Value}{Unit}";
+
+        return $"{Value.ToString(CultureInfo.InvariantCulture)}{Unit}";
     }
 }

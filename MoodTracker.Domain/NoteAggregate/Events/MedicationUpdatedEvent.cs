@@ -4,9 +4,12 @@ namespace MoodTracker.Domain.NoteAggregate.Events;
 
 public class MedicationUpdatedEvent : DomainEventBase
 {
-    public MedicationUpdatedEvent(Medication medication)
+    public MedicationUpdatedEvent(Medication currentMedication, Medication newMedication)
     {
-        Medication = medication;
+        CurrentMedication = currentMedication;
+        NewMedication = newMedication;
     }
-    public Medication Medication { get; } = null!;
+
+    public Medication CurrentMedication { get; } = null!;
+    public Medication NewMedication { get; } = null!;
 }

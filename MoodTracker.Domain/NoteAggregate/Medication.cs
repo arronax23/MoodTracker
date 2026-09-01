@@ -1,6 +1,8 @@
 ﻿using MoodTracker.Domain.Abstractions;
 using MoodTracker.Domain.Models;
 using MoodTracker.Domain.NoteAggregate.Events;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 
 namespace MoodTracker.Domain.NoteAggregate;
 
@@ -9,6 +11,8 @@ public class Medication : EntityBase
     public TimeOnly Time { get; private set; }
     public string Name { get; private set; } = null!;
     public Dosage Dose { get; private set; } = null!;
+
+    public string NameWithDoseLabel => $"{Name} {Dose.Value.ToString(CultureInfo.InvariantCulture)}{Dose.Unit}";
 
     private Medication()
     {
@@ -35,16 +39,15 @@ public class Medication : EntityBase
     {
         if (string.IsNullOrWhiteSpace(updateMedication.Name))
             throw new ArgumentException($"Medication name cannot be null or empty", nameof(updateMedication.Name));
+     
+        AddDomainEvent(new MedicationUpdatedEvent(
+            currentMedication: Medication.Create(this.Time, this.Name, Dosage.Create(this.Dose.Value, this.Dose.Unit)),
+            newMedication: this)
+        );
 
         this.Time = updateMedication.Time;
         this.Name = updateMedication.Name;  
         this.Dose = updateMedication.Dosage;
 
-        AddDomainEvent(new MedicationUpdatedEvent(this));
-    }
-
-    public override string ToString()
-    {
-        return $"{Name} {Dose.ToString()}";
     }
 }

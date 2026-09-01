@@ -1,5 +1,6 @@
 ﻿using MoodTracker.Domain.Abstractions;
 using MoodTracker.Domain.Models;
+using MoodTracker.Domain.NoteAggregate.Events;
 
 namespace MoodTracker.Domain.NoteAggregate;
 
@@ -72,6 +73,8 @@ public class Note : EntityBase, IAggreateRoot
     {
         var medication = _medications.Single(m => m.Id == medId);
         _medications.Remove(medication);
+
+        AddDomainEvent(new MedicationRemovedEvent(medication));
     }
 
     public void DeleteThought(int thoughtId)

@@ -29,7 +29,7 @@ internal class MedicationCreatedEventHandler(IApplicationDbContext dbContext) : 
 
     private async Task UpsertChildMedCount(MedicationCreatedEvent @event, MedCount parent)
     {
-        var medicationName = $"{@event.Medication.Name} {@event.Medication.Dose.Value}{@event.Medication.Dose.Unit}";
+        var medicationName = @event.Medication.NameWithDoseLabel;
 
         var medCount = dbContext.MedCounts.SingleOrDefault(m => m.MedicationName == medicationName);
 

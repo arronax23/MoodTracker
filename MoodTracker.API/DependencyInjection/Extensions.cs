@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using MoodTracker.API.EventHandlers.Utilities;
 using MoodTracker.API.Services;
 
 namespace MoodTracker.API.DependencyInjection;
@@ -13,5 +14,7 @@ public static  class Extensions
         services.AddScoped<HistogramService>();
         services.AddScoped<MedicationSetService>();
         services.AddScoped<StatsService>();
+
+        services.AddScoped<MedCountUtility>();
     }
 }
