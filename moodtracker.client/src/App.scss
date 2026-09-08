@@ -1,4 +1,6 @@
-﻿* {
+﻿$light-green: #a8d4d3;
+
+* {
   margin: 0;
   padding: 0;
   font-family: "DynaPuff", system-ui;
@@ -73,8 +75,7 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 350px;
-  /* width: 195px; */
-  background: #a8d4d3;
+  background: $light-green;
   border: 2px solid black;
 }
 

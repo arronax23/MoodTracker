@@ -15,8 +15,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddSingleton<ISettings, Settings>();
 builder.Services.AddAPIServices();
 
-builder.Services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>(); //to do
-//builder.Services.AddScoped<ISaveChangesInterceptor, MedicationInterceptor>();
+builder.Services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
 
 builder.Services.AddDbContext<ApplicationDbContext>((sp, options) =>
 {

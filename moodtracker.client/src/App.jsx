@@ -13,7 +13,7 @@ import { Route, Routes } from "react-router";
 import { LocalizationProvider } from '@mui/x-date-pickers';    
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { pl } from 'date-fns/locale/pl';
-import "./App.css";
+import "./App.scss";
 
 function App() {
   return (
