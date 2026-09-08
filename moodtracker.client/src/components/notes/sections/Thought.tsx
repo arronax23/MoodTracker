@@ -2,13 +2,21 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGlobalStore } from "../../../utilities/useGlobalStore";
 import { apiRequest } from "../../../utilities/useApi";
+import { ThoughtItem } from "../../../types/note";
 
-const Thought = ({ thought, noteId, noteDate, dayName, dateDisplay }) => {
+export interface ThoughtProps {
+  thought: ThoughtItem;
+  noteId: number;
+  noteDate: string;
+  dayName: string;
+  dateDisplay: string;
+}
+
+const Thought = ({ thought, noteId, noteDate, dayName, dateDisplay }: ThoughtProps) => {
   const navigate = useNavigate();
-  const confirmBox = useRef();
+  const confirmBox = useRef<HTMLDivElement>(null);
 
-  const { setDayOfTheWeek, setDateDisplay, setUpdatedNoteDate } =
-    useGlobalStore();
+  const { setDayOfTheWeek, setDateDisplay, setUpdatedNoteDate } = useGlobalStore();
 
   const editClick = () => {
     setDayOfTheWeek(dayName);
@@ -17,24 +25,30 @@ const Thought = ({ thought, noteId, noteDate, dayName, dateDisplay }) => {
   };
 
   const deleteClick = () => {
-    confirmBox.current.classList.toggle("active");
+    confirmBox.current?.classList.toggle("active");
   };
 
   const closeBox = () => {
-    confirmBox.current.classList.remove("active");
+    confirmBox.current?.classList.remove("active");
   };
 
   const confirmDelete = async () => {
-    const isSuccess = await apiRequest("/api/Notes/DeleteThought", "DELETE", {
-      noteId: noteId,
-      thoughtId: thought.id,
-    });
+    const isSuccess = await apiRequest(
+      "/api/Notes/DeleteThought",
+      "DELETE",
+      {
+        noteId: noteId,
+        thoughtId: thought.id,
+      }
+    );
 
     if (isSuccess) {
-      confirmBox.current.classList.remove("active");
+      confirmBox.current?.classList.remove("active");
       setUpdatedNoteDate(noteDate);
     }
   };
+
+  if (!thought) return null;
 
   return (
     <div className="thought-container">
@@ -72,4 +86,5 @@ const Thought = ({ thought, noteId, noteDate, dayName, dateDisplay }) => {
     </div>
   );
 };
+
 export default Thought;

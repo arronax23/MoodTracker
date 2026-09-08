@@ -6,25 +6,34 @@ import { apiRequest } from "../../../../utilities/useApi";
 import { useNavigate } from "react-router-dom";
 import { getLocalTime } from "../../../../utilities/dateUtils"
 
-const AddMedicationSetForm = ({ date }) => {
+export interface MedicationSet {
+  id: string;
+  name: string;
+  meds: {
+    name: string;
+    dose: {
+      value: number;
+      unit: string;
+    };
+  }[];
+}
+
+const AddMedicationSetForm = ({ date } : { date: string }) => {
   const { setUpdatedNoteDate, setFormType } = useGlobalStore();  
   const navigate = useNavigate();
   const [time, setTime] = useState(getLocalTime());
-  const { result: medicationSets } = useFetchGet("/api/MedicationSet/GetSets");
+  const { result: medicationSets } = useFetchGet<MedicationSet[]>("/api/MedicationSet/GetSets");
 
   const goBack = () => {
     setFormType(FORM_TYPE.add_medication);
   };
 
-  const open = (e) => {
-    e.target.closest(".set").classList.toggle("open");
+  const open = (e : React.MouseEvent<HTMLDivElement>) => {
+    e.currentTarget.closest(".set")!.classList.toggle("open");
   };
 
-  const pickSet = async (e) => {
-    const id = e.target.closest(".set").getAttribute('id');
-
-     console.log(id);
-    console.log(time);
+  const pickSet = async (e : React.MouseEvent<HTMLImageElement>) => {
+    const id = e.currentTarget.closest(".set")!.getAttribute('id');
 
     const isSuccess = await apiRequest('/api/Notes/AddMedicationsFromSet','PUT',{
       noteDate: date,

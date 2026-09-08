@@ -1,7 +1,7 @@
 import useFetchGet from "../../../utilities/useFetchGet";
 import { formatDate } from "../../../utilities/dateUtils";
 import { mapColor } from "../../../utilities/colorUtils";
-import HistogramTooltip from "./../HistogramTooltip";
+import HistogramTooltip from "../HistogramTooltip";
 
 import {
   ComposedChart,
@@ -15,8 +15,18 @@ import {
 } from "recharts";
 
 
-const MoodRateHistogram = ({ date }) => {
-  const { result: histogram } = useFetchGet(
+export interface Histogram {
+  month: string;
+  year: number;
+  items: {
+    moodColor: string;
+    moodRate: number;
+    count: number;
+  }[];
+}
+
+const MoodRateHistogram = ({ date }: { date: Date }) => {
+  const { result: histogram } = useFetchGet<Histogram>(
     `/api/Histogram/GetMoodRateHistogram/${formatDate(date)}`,
   );
 

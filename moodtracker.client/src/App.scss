@@ -894,7 +894,15 @@ select#mood-characteristics {
 .add-medication-options fieldset .options {
   display: flex;
   justify-content: space-evenly;
+
+  & .option {
+    display: flex;
+    align-items: center;
+    gap: .2rem;
+  }
 }
+
+
 
 .add-medication-options fieldset .submit-btn {
   display: flex;

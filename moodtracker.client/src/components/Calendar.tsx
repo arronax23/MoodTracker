@@ -6,7 +6,7 @@ import { Outlet } from "react-router";
 export default function Calendar() {
   const [weekReference, setWeekReference] = useState(0);
   const [week, setWeek] = useState(getWeek(weekReference));
-  const calendar = useRef();
+  const calendar = useRef<HTMLDivElement>(null);
 
   const moveToPreviousWeek = () => {
     setWeekReference(prev => {
@@ -26,9 +26,9 @@ export default function Calendar() {
 
 
   const blink = () => {
-    calendar.current.classList.add('blink');
+    calendar.current?.classList.add('blink');
     setTimeout(() => {
-      calendar.current.classList.remove('blink');
+      calendar.current?.classList.remove('blink');
     }, 150);
   }
 

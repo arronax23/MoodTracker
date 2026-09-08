@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { RefObject, useRef, useState } from "react";
 
 import {
   getFirstDayOfCurrentMonth,
@@ -14,14 +14,13 @@ const HistogramChart = () => {
   const [date, setDate] = useState(getFirstDayOfCurrentMonth());
   const [type, setType] = useState("mood-rate");
   
-  const leftArrow = useRef();
-  const rightArrow = useRef();
+  const leftArrow = useRef<HTMLImageElement>(null);
+  const rightArrow = useRef<HTMLImageElement>(null);
 
-
-  const blink = (arrowRef) => {
-    arrowRef.current.classList.add("blink");
+  const blink = (arrowRef : RefObject<HTMLImageElement | null>) => {
+    arrowRef.current!.classList.add("blink");
     setTimeout(() => {
-      arrowRef.current.classList.remove("blink");
+      arrowRef.current!.classList.remove("blink");
     }, 250);
   };
 

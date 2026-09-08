@@ -1,14 +1,13 @@
 import { useGlobalStore } from "../../../../utilities/useGlobalStore";
 import { FORM_TYPE } from "../../../../utilities/formTypes";
 
-
 const AddMedicationsOptions = () => {
-    const { setFormType } = useGlobalStore(); 
+  const { setFormType } = useGlobalStore();
 
-  const handleSubmit = (e) => {
-    console.log(e.target.addOption.value);  
+  const handleAction = (formData: FormData) => {
+    const selectedOption = formData.get("addOption") as string | null;
 
-    switch (e.target.addOption.value) {
+    switch (selectedOption) {
       case "single":
         setFormType(FORM_TYPE.add_medication_single);
         break;
@@ -20,18 +19,29 @@ const AddMedicationsOptions = () => {
 
   return (
     <div className="add-medication-options">
-      <form onSubmit={handleSubmit}>
+      <form action={handleAction}>
         <fieldset>
           <legend>Dodaj leki</legend>
 
           <div className="options">
-            <div>
-              <input type="radio" id="single" name="addOption" value="single" defaultChecked />
+            <div className="option">
+              <input 
+                type="radio" 
+                id="single" 
+                name="addOption" 
+                value="single" 
+                defaultChecked 
+              />
               <label htmlFor="single">Pojedynczo</label>
             </div>
 
-            <div>
-              <input type="radio" id="set" name="addOption" value="set" />
+            <div className="option">
+              <input 
+                type="radio" 
+                id="set" 
+                name="addOption" 
+                value="set" 
+              />
               <label htmlFor="set">Z zestawu</label>
             </div>
           </div>
@@ -44,4 +54,5 @@ const AddMedicationsOptions = () => {
     </div>
   );
 };
+
 export default AddMedicationsOptions;

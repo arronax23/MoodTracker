@@ -1,4 +1,6 @@
-export const mapColor = (color) => {
+export type ColorName = "Green" | "Yellow" | "Red";
+
+export const mapColor = (color: ColorName | string): string => {
   switch (color) {
     case "Green":
       return "#A2EF44";
@@ -7,12 +9,11 @@ export const mapColor = (color) => {
     case "Red":
       return "#B23256";
     default:
-      "#000";
+      return "#fffefe";
   }
-}
+};
 
-
-export const translateColorToPolish = (color) => {
+export const translateColorToPolish = (color: ColorName | string): string => {
   switch (color) {
     case "Green":
       return "Zielony";
@@ -21,6 +22,6 @@ export const translateColorToPolish = (color) => {
     case "Red":
       return "Czerwony";
     default:
-      "Czarny";
+      return "Czarny";
   }
-}
+};
