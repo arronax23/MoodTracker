@@ -1,5 +1,5 @@
-import useFetchGet from "../utilities/useFetchGet";
 import { useState, useRef } from "react";
+import useFetchGet from "../utilities/useFetchGet";
 import MoodChartTooltip from "./MoodChartTooltip";
 import {
   getFirstDayOfCurrentMonth,
@@ -20,22 +20,48 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+// 1. Definicje interfejsów dla danych z API
+export type MoodColor = "Green" | "Yellow" | "Red" | string;
+
+export interface MoodProgressItem {
+  day: number | string;
+  moodRate: number;
+  moodColor: MoodColor;
+}
+
+export interface MoodProgressResponse {
+  month: string;
+  year: number;
+  progress: MoodProgressItem[];
+}
+
+// Interfejs danych przekazywanych bezpośrednio do wykresu Recharts
+export interface ChartDataItem {
+  name: number | string;
+  value: number;
+  color: MoodColor;
+}
+
 const MoodChart = () => {
-  const [date, setDate] = useState(getFirstDayOfCurrentMonth());
-  const leftArrow = useRef();
-  const rightArrow = useRef();
-  const { result: moodProgress } = useFetchGet(
+  const [date, setDate] = useState<Date>(getFirstDayOfCurrentMonth());
+  
+  const leftArrow = useRef<HTMLImageElement>(null);
+  const rightArrow = useRef<HTMLImageElement>(null);
+
+  const { result: moodProgress } = useFetchGet<MoodProgressResponse>(
     `/api/MoodProgress/GetProgress/${formatDate(date)}`
   );
 
-  const blink = (arrowRef) => {
-    arrowRef.current.classList.add("blink");
-    setTimeout(() => {
-      arrowRef.current.classList.remove("blink");
-    }, 250);
+  const blink = (arrowRef: React.RefObject<HTMLImageElement | null>) => {
+    if (arrowRef.current) {
+      arrowRef.current.classList.add("blink");
+      setTimeout(() => {
+        arrowRef.current?.classList.remove("blink");
+      }, 250);
+    }
   };
 
-  const mapColor = (color) => {
+  const mapColor = (color: MoodColor): string => {
     switch (color) {
       case "Green":
         return "#A2EF44";
@@ -44,7 +70,7 @@ const MoodChart = () => {
       case "Red":
         return "#B23256";
       default:
-        "#000";
+        return "#000000";
     }
   };
 
@@ -60,18 +86,28 @@ const MoodChart = () => {
     setDate(newDate);
   };
 
+  const chartData: ChartDataItem[] = moodProgress
+    ? moodProgress.progress.map((p) => ({
+        name: p.day,
+        value: p.moodRate,
+        color: p.moodColor,
+      }))
+    : [];
+
   return (
     <div className="mood-chart">
       <img
         ref={leftArrow}
         className="arrow left-arrow"
-        src={"/left-arrow.svg"}
+        src="/left-arrow.svg"
+        alt="Poprzedni miesiąc"
         onClick={decrement}
       />
       <img
         ref={rightArrow}
         className="arrow right-arrow"
-        src={"/right-arrow.svg"}
+        src="/right-arrow.svg"
+        alt="Następny miesiąc"
         onClick={increment}
       />
       {moodProgress && (
@@ -83,11 +119,7 @@ const MoodChart = () => {
           <ResponsiveContainer width="100%" height={450}>
             <ComposedChart
               margin={{ top: 50 }}
-              data={moodProgress.progress.map((p) => ({
-                name: p.day,
-                value: p.moodRate,
-                color: p.moodColor,
-              }))}
+              data={chartData}
             >
               <CartesianGrid strokeDasharray="3" vertical={false} />
               <XAxis dataKey="name" />
@@ -116,4 +148,5 @@ const MoodChart = () => {
     </div>
   );
 };
+
 export default MoodChart;
