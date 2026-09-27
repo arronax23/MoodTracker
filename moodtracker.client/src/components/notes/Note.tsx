@@ -66,7 +66,7 @@ export default function Note({ date, dayName, dateDisplay, isToday = false }: No
 
       <div className="section medications">
         <div className="medications-header">Leki</div>
-        {note?.medications.map((m) => (
+        {note?.medications?.map((m) => (
           <Medication
             key={m.id}
             dayName={dayName}

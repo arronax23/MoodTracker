@@ -12,7 +12,7 @@ public class Medication : EntityBase
     public string Name { get; private set; } = null!;
     public Dosage Dose { get; private set; } = null!;
 
-    public string NameWithDoseLabel => $"{Name} {Dose.Value.ToString(CultureInfo.InvariantCulture)}{Dose.Unit}";
+    public string NameWithDoseLabel => $"{Name} {Dose.ToString()}";
 
     private Medication()
     {
